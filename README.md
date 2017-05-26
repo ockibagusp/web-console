@@ -1,5 +1,5 @@
-# angular2-agri-hub
-Agrihub Client; code with Angular2 and ❤
+# agri-hub-webpack
+Agrihub Client; webpack bundle version; code with Angular2 and ❤
 
 ## Features
 1. Full SPA (Single Page Application).
@@ -22,3 +22,7 @@ Agrihub Client; code with Angular2 and ❤
 `$ npm install`
 6. Serve...
 `$ npm start`
+7. Or Build...
+`$ npm run build`
+
+Output bundle in /dist directory
