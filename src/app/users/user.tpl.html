@@ -1,0 +1,42 @@
+<nav-bar></nav-bar>
+<div class="container">
+    <breadcrumb [title]="'Users List'" [links]="links"></breadcrumb>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <h3>Users List</h3>
+            <ngb-tabset type="pills" [(activeId)]="activeId" (tabChange)="tabChange($event)">
+                <ngb-tab title="Admin" id="admin">
+                    <template ngbTabContent>
+                        <ul class="users">
+                            <li *ngFor="let user of users">
+                                <div>
+                                    <a [routerLink]="['/users/view', user.id]">
+                                        {{ user.username }}
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </template>
+                </ngb-tab>
+                <ngb-tab title="Researcher" id="researcher">
+                    <template ngbTabContent>
+                        <ul class="users">
+                            <li *ngFor="let user of users">
+                                <div>
+                                    <a [routerLink]="['/users/view', user.id]">
+                                        {{ user.username }}
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </template>
+                </ngb-tab>
+            </ngb-tabset>
+            
+            <strong *ngIf="users?.length == 0">No Data</strong>
+            <div class="alert alert-info" role="alert">
+                New User: <a [routerLink]="['/users/new']" class="btn btn-primary">Link</a>
+            </div>
+        </div>
+    </div>
+</div>

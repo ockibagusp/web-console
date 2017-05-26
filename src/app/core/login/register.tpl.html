@@ -1,0 +1,31 @@
+<div class="container">
+    <form (ngSubmit)="register()" class="form-signin" name="registerForm">
+        <h2 class="form-signin-heading">Register Form</h2>
+        <p *ngFor="let error of errors">
+            <ngb-alert [type]="'danger'" (close)="closeAlert(alert)">
+                <strong>{{ error.field}}:</strong> {{ error.message }}
+            </ngb-alert>
+        </p>
+        <label class="sr-only">Username</label>
+        <input type="text" class="form-control" [(ngModel)]="user.username"
+            placeholder="Username" name="username" required>
+        <label class="sr-only">Password</label>
+        <input type="password" [(ngModel)]="user.password" class="form-control" 
+            placeholder="Password" name="password" required>
+        <label class="sr-only">Email</label>
+        <input type="email" [(ngModel)]="user.email" class="form-control" 
+            placeholder="Email" name="email" required>
+        <label class="sr-only">First name</label>
+        <input type="text" [(ngModel)]="user.first_name" class="form-control" 
+            placeholder="First name" name="first_name" required>
+        <label class="sr-only">Last name</label>
+        <input type="text" [(ngModel)]="user.last_name" class="form-control" 
+            placeholder="Last name" name="last_name" required>
+        <button class="btn btn-lg btn-success btn-block" style="margin-top: 10px">
+            Register
+        </button>
+        <a [routerLink]="['/login']" class="btn btn-lg btn-primary btn-block">
+            Login
+        </a>
+    </form>
+</div>

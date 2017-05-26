@@ -1,0 +1,25 @@
+<nav-bar></nav-bar>
+<div *ngIf="sensor" class="container">
+    <breadcrumb [title]="is_new ? 'New Sensor' : 'Edit Sensor: ' + sensor.label " [links]="links"></breadcrumb>
+    <div class="row-fluid">
+        <p *ngFor="let error of errors">
+            <ngb-alert [type]="'danger'" (close)="closeAlert(alert)">
+                <strong>{{ error.field}}:</strong> {{ error.message }}
+            </ngb-alert>
+        </p>
+        <div class="col-md-6">
+            <form name="sensorForm" (ngSubmit)="save()" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label" for="label">Label:</label>
+                    <input [(ngModel)]="sensor.label" class="form-control" name="label" required>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary">Save</button>
+                    <button type="button" *ngIf="sensor.id" (click)="delete()" class="btn">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

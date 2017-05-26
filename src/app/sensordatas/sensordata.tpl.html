@@ -1,0 +1,61 @@
+<nav-bar></nav-bar>
+<div *ngIf="sensordatas" class="container">
+    <breadcrumb [title]="'Sensor Data List'" [links]="links"></breadcrumb>
+    <div class="row-fluid">
+		<div class="col-md-8">
+			<div *ngIf="sensor">
+				<h3>Sensor: {{ sensor.label }}</h3>
+				<a *ngIf="is_mine" class="btn btn-primary" [routerLink]="['/nodes', node.id, 'sensors', 'edit', sensor.id]">
+					Edit
+				</a>
+			</div>
+			<div *ngIf="!sensor">
+				<h3>{{ title }} Sensor Data</h3>
+			</div>
+			<form class="form-inline">
+				<div class="form-group">
+					<label for="date_start">Start</label>
+					<input class="form-control" type="text"
+						[(ngModel)]="date_start" ng2-datetime-picker name="date_start"
+						placeholder="YYYY-MM-DD HH:MM" close-on-select="false"/>
+				</div>
+				<div class="form-group">
+					<label for="date_end">End</label>
+					<input class="form-control" type="text"
+						[(ngModel)]="date_end" ng2-datetime-picker name="date_end"
+						placeholder="YYYY-MM-DD HH:MM" close-on-select="false"/>
+				</div>
+				<div class="form-group">
+					<label for="action">Action</label>
+					<div>
+						<button [disabled]="!date_start && !date_end" (click)="filter()" class="btn btn-primary">Filter</button>
+						<button [disabled]="!date_start && !date_end" (click)="clearFilter()" class="btn btn-success">Clear</button>
+					</div>
+				</div>
+			</form>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Node</th>
+						<th>Sensor</th>
+						<th>Data</th>
+						<th>Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let sensordata of sensordatas">
+						<td>{{ sensordata.node }}</td>
+						<td>{{ sensordata.sensorlabel }}</td>
+						<td>{{ sensordata.data }}</td>
+						<td>{{ sensordata.timestamp | localdate }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<strong *ngIf="sensordatas?.length == 0">No Data</strong>
+			<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="maxSize" 
+				[rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChange()" 
+				*ngIf="sensordatas?.length != 0">
+			</ngb-pagination>
+		</div>
+    </div>
+</div>

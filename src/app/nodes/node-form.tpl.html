@@ -1,0 +1,44 @@
+<nav-bar></nav-bar> 
+<div class="container">
+    <breadcrumb [title]="is_new ? 'New Node' : 'Edit Node'" [links]="links"></breadcrumb>
+    <div class="row-fluid">
+        <p *ngFor="let error of errors">
+            <ngb-alert [type]="'danger'" (close)="closeAlert(alert)">
+                <strong>{{ error.field}}:</strong> {{ error.message }}
+            </ngb-alert>
+        </p>
+        <ngb-alert *ngIf="node.is_public" [dismissible]="false">
+            <strong>Important!</strong> Your sensor datas will be visible by another.
+        </ngb-alert>
+        <div class="col-md-6">
+            <form name="nodeForm" (ngSubmit)="save()" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label" for="label">Label:</label>
+                    <input [(ngModel)]="node.label" class="form-control" name="label" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="secretkey">Secretkey:</label>
+                    <input [(ngModel)]="node.secretkey" class="form-control" name="secretkey" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="is_public">Public node:</label>
+                    <input type="checkbox" [(ngModel)]="node.is_public" name="is_public"> 
+                        {{ node.is_public ? "Yes" : "No" }}
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="subsperday">Subsperday:</label>
+                    <input type="checkbox" [(ngModel)]="unlimited" name="_unlimited" 
+                        (ngModelChange)="unlimitedStateChange()"> Unlimited
+                    <input type="number" min="-1" [(ngModel)]="node.subsperday" class="form-control" 
+                        name="subsperday" *ngIf="!unlimited" required>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary">Save</button>
+                    <button type="button" *ngIf="node.id" class="btn" (click)="delete()">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
