@@ -4,15 +4,13 @@ import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import { User } from './user.model';
 
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsAdminComponent } from '../core/authenticate/authenticate.component';
-
 
 @Component({
+    moduleId: '../views/users/',
     selector: 'user-new',
-    templateUrl: './user-form.tpl.html'
+    templateUrl: 'user-form.tpl.html'
 })
-export class UserNewComponent extends IsAdminComponent implements OnInit {
+export class UserNewComponent implements OnInit {
     is_new: boolean = true;
     user: User;
     links: any[];
@@ -21,12 +19,8 @@ export class UserNewComponent extends IsAdminComponent implements OnInit {
 
     constructor(
         private userService: UserService,
-        public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.links = [

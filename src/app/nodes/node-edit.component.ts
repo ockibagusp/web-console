@@ -5,14 +5,12 @@ import { Node } from './node.model';
 import 'rxjs/add/operator/switchMap';
 
 import { CredentialsService } from '../core/authenticate/credentials.service';
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsResearcherComponent } from '../core/authenticate/authenticate.component';
 
 @Component({
     selector: 'node-edit',
     templateUrl: './node-form.tpl.html'
 })
-export class NodeEditComponent extends IsResearcherComponent {
+export class NodeEditComponent {
     links: any[];
     node: Node;
     unlimited: boolean;
@@ -24,12 +22,8 @@ export class NodeEditComponent extends IsResearcherComponent {
         private nodeService: NodeService,
         private route: ActivatedRoute,
         private credentialsService: CredentialsService,
-        public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.route.params

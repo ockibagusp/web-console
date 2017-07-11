@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CredentialsService } from './credentials.service';
+import { Router, CanActivate } from '@angular/router'
 
 @Injectable()
 export class AuthenticateService {
@@ -27,5 +28,57 @@ export class AuthenticateService {
         } else {
             return 0 == this.credentialsService.getUser().is_admin;
         }
+    }
+}
+
+@Injectable()
+export class BaseCanActivate implements CanActivate {
+    constructor(
+        public authenticateService: AuthenticateService,
+        public router: Router
+    ) {}
+
+    canActivate() {
+        if (this.authenticateService.isAuth()) {
+            return true;
+        }
+        this.router.navigate(['/login']);
+        return false;
+    }
+}
+
+@Injectable() 
+export class CanActivateAdmin extends BaseCanActivate {
+    constructor(
+        public authenticateService: AuthenticateService,
+        public router: Router
+    ) {
+        super(authenticateService, router);
+    }
+
+    canActivate() {
+        if (this.authenticateService.isAdmin()) {
+            return true;
+        }
+        this.router.navigateByUrl('/403', { skipLocationChange: true });
+        return false;
+    }
+}
+
+@Injectable() 
+export class CanActivateResearcher extends BaseCanActivate {
+    constructor(
+        public authenticateService: AuthenticateService,
+        public router: Router
+    ) {
+        super(authenticateService, router);
+    }
+
+    canActivate() {
+        if (this.authenticateService.isResearcher()) {
+            return true;
+        }
+        this.router.navigateByUrl('/403', { skipLocationChange: true });
+        return false;
     }
 }

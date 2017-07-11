@@ -7,14 +7,13 @@ import { Node } from '../nodes/node.model';
 import { Sensor } from './sensor.model';
 
 import { CredentialsService } from '../core/authenticate/credentials.service';
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsResearcherComponent } from '../core/authenticate/authenticate.component';
 
 @Component({
+    moduleId: '../views/sensors/',
     selector: 'sensor-list',
-    templateUrl: './sensor.tpl.html'
+    templateUrl: 'sensor.tpl.html'
 })
-export class SensorComponent extends IsResearcherComponent implements OnInit {
+export class SensorComponent implements OnInit {
     parentNode: Node;
     sensors: Sensor[];
     links: any[]; // breadcrumb
@@ -25,12 +24,8 @@ export class SensorComponent extends IsResearcherComponent implements OnInit {
         private sensorService: SensorService, 
         private route: ActivatedRoute,
         private credentialsService: CredentialsService,
-        public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.getParentNode();

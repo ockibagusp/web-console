@@ -3,14 +3,12 @@ import { NodeService } from './node.service';
 import { Node } from './node.model';
 import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsResearcherComponent } from '../core/authenticate/authenticate.component';
 
 @Component({
     selector: 'node-list',
     templateUrl: './node.tpl.html',
 })
-export class NodeComponent extends IsResearcherComponent implements OnInit {
+export class NodeComponent implements OnInit {
     
     nodes: Node[];
     links: any[]; // breadcrumb
@@ -19,11 +17,7 @@ export class NodeComponent extends IsResearcherComponent implements OnInit {
     constructor(
         private nodeService: NodeService,
         public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+    ) {}
     
     ngOnInit(): void {
         this.links = [

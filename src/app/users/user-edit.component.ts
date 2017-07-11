@@ -4,15 +4,12 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UserService } from './user.service';
 import { User } from './user.model';
 
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsAdminComponent } from '../core/authenticate/authenticate.component';
-
-
 @Component({
+    moduleId: '../views/users/',
     selector: 'user-edit',
-    templateUrl: './user-form.tpl.html'
+    templateUrl: 'user-form.tpl.html'
 })
-export class UserEditComponent extends IsAdminComponent implements OnInit {
+export class UserEditComponent implements OnInit {
     user: User;
     links: any[];
 
@@ -21,12 +18,8 @@ export class UserEditComponent extends IsAdminComponent implements OnInit {
     constructor(
         private userService: UserService,
         private route: ActivatedRoute,
-        public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.user = new User;

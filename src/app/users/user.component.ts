@@ -4,25 +4,19 @@ import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from './user.service';
 import { User } from './user.model';
 
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsAdminComponent } from '../core/authenticate/authenticate.component';
-
 @Component({
+    moduleId: '../views/users/',
     selector: 'users',
-    templateUrl: './user.tpl.html'
+    templateUrl: 'user.tpl.html'
 })
-export class UserComponent extends IsAdminComponent implements OnInit {
+export class UserComponent implements OnInit {
     users: User[];
     links: any[]; // breadcrumb
 
     constructor(
         private userService: UserService,
-        public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.links = [

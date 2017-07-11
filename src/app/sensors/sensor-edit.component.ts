@@ -8,14 +8,13 @@ import { Node } from '../nodes/node.model';
 import { Sensor } from './sensor.model';
 
 import { CredentialsService } from '../core/authenticate/credentials.service';
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsResearcherComponent } from '../core/authenticate/authenticate.component';
 
 @Component({
+    moduleId: '../views/sensors/',
     selector: 'sensor-edit',
-    templateUrl: './sensor-form.tpl.html'
+    templateUrl: 'sensor-form.tpl.html'
 })
-export class SensorEditComponent extends IsResearcherComponent implements OnInit {
+export class SensorEditComponent implements OnInit {
     parentNode: Node;
     sensor: Sensor;
     links: any[];
@@ -27,12 +26,8 @@ export class SensorEditComponent extends IsResearcherComponent implements OnInit
         private sensorService: SensorService,
         private route: ActivatedRoute,
         private credentialsService: CredentialsService,
-        public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.getNode();

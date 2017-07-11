@@ -13,8 +13,7 @@ import { LogoutComponent } from './authenticate/logout.component';
 import { RegisterComponent } from './register/register.component';
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { IsAuthComponent, IsAdminComponent, IsResearcherComponent } from './authenticate/authenticate.component';
-import { AuthenticateService } from './authenticate/authenticate.service';
+import { AuthenticateService, BaseCanActivate, CanActivateAdmin, CanActivateResearcher } from './authenticate/authenticate.service';
 import { CredentialsService } from './authenticate/credentials.service';
 import { LoginService } from './login/login.service';
 import { RegisterService } from './register/register.service';
@@ -36,9 +35,6 @@ import { RegisterService } from './register/register.service';
         BreadcrumbComponent,
         LoginComponent,
         LogoutComponent,
-        IsAuthComponent,
-        IsAdminComponent,
-        IsResearcherComponent,
         NgbModule
     ],
     declarations: [
@@ -48,17 +44,17 @@ import { RegisterService } from './register/register.service';
         ForbiddenComponent,
         LoginComponent,
         LogoutComponent,
-        RegisterComponent,
-        IsAuthComponent,
-        IsAdminComponent,
-        IsResearcherComponent
+        RegisterComponent
     ],
     providers: [ 
         LoginService,
         RegisterService,
         CookieService,
         CredentialsService,
-        AuthenticateService 
+        AuthenticateService,
+        BaseCanActivate,
+        CanActivateAdmin,
+        CanActivateResearcher
     ]
 })
 export class CoreModule {}

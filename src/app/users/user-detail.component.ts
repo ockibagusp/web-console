@@ -4,26 +4,20 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UserService } from './user.service';
 import { User } from './user.model';
 
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsAdminComponent } from '../core/authenticate/authenticate.component';
-
 @Component({
+    moduleId: '../views/users/',
     selector: 'user-detail',
-    templateUrl: './user-detail.tpl.html'
+    templateUrl: 'user-detail.tpl.html'
 })
-export class UserDetailComponent extends IsAdminComponent implements OnInit {
+export class UserDetailComponent implements OnInit {
     user: User;
     links: any[]; // breadcrumb
 
     constructor(
         private userService: UserService,
         private route: ActivatedRoute,
-        public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.route.params

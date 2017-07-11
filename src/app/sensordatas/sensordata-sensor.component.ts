@@ -10,14 +10,12 @@ import { Sensor } from '../sensors/sensor.model';
 import { SensorData } from './sensordata.model';
 
 import { CredentialsService } from '../core/authenticate/credentials.service';
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
-import { IsResearcherComponent } from '../core/authenticate/authenticate.component';
 
 @Component({
     selector: 'sensordata-sensor',
     templateUrl: './sensordata.tpl.html'
 })
-export class SensorDataSensorComponent extends IsResearcherComponent implements OnInit {
+export class SensorDataSensorComponent implements OnInit {
     node: Node;
     sensor: Sensor;
     sensordatas: SensorData[];
@@ -37,12 +35,8 @@ export class SensorDataSensorComponent extends IsResearcherComponent implements 
         private sensorDataService: SensorDataService,
         private route: ActivatedRoute,
         private credentialsService: CredentialsService,
-        public router: Router,
-        public authenticateService: AuthenticateService
-    ) {
-        super(router, authenticateService);
-        super.ngOnInit();
-    }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.links = [
