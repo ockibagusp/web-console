@@ -5,8 +5,8 @@ export class Node {
     label: string;
     is_public: number;
     secretkey: string;
-    subsperday: number;
-    subsperdayremain: number;
+    pubsperday: number;
+    pubsperdayremain: number;
     sensor_count: number;
     sensors_list: string;
     subscriptions_list: string;

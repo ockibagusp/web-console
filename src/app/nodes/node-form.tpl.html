@@ -8,7 +8,7 @@
             </ngb-alert>
         </p>
         <ngb-alert *ngIf="node.is_public" [dismissible]="false">
-            <strong>Important!</strong> Your sensor datas will be visible by another.
+            <strong>Important!</strong> Your sensor datas would be visible by another.
         </ngb-alert>
         <div class="col-md-6">
             <form name="nodeForm" (ngSubmit)="save()" class="form-horizontal">
@@ -26,11 +26,11 @@
                         {{ node.is_public ? "Yes" : "No" }}
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="subsperday">Subsperday:</label>
+                    <label class="control-label" for="pubsperday">pubsperday:</label>
                     <input type="checkbox" [(ngModel)]="unlimited" name="_unlimited" 
                         (ngModelChange)="unlimitedStateChange()"> Unlimited
-                    <input type="number" min="-1" [(ngModel)]="node.subsperday" class="form-control" 
-                        name="subsperday" *ngIf="!unlimited" required>
+                    <input type="number" min="-1" [(ngModel)]="node.pubsperday" class="form-control" 
+                        name="pubsperday" *ngIf="!unlimited" required>
                 </div>
                 <div class="form-actions">
                     <button class="btn btn-primary">Save</button>

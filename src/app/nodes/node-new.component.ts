@@ -34,14 +34,14 @@ export class NodeNewComponent {
         this.node = new Node;
         this.node.label = "FILKOM_1";
         this.node.secretkey = "rahasia";
-        this.node.subsperday = 20;
+        this.node.pubsperday = 20;
     }
 
     unlimitedStateChange(): void {
         if (this.unlimited) {
-            this.node.subsperday = -1;
+            this.node.pubsperday = -1;
         } else {
-            this.node.subsperday = 0;
+            this.node.pubsperday = 0;
         }
     }
 
