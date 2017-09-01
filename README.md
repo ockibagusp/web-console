@@ -1,5 +1,5 @@
 # agri-hub-webpack
-Agrihub Client; webpack bundle version; code with Angular2 and ❤
+Agrihub Cloud Platform Web Console; code with Angular2 and ❤
 
 ## Features
 1. Full SPA (Single Page Application).
@@ -15,9 +15,9 @@ Agrihub Client; webpack bundle version; code with Angular2 and ❤
 1. Install NodeJS
 2. Install NPM
 3. Clone Repository
-`$ git clone https://github.com/OckiFals/angular2-agri-hub.git`
+`$ git clone https://github.com/OckiFals/agri-hub-webpack.git`
 4. Change directory
-`$ cd angular2-agri-hub`
+`$ cd agri-hub-webpack`
 5. Install Dependencies (Angular2, TypeScript, RxJS, etc.)
 `$ npm install`
 6. Serve...
