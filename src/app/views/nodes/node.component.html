@@ -1,0 +1,226 @@
+<div class="animated fadeIn">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<i class="fa fa-align-justify"></i> Nodes
+					<a [routerLink]="['/nodes/new']" class="btn btn-sm btn-flat btn-primary float-right">
+						<i class="fa fa-plus"></i> Add
+					</a>
+				</div>
+				<div class="card-body">
+					<tabset>
+						<tab (select)="selectTab('all')">
+							<ng-template tabHeading>All</ng-template>
+							<table class="table table-bordered table-striped table-sm">
+								<thead>
+								<tr>
+									<th>Node</th>
+									<th>Visibility</th>
+									<th>Sensor</th>
+									<th>Publish remaining</th>
+									<th>Sensordatas List</th>
+									<th width="150px">Action</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr *ngFor="let node of nodes">
+									<td>{{ node.label }}</td>
+									<td>
+										<span class="badge {{ node.is_public ? 'badge-success' : 'badge-primary' }}"
+										>
+                                        	{{ node.is_public ? "Public" : "Private" }}
+                                    	</span>
+									</td>
+									<td>
+										{{ node.sensor_count }}
+									</td>
+									<td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+									<td>
+										<button class="btn btn-link" type="button">
+											<i class="fa fa-link"></i>&nbsp; Link
+										</button>
+									</td>
+									<td>
+										<a [routerLink]="['/nodes/view', node.id]" 
+											class="btn btn-sm btn-flat btn-success">
+											<i class="fa fa-eye"></i>
+										</a>
+										<a [routerLink]="['/nodes/edit/', node.id]" 
+											class="btn btn-sm btn-flat btn-primary">
+											<i class="fa fa-edit"></i>
+										</a>
+										<button type="button" class="btn btn-sm btn-flat btn-warning"
+											data-toggle="modal" (click)="openResetConfirmationModal(node)"
+											[disabled]="-1 == node.pubsperday">
+											<i class="fa fa-history"></i>
+										</button>
+										<button type="button" class="btn btn-sm btn-flat btn-danger"
+											data-toggle="modal" (click)="openDeleteConfirmationModal(node)">
+											<i class="fa fa-trash-o"></i>
+										</button>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							<nav>
+								<pagination [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage"
+									(pageChanged)="pageChanged($event)" [itemsPerPage]="itemsPerPage" 
+									class="pagination-md" [boundaryLinks]="true"></pagination>
+							</nav>
+						</tab>
+						<tab (select)="selectTab('public')">
+							<ng-template tabHeading>Public</ng-template>
+							<table class="table table-bordered table-striped table-sm">
+								<thead>
+								<tr>
+									<th>Node</th>
+									<th>Visibility</th>
+									<th>Sensor</th>
+									<th>Publish remaining</th>
+									<th>Sensordatas List</th>
+									<th width="150px">Action</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr *ngFor="let node of nodes">
+									<td>{{ node.label }}</td>
+									<td>
+										<span class="badge badge-success">
+                                        	Public
+                                    	</span>
+									</td>
+									<td>
+										{{ node.sensor_count }}
+									</td>
+									<td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+									<td>
+										<button class="btn btn-link" type="button">
+											<i class="fa fa-link"></i>&nbsp; Link
+										</button>
+									</td>
+									<td>
+										<a [routerLink]="['/nodes/view', node.id]" 
+											class="btn btn-sm btn-flat btn-success">
+											<i class="fa fa-eye"></i>
+										</a>
+										<a [routerLink]="['/nodes/edit/', node.id]" 
+											class="btn btn-sm btn-flat btn-primary">
+											<i class="fa fa-edit"></i>
+										</a>
+										<button type="button" class="btn btn-sm btn-flat btn-warning"
+											data-toggle="modal" (click)="openResetConfirmationModal(node)">
+											<i class="fa fa-history"></i>
+										</button>
+										<button type="button" class="btn btn-sm btn-flat btn-danger"
+											data-toggle="modal" (click)="openDeleteConfirmationModal(node)">
+											<i class="fa fa-trash-o"></i>
+										</button>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</tab>
+						<tab (select)="selectTab('private')">
+							<ng-template tabHeading>Private</ng-template>
+							<table class="table table-bordered table-striped table-sm">
+								<thead>
+								<tr>
+									<th>Node</th>
+									<th>Visibility</th>
+									<th>Sensor</th>
+									<th>Publish remaining</th>
+									<th>Sensordatas List</th>
+									<th width="150px">Action</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr *ngFor="let node of nodes">
+									<td>{{ node.label }}</td>
+									<td>
+										<span class="badge badge-primary">
+                                        	Private
+                                    	</span>
+									</td>
+									<td>
+										{{ node.sensor_count }}
+									</td>
+									<td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+									<td>
+										<button class="btn btn-link" type="button">
+											<i class="fa fa-link"></i>&nbsp; Link
+										</button>
+									</td>
+									<td>
+										<a [routerLink]="['/nodes/view', node.id]" 
+											class="btn btn-sm btn-flat btn-success">
+											<i class="fa fa-eye"></i>
+										</a>
+										<a [routerLink]="['/nodes/edit/', node.id]" 
+											class="btn btn-sm btn-flat btn-primary">
+											<i class="fa fa-edit"></i>
+										</a>
+										<button type="button" class="btn btn-sm btn-flat btn-warning"
+											data-toggle="modal" (click)="openResetConfirmationModal(node.id)">
+											<i class="fa fa-history"></i>
+										</button>
+										<button type="button" class="btn btn-sm btn-flat btn-danger"
+											data-toggle="modal" (click)="openDeleteConfirmationModal(node)">
+											<i class="fa fa-trash-o"></i>
+										</button>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</tab>
+						<tab (select)="selectTab('global')">
+							<ng-template tabHeading>Global</ng-template>
+							<table class="table table-bordered table-striped table-sm">
+								<thead>
+								<tr>
+									<th>User</th>
+									<th>Node</th>
+									<th>Visibility</th>
+									<th>Sensor</th>
+									<th>Publish remaining</th>
+									<th>Sensordatas List</th>
+									<th width="40px">Action</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr *ngFor="let node of nodes">
+									<td>{{ node.user }}</td>
+									<td>{{ node.label }}</td>
+									<td>
+										<span class="badge {{ node.is_public ? 'badge-success' : 'badge-primary' }}"
+										>
+                                        	{{ node.is_public ? "Public" : "Private" }}
+                                    	</span>
+									</td>
+									<td>
+										{{ node.sensor_count }}
+									</td>
+									<td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+									<td>
+										<button class="btn btn-link" type="button">
+											<i class="fa fa-link"></i>&nbsp; Link
+										</button>
+									</td>
+									<td>
+										<a [routerLink]="['/nodes/view', node.id]" 
+											class="btn btn-sm btn-flat btn-success">
+											<i class="fa fa-eye"></i>
+										</a>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</tab>
+					</tabset>
+				</div>
+			</div>
+		</div>
+		<!--/.col-->
+	</div>
+	<!--/.row-->
+</div>

@@ -1,0 +1,44 @@
+<div class="animated fadeIn">
+	<div class="row">
+		<div class="col-lg-12">
+			<div *ngIf="user" class="card">
+				<div class="card-header">
+					<i class="fa fa-align-justify"></i> {{ user.username }}
+				</div>
+				<div class="card-body">
+					<div class="card-body">
+						<table class="table">
+							<tbody>
+							<tr>
+		                        <th>Email:</th>
+		                        <td>{{ user.email }}</td>
+		                    </tr>
+		                    <tr>
+		                        <th>First Name:</th>
+		                        <td>{{ user.first_name }}</td>
+		                    </tr>
+		                    <tr>
+		                        <th>Last Name:</th>
+		                        <td>{{ user.last_name }}</td>
+		                    </tr>
+		                    <tr>
+		                        <th>Access Role:</th>
+		                        <td>{{ 1 == user.is_admin ? "Admin" : "Researcher" }}</td>
+		                    </tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer">
+					<a [routerLink]="['/users/edit', user.id]" class="btn btn-sm btn-flat btn-primary">
+						<i class="fa fa-edit"></i> Edit
+					</a>
+					<button type="button" class="btn btn-sm btn-flat btn-danger"
+						data-toggle="modal" (click)="openDeleteConfirmationModal()">
+						<i class="fa fa-trash-o"></i> Delete
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

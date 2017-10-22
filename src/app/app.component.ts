@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticateService } from './core/authenticate/authenticate.service';
-
-import '../assets/css/bootstrap.min.css';
+import { AuthenticateService } from './views/core/authenticate/authenticate.service';
 
 @Component({
     selector: 'main-app',
@@ -16,17 +14,19 @@ export class MainAppComponent {
 
     ngOnInit() {
         if(!this.authenticateService.isAuth()) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/page/login']);
         } else if(this.authenticateService.isAdmin()) {
-            this.router.navigate(['/users']);
+            this.router.navigate(['/users/list']);
         } else if(this.authenticateService.isResearcher()) {
-            this.router.navigate(['/nodes']);
+            this.router.navigate(['/nodes/list']);
         }
     }
 }
 
 @Component({
-    selector: 'my-app',
-    template: `<router-outlet></router-outlet>`
+    // tslint:disable-next-line
+    selector: 'body',
+    template: '<router-outlet></router-outlet>'
 })
-export class AppComponent {}
+export class AppComponent {
+}

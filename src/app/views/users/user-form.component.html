@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<i class="fa fa-align-justify"></i> {{ is_new ? 'New User' : 'Edit User' }}
+				</div>
+				<div class="card-body">
+					<p *ngFor="let error of errors">
+			            <alert [type]="'danger'" dismissible="true">
+			                <strong>{{ error.field }}:</strong> {{ error.message }}
+			            </alert>
+			        </p>
+					<form name="userForm" class="form-horizontal">
+						<div class="form-group">
+					        <label for="username">Username</label>
+					        <input type="text" name="username" class="form-control" [(ngModel)]="user.username"
+									placeholder="Enter username..">
+				      	</div>
+						<div class="form-group">
+					        <label for="email">Email</label>
+					        <input type="email" name="email" class="form-control" [(ngModel)]="user.email"
+									placeholder="Enter user email..">
+				      	</div>
+				      	<div class="form-group">
+		                    <label for="password">Password</label>
+		                    <input [(ngModel)]="user.password" class="form-control" name="password" type="password" 
+		                        placeholder="Enter password.." [required]="!user.id">
+		                </div>
+				      	<div class="form-group">
+					        <label for="first_name">First Name</label>
+					        <input type="text" name="first_name" class="form-control" [(ngModel)]="user.first_name"
+									placeholder="Enter first name..">
+				      	</div>
+				      	<div class="form-group">
+					        <label for="last_name">Last Name</label>
+					        <input type="text" name="last_name" class="form-control" [(ngModel)]="user.last_name"
+									placeholder="Enter last name..">
+				      	</div>
+				      	<div class="form-group">
+		                    <label for="is_admin">Is Admin?</label>
+		                    <div class="checkbox">
+			                    <input type="checkbox" [(ngModel)]="user.is_admin" name="is_admin"> 
+			                        {{ user.is_admin ? "Yes" : "No" }}
+		                    </div>
+		                </div>
+					</form>
+				</div>
+				<div class="card-footer">
+					<button (click)="save()" class="btn btn-sm btn-primary">
+						<i class="fa fa-save"></i> Save
+					</button>
+				</div>
+			</div>
+		</div> <!--/.col-->
+	</div><!--/.row-->
+</div>
