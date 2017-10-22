@@ -7,7 +7,7 @@ import { CredentialsService } from '../../views/core/authenticate/credentials.se
 })
 export class AppHeaderComponent implements OnInit {
 	username: string;
-    role: string;
+    role: number;
 
     constructor(
         private credentialsService: CredentialsService

@@ -11,6 +11,7 @@ import { CredentialsService } from '../core/authenticate/credentials.service';
 })
 export class NodeEditComponent implements OnInit {
     node: Node;
+    is_new:boolean = false;
     unlimited: boolean;
     _initial_pubsperday: number;
 

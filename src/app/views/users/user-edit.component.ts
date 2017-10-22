@@ -10,7 +10,8 @@ import { User } from './user.model';
 })
 export class UserEditComponent implements OnInit {
     user: User;
-
+    is_new:boolean = false;
+    
     errors: Array<{ field: string, message: string }>;
 
     constructor(

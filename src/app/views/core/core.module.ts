@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { CoreRoutingModule } from './core-routing.module';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService, CookieOptions } from 'angular2-cookie/core';
 import { CredentialsService } from './authenticate/credentials.service';
 import { AuthenticateService, BaseCanActivate, CanActivateAdmin, CanActivateResearcher } 
     from './authenticate/authenticate.service';
@@ -44,6 +44,7 @@ import { AlertModule } from 'ngx-bootstrap/alert'
     ],
     providers: [
         CookieService,
+        { provide: CookieOptions, useValue: {} },
         CredentialsService,
         AuthenticateService,
         BaseCanActivate,
