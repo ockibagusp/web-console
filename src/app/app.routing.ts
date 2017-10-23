@@ -11,6 +11,10 @@ import {
 
 import { PageNotFoundComponent } from './views/core/exception.component';
 
+import { 
+    BaseCanActivate, CanActivateAdmin, CanActivateResearcher 
+} from './views/core/authenticate/authenticate.service';
+
 export const routes: Routes = [
     {
         path: '',
@@ -20,6 +24,7 @@ export const routes: Routes = [
     {
         path: '',
         component: FullLayoutComponent,
+        canActivate: [BaseCanActivate],
         data: {
             title: 'Home'
         },
@@ -47,10 +52,12 @@ export const routes: Routes = [
             //
             {
                 path: 'nodes',
+                canActivate: [BaseCanActivate],
                 loadChildren: './views/nodes/nodes.module#NodesModule',
             },
             {
                 path: 'users',
+                canActivate: [BaseCanActivate, CanActivateAdmin],
                 loadChildren: './views/users/users.module#UsersModule',
             }
         ]

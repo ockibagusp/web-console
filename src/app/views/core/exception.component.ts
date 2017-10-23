@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
     templateUrl: 'exception.component.html'
@@ -8,7 +10,13 @@ export class ForbiddenComponent {
 	info = 'Oops! You\'ve caught by the police.';
     detail = 'You do not have permission to perform this action.';
 
-    constructor() {
+    constructor(
+        private location: Location,
+        private router: Router
+    ) {}
+
+    back() {
+        this.location.back();
     }
 
 }
@@ -21,7 +29,10 @@ export class PageNotFoundComponent {
 	info = 'Oops! You\'re lost.';
     detail = 'The page you are looking for was not found.';
 
-    constructor() {
+    constructor(private location: Location) {}
+
+    back() {
+        this.location.back();
     }
 
 }
@@ -34,7 +45,10 @@ export class InternalServerErrorComponent {
 	info = 'Houston, we have a problem!';
     detail = 'The page you are looking for is temporarily unavailable.';
     
-    constructor() {
+    constructor(private location: Location) {}
+
+    back() {
+        this.location.back();
     }
 
 }
