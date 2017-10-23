@@ -1,13 +1,21 @@
+export const ROLEACCESS = {
+    "auth": "*",
+    "admin": 1,
+    "researcher": 0
+};
+
 export const navigation = [
     {
         name: 'Dashboard',
         url: '/dashboard',
-        icon: 'icon-speedometer'
+        icon: 'icon-speedometer',
+        role: ROLEACCESS.auth
     },
     {
         name: 'Nodes',
         url: '/nodes',
         icon: 'fa fa-microchip',
+        role: ROLEACCESS.auth,
         children: [
             {
                 name: 'List',
@@ -25,6 +33,7 @@ export const navigation = [
         name: 'Users',
         url: '/users',
         icon: 'fa fa-user',
+        role: ROLEACCESS.admin,
         children: [
             {
                 name: 'List',
