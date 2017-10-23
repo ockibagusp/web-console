@@ -44,7 +44,14 @@ export class ModalContentComponent {
     ) {}
 
   	reset(): void {
-  		console.log("Reset modal: " + this.id);
+  		this.nodeService.reset(this.id)
+            .subscribe(
+                () => {
+                    this.status = 200;
+                    this.bsModalRef.hide();
+                },
+                error => null
+            );
   	}
 
   	delete(): void {

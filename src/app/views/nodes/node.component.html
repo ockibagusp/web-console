@@ -9,6 +9,9 @@
 					</a>
 				</div>
 				<div class="card-body">
+					<alert *ngIf="flash_message" [type]="'info'" dismissOnTimeout="5000" dismissible="true">
+		                <strong>{{ flash_message }}:</strong> Reset Subsperdayremain Successfully
+		            </alert>
 					<tabset>
 						<tab (select)="selectTab('all')">
 							<ng-template tabHeading>All</ng-template>
@@ -35,7 +38,10 @@
 									<td>
 										{{ node.sensor_count }}
 									</td>
-									<td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+									<td>
+										{{ -1 == node.pubsperday ? "unlimited" : 
+											node.pubsperdayremain + ' from ' + node.pubsperday }}
+									</td>
 									<td>
 										<button class="btn btn-link" type="button">
 											<i class="fa fa-link"></i>&nbsp; Link
@@ -52,7 +58,7 @@
 										</a>
 										<button type="button" class="btn btn-sm btn-flat btn-warning"
 											data-toggle="modal" (click)="openResetConfirmationModal(node)"
-											[disabled]="-1 == node.pubsperday">
+											[disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
 											<i class="fa fa-history"></i>
 										</button>
 										<button type="button" class="btn btn-sm btn-flat btn-danger"
@@ -93,7 +99,10 @@
 									<td>
 										{{ node.sensor_count }}
 									</td>
-									<td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+									<td>
+										{{ -1 == node.pubsperday ? "unlimited" : 
+											node.pubsperdayremain + ' from ' + node.pubsperday }}
+									</td>
 									<td>
 										<button class="btn btn-link" type="button">
 											<i class="fa fa-link"></i>&nbsp; Link
@@ -109,7 +118,8 @@
 											<i class="fa fa-edit"></i>
 										</a>
 										<button type="button" class="btn btn-sm btn-flat btn-warning"
-											data-toggle="modal" (click)="openResetConfirmationModal(node)">
+											data-toggle="modal" (click)="openResetConfirmationModal(node)"
+											[disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
 											<i class="fa fa-history"></i>
 										</button>
 										<button type="button" class="btn btn-sm btn-flat btn-danger"
@@ -145,7 +155,10 @@
 									<td>
 										{{ node.sensor_count }}
 									</td>
-									<td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+									<td>
+										{{ -1 == node.pubsperday ? "unlimited" : 
+											node.pubsperdayremain + ' from ' + node.pubsperday }}
+									</td>
 									<td>
 										<button class="btn btn-link" type="button">
 											<i class="fa fa-link"></i>&nbsp; Link
@@ -161,7 +174,8 @@
 											<i class="fa fa-edit"></i>
 										</a>
 										<button type="button" class="btn btn-sm btn-flat btn-warning"
-											data-toggle="modal" (click)="openResetConfirmationModal(node.id)">
+											data-toggle="modal" (click)="openResetConfirmationModal(node)"
+											[disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
 											<i class="fa fa-history"></i>
 										</button>
 										<button type="button" class="btn btn-sm btn-flat btn-danger"
@@ -200,7 +214,10 @@
 									<td>
 										{{ node.sensor_count }}
 									</td>
-									<td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+									<td>
+										{{ -1 == node.pubsperday ? "unlimited" : 
+											node.pubsperdayremain + ' from ' + node.pubsperday }}
+									</td>
 									<td>
 										<button class="btn btn-link" type="button">
 											<i class="fa fa-link"></i>&nbsp; Link

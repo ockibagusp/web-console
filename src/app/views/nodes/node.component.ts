@@ -21,8 +21,11 @@ export class NodeComponent {
 	public currentPage:number = 1;
 	public numPages:number = 0;
 	public activeTab:string;
+	// reset subsperdayremain flash info
+	public flash_message: string;
 	public bsModalRef: BsModalRef;
 	private modalSubscriptions: Subscription;
+
 
   	constructor(
         private nodeService: NodeService,
@@ -54,6 +57,14 @@ export class NodeComponent {
 	    this.bsModalRef.content.id = node.id;
 	    this.bsModalRef.content.title = 'Reset Confirmation';
 	    this.bsModalRef.content.message = 'Are you sure to reset publish per day remaining?';
+	    // event fired when modal dismissed -> reload sensor data
+	    this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
+      		if (!reason && 200 == this.bsModalRef.content.status) {
+      			this.getNodes(this.activeTab);
+      			this.flash_message = node.label;
+      		}
+    		this.modalSubscriptions.unsubscribe();
+	    });
 	}
 
   	public openDeleteConfirmationModal(node: Node) {

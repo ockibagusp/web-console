@@ -6,6 +6,9 @@
 					<i class="fa fa-align-justify"></i> {{ node.label }}
 				</div>
 				<div class="card-body">
+					<alert *ngIf="flash_message" [type]="'info'" dismissOnTimeout="5000" dismissible="true">
+		                <strong>{{ flash_message }}:</strong> Reset Subsperdayremain Successfully
+		            </alert>
 					<div class="row">
 						<div class="col-md-7">
 							<div class="card">
@@ -82,7 +85,8 @@
 					<a [routerLink]="['/nodes/edit', node.id]" class="btn btn-sm btn-flat btn-primary">
 						<i class="fa fa-edit"></i> Edit
 					</a>
-					<button type="button" class="btn btn-sm btn-flat btn-warning" [disabled]="-1 == node.pubsperday"
+					<button type="button" class="btn btn-sm btn-flat btn-warning" 
+						[disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain"
 						data-toggle="modal" (click)="openResetConfirmationModal()">
 						<i class="fa fa-history"></i> Reset
 					</button>

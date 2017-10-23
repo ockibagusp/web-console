@@ -18,7 +18,9 @@ import { CredentialsService } from '../core/authenticate/credentials.service';
 export class NodeDetailComponent implements OnInit {
 	node: Node;
 	sensors: Sensor[];
-  is_mine: boolean; // 'edit' button visibility
+    is_mine: boolean; // 'edit' button visibility
+    // reset subsperdayremain flash info
+    flash_message: string;
 	public bsModalRef: BsModalRef;
 	public modalSubscriptions: Subscription;
 
@@ -62,10 +64,19 @@ export class NodeDetailComponent implements OnInit {
     }
 
   	public openResetConfirmationModal() {
-	    this.bsModalRef = this.modalService.show(ModalContentComponent, {'class': 'modal-warning'});
-	    this.bsModalRef.content.id = this.node.id;
-	    this.bsModalRef.content.title = 'Reset Confirmation';
-	    this.bsModalRef.content.message = 'Are you sure to reset publish per day remaining?';
+        this.bsModalRef = this.modalService.show(ModalContentComponent, {'class': 'modal-warning'});
+        this.bsModalRef.content.id = this.node.id;
+        this.bsModalRef.content.title = 'Reset Confirmation';
+        this.bsModalRef.content.message = 'Are you sure to reset publish per day remaining?';
+        this.flash_message = '';
+        // event fired when modal dismissed -> reload sensor data
+        this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
+                if (!reason && 200 == this.bsModalRef.content.status) {
+                    this.getNode();
+                    this.flash_message = this.node.label;
+                }
+            this.modalSubscriptions.unsubscribe();
+        });
 	}
 
 	public openDeleteConfirmationModal(sensor = null) {

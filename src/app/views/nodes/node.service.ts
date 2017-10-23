@@ -63,6 +63,12 @@ export class NodeService {
             .catch(this.handleError);
     }
 
+    reset(id: string): Observable<Node> {
+        return this.http.post(`${this.nodeUrl}/reset/`, {'id': id}, {headers: this.headers})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body || { };
