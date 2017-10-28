@@ -109,10 +109,24 @@ export class NodeDetailComponent implements OnInit {
 	    }
 	}
 
-	public openSensorFormModal() {
+	public openSensorFormModal(sensor = null) {
 	    this.bsModalRef = this.modalService.show(ModalSensorFormComponent, {'class': 'modal-primary'});
-	    this.bsModalRef.content.title = 'New Sensor Form';
+	    this.bsModalRef.content.title = (sensor ? 'Edit': 'New') + ' Sensor Form';
 	    this.bsModalRef.content.node = this.node;
+        let _sensor = new Sensor();
+        // is modal form action is update
+        if (sensor) {
+            /*
+             * create new sensor instance from existing obj, 
+             * avoid referring the same object with sensors list table
+             */
+            _sensor.id = sensor.id;
+            _sensor.url = sensor.url;
+            _sensor.label = sensor.label;
+            _sensor.nodeurl = sensor.nodeurl;
+            _sensor.subscriptions_list = sensor.subscriptions_list;
+        }
+        this.bsModalRef.content.sensor = _sensor;
 	    // event fired when modal dismissed -> reload sensor data
 	    this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
       		if (!reason && 201 == this.bsModalRef.content.status) {
@@ -153,7 +167,7 @@ interface Errors {
 	    </div>
 	    <div class="modal-footer">
 	      	<button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
-			<button type="button" class="btn btn-primary" (click)="save()">Save</button>
+			<button [disabled]="!sensor.label" type="button" class="btn btn-primary" (click)="save()">Save</button>
 	    </div>
 	`
 })

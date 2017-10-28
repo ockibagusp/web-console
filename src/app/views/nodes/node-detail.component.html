@@ -61,13 +61,17 @@
 										<thead>
 										<tr>
 											<th>Label</th>
-											<th *ngIf="is_mine" width="50px">Action</th>
+											<th *ngIf="is_mine" width="100px">Action</th>
 										</tr>
 										</thead>
 										<tbody>
 										<tr *ngFor="let sensor of sensors">
 											<td>{{ sensor.label }}</td>
 					                        <td *ngIf="is_mine">
+					                        	<button type="button" class="btn btn-sm btn-flat btn-primary"
+													data-toggle="modal" (click)="openSensorFormModal(sensor)">
+													<i class="fa fa-edit"></i>
+												</button>
 												<button type="button" class="btn btn-sm btn-flat btn-danger"
 													data-toggle="modal" (click)="openDeleteConfirmationModal(sensor)">
 													<i class="fa fa-trash-o"></i>
