@@ -1,0 +1,66 @@
+<div class="animated fadeIn">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<i class="fa fa-align-justify"></i> Super-Nodes
+					<a [routerLink]="['/supernodes/new']" class="btn btn-sm btn-flat btn-primary float-right">
+						<i class="fa fa-plus"></i> Add
+					</a>
+				</div>
+				<div class="card-body">
+					<table class="table table-bordered table-striped table-sm">
+						<thead>
+						<tr>
+							<th>Super-Node</th>
+							<th>Node</th>
+							<th>Nodes List</th>
+							<th>Description</th>
+							<th width="120px">Action</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor="let supernode of supernodes">
+							<td>{{ supernode.label }}</td>
+							<td>
+								{{ supernode.node_count }}
+							</td>
+							<td>
+								<a [routerLink]="['/supernodes/view', supernode.id, 'nodes']" 
+									class="btn btn-link">
+									<i class="fa fa-link"></i>&nbsp; Link
+								</a>
+							</td>
+							<td>
+								{{ !supernode.description ? "-" : supernode.description }}
+							</td>
+							<td>
+								<a [routerLink]="['/supernodes/view', supernode.id]" 
+									class="btn btn-sm btn-flat btn-success">
+									<i class="fa fa-eye"></i>
+								</a>
+								<a [routerLink]="['/supernodes/edit/', supernode.id]" 
+									class="btn btn-sm btn-flat btn-primary">
+									<i class="fa fa-edit"></i>
+								</a>
+								<button type="button" class="btn btn-sm btn-flat btn-danger"
+									data-toggle="modal" (click)="openDeleteConfirmationModal(supernode)">
+									<i class="fa fa-trash-o"></i>
+								</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<nav>
+						<pagination *ngIf="10>totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
+							[(ngModel)]="currentPage"
+							(pageChanged)="pageChanged($event)" [itemsPerPage]="itemsPerPage" 
+							class="pagination-md" [boundaryLinks]="true"></pagination>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<!--/.col-->
+	</div>
+	<!--/.row-->
+</div>

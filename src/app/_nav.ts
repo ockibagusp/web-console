@@ -12,6 +12,24 @@ export const navigation = [
         role: ROLEACCESS.auth
     },
     {
+        name: 'Super-Nodes',
+        url: '/supernodes',
+        icon: 'fa fa-microchip',
+        role: ROLEACCESS.auth,
+        children: [
+            {
+                name: 'List',
+                url: '/supernodes/list',
+                icon: 'fa fa-list'
+            },
+            {
+                name: 'Add',
+                url: '/supernodes/new',
+                icon: 'fa fa-plus-square'
+            }
+        ]
+    },
+    {
         name: 'Nodes',
         url: '/nodes',
         icon: 'fa fa-microchip',

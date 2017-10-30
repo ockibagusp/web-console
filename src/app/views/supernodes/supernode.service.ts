@@ -4,14 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { Node } from './node.model';
+import { Supernode } from './supernode.model';
 import { AgriHub } from '../core/global/agrihub';
 
 import { CredentialsService } from '../core/authenticate/credentials.service';
 
 @Injectable()
-export class NodeService {
-    private nodeUrl = AgriHub.BASE_API_URL+'/nodes';
+export class SupernodeService {
+    private supernodeUrl = AgriHub.BASE_API_URL+'/supernodes';
     private headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'JWT ' + this.credentialsService.getToken()
@@ -22,7 +22,20 @@ export class NodeService {
         private credentialsService: CredentialsService
     ) {}
 
-    getNodes(role: string, page: number=1): Observable<any> {
+    getSupernodes(page: number=1): Observable<any> {
+
+        return this.http.get(`${this.supernodeUrl}/?page=${page}`, {headers: this.headers})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getSupernode(id: string): Observable<Supernode> {
+        return this.http.get(`${this.supernodeUrl}/${id}/`, {headers: this.headers})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getNodes(id: string, role: string, page: number=1): Observable<any> {
         let extraParam = "";
 
         if ("public" == role) {
@@ -39,25 +52,19 @@ export class NodeService {
             extraParam += `&&page=${page}`
         }
 
-        return this.http.get(`${this.nodeUrl}/${extraParam}`, {headers: this.headers})
+        return this.http.get(`${this.supernodeUrl}/${id}/${extraParam}`, {headers: this.headers})
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    getNode(id: string): Observable<Node> {
-        return this.http.get(`${this.nodeUrl}/${id}/`, {headers: this.headers})
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-    save(node: Node): Observable<Node> {
-        const url = node.id ? `${this.nodeUrl}/${node.id}/` : this.nodeUrl;
+    save(supernode: Supernode): Observable<Supernode> {
+        const url = supernode.id ? `${this.supernodeUrl}/${supernode.id}/` : this.supernodeUrl;
         var promise: Observable<Response>;
 
-        if (url == this.nodeUrl ) {
-            promise = this.http.post(`${url}/`, JSON.stringify(node), {headers: this.headers});
+        if (url == this.supernodeUrl ) {
+            promise = this.http.post(`${url}/`, JSON.stringify(supernode), {headers: this.headers});
         } else {
-            promise = this.http.put(url, JSON.stringify(node), {headers: this.headers});
+            promise = this.http.put(url, JSON.stringify(supernode), {headers: this.headers});
         }
 
         return promise.map(this.extractData).catch(this.handleError);
@@ -66,12 +73,6 @@ export class NodeService {
     delete(url: string): Observable<void> {
         return this.http.delete(url, {headers: this.headers})
             .map(() => null)
-            .catch(this.handleError);
-    }
-
-    reset(id: string): Observable<Node> {
-        return this.http.post(`${this.nodeUrl}/reset/`, {'id': id}, {headers: this.headers})
-            .map(this.extractData)
             .catch(this.handleError);
     }
 

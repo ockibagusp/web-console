@@ -1,0 +1,40 @@
+<div class="animated fadeIn">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<i class="fa fa-align-justify"></i> {{ is_new ? 'New Super-Node' : 'Edit Super-Node' }}
+				</div>
+				<div class="card-body">
+					<p *ngFor="let error of errors">
+			            <alert [type]="'danger'" dismissible="true">
+			                <strong>{{ error.field }}:</strong> {{ error.message }}
+			            </alert>
+			        </p>
+					<form class="form-horizontal">
+						<div class="form-group">
+					        <label for="label">Label</label>
+					        <input type="text" name="label" class="form-control" [(ngModel)]="supernode.label"
+									placeholder="Enter Super-Node Label..">
+				      	</div>
+						<div class="form-group">
+					        <label for="label">Secretkey</label>
+					        <input type="text" name="secretkey" class="form-control" 
+					        	[(ngModel)]="supernode.secretkey" placeholder="Enter Super-Node Secretkey..">
+				      	</div>
+				      	<div class="form-group">
+					        <label for="label">Description</label>
+					        <input type="text" name="description" class="form-control" 
+					        	[(ngModel)]="supernode.description" placeholder="Enter Super-Node Description..">
+				      	</div>
+					</form>
+				</div>
+				<div class="card-footer">
+					<button type="button" (click)="save()" class="btn btn-sm btn-primary">
+						<i class="fa fa-save"></i> Save
+					</button>
+				</div>
+			</div>
+		</div> <!--/.col-->
+	</div><!--/.row-->
+</div>

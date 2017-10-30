@@ -51,6 +51,11 @@ export const routes: Routes = [
             },
             //
             {
+                path: 'supernodes',
+                canActivate: [BaseCanActivate],
+                loadChildren: './views/supernodes/supernodes.module#SupernodesModule',
+            },
+            {
                 path: 'nodes',
                 canActivate: [BaseCanActivate],
                 loadChildren: './views/nodes/nodes.module#NodesModule',

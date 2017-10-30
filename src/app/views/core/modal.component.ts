@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { UserService } from '../users/user.service';
+import { SupernodeService } from '../supernodes/supernode.service';
 import { NodeService } from '../nodes/node.service';
 import { SensorService } from '../nodes/sensor.service';
 
@@ -32,6 +33,7 @@ export class ModalContentComponent {
     // in case of reset pubs per day remain, is_delete should be false
   	public is_delete: boolean = false;
     // perform diferent delete action
+    public is_supernode: boolean = false;
     public is_node: boolean = false;
   	public is_sensor: boolean = false;
     public is_user: boolean = false;
@@ -39,6 +41,7 @@ export class ModalContentComponent {
   	constructor(
   		public bsModalRef: BsModalRef,
         private userService: UserService,
+        private supernodeService: SupernodeService,
         private nodeService: NodeService,
         private sensorService: SensorService
     ) {}
@@ -55,7 +58,16 @@ export class ModalContentComponent {
   	}
 
   	delete(): void {
-        if(this.is_node) {
+        if (this.is_supernode) {
+            this.supernodeService.delete(this.url)
+                .subscribe(
+                    () => {
+                        this.status = 204;
+                        this.bsModalRef.hide();
+                    },
+                    error => null
+                );
+        } else if(this.is_node) {
             this.nodeService.delete(this.url)
                 .subscribe(
                     () => {

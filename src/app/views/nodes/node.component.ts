@@ -38,8 +38,8 @@ export class NodeComponent {
         this.getNodes();
     }
 
-    private getNodes(role: string=""): void {
-        this.nodeService.getNodes(role)
+    private getNodes(role: string="", page:number=1): void {
+        this.nodeService.getNodes(role, page)
             .subscribe(
                 res => this.nodes = res.results as Node[],
                 error => console.log(error)
@@ -85,6 +85,8 @@ export class NodeComponent {
 	}
 
 	public pageChanged(event:any):void {
+		this.router.navigateByUrl(`/nodes/list?visibility=${this.activeTab}&&page=${event.page}`);
+		this.getNodes(this.activeTab, event.page);
 	    console.log('Page changed to: ' + event.page);
 	    console.log('Number items per page: ' + event.itemsPerPage);
 	}
