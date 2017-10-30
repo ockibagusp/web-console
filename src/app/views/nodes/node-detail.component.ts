@@ -118,7 +118,7 @@ export class NodeDetailComponent implements OnInit {
         if (sensor) {
             /*
              * create new sensor instance from existing obj, 
-             * avoid referring the same object with sensors list table
+             * avoid referring the same object in sensors list table
              */
             _sensor.id = sensor.id;
             _sensor.url = sensor.url;
