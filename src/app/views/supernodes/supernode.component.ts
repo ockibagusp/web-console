@@ -54,6 +54,7 @@ export class SupernodeComponent {
 	    // event fired when modal dismissed -> reload sensor data
 	    this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
       		if (!reason && 204 == this.bsModalRef.content.status) {
+      			this.router.navigateByUrl('/supernodes/list');
       			this.getSupernodes();
       		}
     		this.modalSubscriptions.unsubscribe();

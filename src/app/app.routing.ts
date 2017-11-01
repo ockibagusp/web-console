@@ -11,8 +11,8 @@ import {
 
 import { PageNotFoundComponent } from './views/core/exception.component';
 
-import { 
-    BaseCanActivate, CanActivateAdmin, CanActivateResearcher 
+import {
+    BaseCanActivate, CanActivateAdmin, CanActivateResearcher
 } from './views/core/authenticate/authenticate.service';
 
 export const routes: Routes = [
@@ -29,27 +29,6 @@ export const routes: Routes = [
             title: 'Home'
         },
         children: [
-            {
-                path: 'dashboard',
-                loadChildren: './views/dashboard/dashboard.module#DashboardModule'
-            },
-            {
-                path: 'components',
-                loadChildren: './views/components/components.module#ComponentsModule'
-            },
-            {
-                path: 'icons',
-                loadChildren: './views/icons/icons.module#IconsModule'
-            },
-            {
-                path: 'widgets',
-                loadChildren: './views/widgets/widgets.module#WidgetsModule'
-            },
-            {
-                path: 'charts',
-                loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
-            },
-            //
             {
                 path: 'supernodes',
                 canActivate: [BaseCanActivate],
@@ -77,19 +56,6 @@ export const routes: Routes = [
             {
                 path: '',
                 loadChildren: './views/core/core.module#CoreModule',
-            }
-        ]
-    },
-    {
-        path: 'pages',
-        component: SimpleLayoutComponent,
-        data: {
-            title: 'Pages'
-        },
-        children: [
-            {
-                path: '',
-                loadChildren: './views/pages/pages.module#PagesModule',
             }
         ]
     },

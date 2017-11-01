@@ -69,10 +69,12 @@
 								</tr>
 								</tbody>
 							</table>
+							<strong *ngIf="nodes?.length == 0">No Data</strong>
 							<nav>
-								<pagination [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage"
-									(pageChanged)="pageChanged($event)" [itemsPerPage]="itemsPerPage" 
-									class="pagination-md" [boundaryLinks]="true"></pagination>
+								<pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
+									[(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
+									[itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
+									</pagination>
 							</nav>
 						</tab>
 						<tab (select)="selectTab('public')">
@@ -130,6 +132,7 @@
 								</tr>
 								</tbody>
 							</table>
+							<strong *ngIf="nodes?.length == 0">No Data</strong>
 						</tab>
 						<tab (select)="selectTab('private')">
 							<ng-template tabHeading>Private</ng-template>
@@ -186,6 +189,7 @@
 								</tr>
 								</tbody>
 							</table>
+							<strong *ngIf="nodes?.length == 0">No Data</strong>
 						</tab>
 						<tab (select)="selectTab('global')">
 							<ng-template tabHeading>Global</ng-template>
@@ -232,6 +236,7 @@
 								</tr>
 								</tbody>
 							</table>
+							<strong *ngIf="nodes?.length == 0">No Data</strong>
 						</tab>
 					</tabset>
 				</div>
