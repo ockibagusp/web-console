@@ -1,10 +1,10 @@
 {
-  "name": "@coreui/angular",
-  "version": "1.0.2",
-  "description": "",
+  "name": "@ockifals/web-console",
+  "version": "0.8.1",
+  "description": "Web-Console for Agrihub Cloud-Platform",
   "author": "",
-  "url": "http://coreui.io",
-  "copyright": "Copyright 2017 creativeLabs Łukasz Holeczek",
+  "url": "http://filkom.ub.ac.id",
+  "copyright": "NetworkingLabs © 2017 FILKOM UB",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
