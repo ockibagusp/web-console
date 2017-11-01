@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { RegisterService } from './register.service';
-import { User } from '../users/user.model';
-import { AuthenticateService } from '../core/authenticate/authenticate.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {RegisterService} from './register.service';
+import {User} from '../users/user.model';
+import {AuthenticateService} from './authenticate/authenticate.service';
 
 @Component({
     templateUrl: 'register.component.html'
 })
 export class RegisterComponent implements OnInit {
     user: User;
-    errors: Array<{field: string, message: string}>
+    errors: Array<{ field: string, message: string }>;
 
-    constructor(
-        private router: Router, 
-        private registerService: RegisterService,
-        private authenticateService: AuthenticateService
-    ) {}
+    constructor(private router: Router,
+                private registerService: RegisterService,
+                private authenticateService: AuthenticateService) {
+    }
 
     public ngOnInit() {
         if (this.authenticateService.isAuth()) {
@@ -33,13 +32,13 @@ export class RegisterComponent implements OnInit {
         this.registerService.register(this.user)
             .then(res => this.router.navigate(['/page/login']))
             .catch(error => this.extractErrors(error))
-    } 
+    }
 
     private extractErrors(err: any): void {
-        let errorsParse = err;
+        const errorsParse = err;
         this.errors = [];
-        for(let index in errorsParse) {
-            if(errorsParse.hasOwnProperty(index)) {
+        for (const index in errorsParse) {
+            if (errorsParse.hasOwnProperty(index)) {
                 this.errors.push({
                     field: index,
                     message: errorsParse[index]

@@ -1,7 +1,7 @@
 export const ROLEACCESS = {
-    "auth": "*",
-    "admin": 1,
-    "researcher": 0
+    'auth': '*',
+    'admin': 1,
+    'researcher': 0
 };
 
 export const navigation = [

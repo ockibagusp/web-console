@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { CookieService } from 'angular2-cookie/core';
+import {Injectable} from '@angular/core';
+import {CookieService} from 'angular2-cookie/core';
 
 @Injectable()
 export class CredentialsService {
-    constructor(
-        private cookieService: CookieService
-    ) {}
+    constructor(private cookieService: CookieService) {
+    }
 
     setUser(user: Object): void {
         this.cookieService.putObject('user', user);

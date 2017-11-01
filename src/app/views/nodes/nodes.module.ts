@@ -1,39 +1,37 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { NodeComponent } from './node.component';
-import { NodeNewComponent } from './node-new.component';
-import { NodeEditComponent } from './node-edit.component';
-import { NodeDetailComponent, ModalSensorFormComponent } from './node-detail.component';
+import {NodeComponent} from './node.component';
+import {NodeNewComponent} from './node-new.component';
+import {NodeEditComponent} from './node-edit.component';
+import {NodeDetailComponent, ModalSensorFormComponent} from './node-detail.component';
 
-import { NodeService } from './node.service';
-import { SensorService } from './sensor.service';
-import { UserService } from '../users/user.service';
+import {NodeService} from './node.service';
+import {SensorService} from './sensor.service';
+import {UserService} from '../users/user.service';
 
-import { ModalContentComponent } from '../core/modal.component';
-
-import { NodeRoutingModule } from './nodes-routing.module';
+import {NodeRoutingModule} from './nodes-routing.module';
 
 // Modal Component
-import { ModalModule } from 'ngx-bootstrap/modal';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 // Tabs Component
-import { TabsModule } from 'ngx-bootstrap/tabs';
+import {TabsModule} from 'ngx-bootstrap/tabs';
 
 // Pagination Component
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
 
-import { AlertModule } from 'ngx-bootstrap/alert';
+import {AlertModule} from 'ngx-bootstrap/alert';
 
 @NgModule({
     imports: [
         CommonModule,
-	    FormsModule,
-    	NodeRoutingModule,
-    	ModalModule.forRoot(),
-    	TabsModule,
-    	PaginationModule.forRoot(),
+        FormsModule,
+        NodeRoutingModule,
+        ModalModule.forRoot(),
+        TabsModule,
+        PaginationModule.forRoot(),
         AlertModule.forRoot()
     ],
     entryComponents: [
@@ -46,8 +44,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
         NodeDetailComponent,
         ModalSensorFormComponent
     ],
-    providers: [ 
-        NodeService, 
+    providers: [
+        NodeService,
         SensorService,
         UserService
     ]

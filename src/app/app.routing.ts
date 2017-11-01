@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { MainAppComponent } from './app.component';
+import {MainAppComponent} from './app.component';
 
 // Import Containers
 import {
@@ -9,10 +9,10 @@ import {
     SimpleLayoutComponent
 } from './containers';
 
-import { PageNotFoundComponent } from './views/core/exception.component';
+import {PageNotFoundComponent} from './views/core/exception.component';
 
 import {
-    BaseCanActivate, CanActivateAdmin, CanActivateResearcher
+    BaseCanActivate, CanActivateAdmin
 } from './views/core/authenticate/authenticate.service';
 
 export const routes: Routes = [
@@ -59,7 +59,7 @@ export const routes: Routes = [
             }
         ]
     },
-    { path: '**', component: PageNotFoundComponent }
+    {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

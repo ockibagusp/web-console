@@ -4,11 +4,11 @@ import {
     RouterModule
 } from '@angular/router';
 
-import { SupernodeComponent } from './supernode.component';
-import { SupernodeNewComponent } from './supernode-new.component'
-import { SupernodeEditComponent } from './supernode-edit.component';
-import { SupernodeDetailComponent } from './supernode-detail.component';
-import { SupernodeNodeComponent } from './supernode-node.component';
+import {SupernodeComponent} from './supernode.component';
+import {SupernodeNewComponent} from './supernode-new.component'
+import {SupernodeEditComponent} from './supernode-edit.component';
+import {SupernodeDetailComponent} from './supernode-detail.component';
+import {SupernodeNodeComponent} from './supernode-node.component';
 
 const routes: Routes = [
     {

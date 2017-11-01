@@ -4,10 +4,10 @@ import {
     RouterModule
 } from '@angular/router';
 
-import { NodeComponent } from './node.component';
-import { NodeNewComponent } from './node-new.component'
-import { NodeEditComponent } from './node-edit.component';
-import { NodeDetailComponent } from './node-detail.component';
+import {NodeComponent} from './node.component';
+import {NodeNewComponent} from './node-new.component'
+import {NodeEditComponent} from './node-edit.component';
+import {NodeDetailComponent} from './node-detail.component';
 
 const routes: Routes = [
     {

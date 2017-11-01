@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
-import { AppComponent, MainAppComponent } from './app.component';
+import {AppComponent, MainAppComponent} from './app.component';
 
-import { CoreModule } from './views/core/core.module';
+import {CoreModule} from './views/core/core.module';
 
 // Import containers
 import {
@@ -49,7 +49,7 @@ const APP_DIRECTIVES = [
     NAV_DROPDOWN_DIRECTIVES,
     ReplaceDirective,
     SIDEBAR_TOGGLE_DIRECTIVES
-]
+];
 
 // Import routing module
 import {AppRoutingModule} from './app.routing';

@@ -1,8 +1,8 @@
-import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
-import { CredentialsService } from '../../views/core/authenticate/credentials.service';
+import {Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {CredentialsService} from '../../views/core/authenticate/credentials.service';
 
 // Import navigation elements
-import { navigation, ROLEACCESS } from './../../_nav';
+import {navigation, ROLEACCESS} from '../../_nav';
 
 @Component({
     selector: 'app-sidebar-nav',
@@ -78,47 +78,41 @@ export class AppSidebarNavItemComponent {
     public isRenderItem(): boolean {
         if (!this.item.role) {
             return true;
-        } else if (ROLEACCESS.auth == this.item.role) {
-            return this.isAuth(); 
-        } else if (ROLEACCESS.admin == this.item.role) {
+        } else if (ROLEACCESS.auth === this.item.role) {
+            return this.isAuth();
+        } else if (ROLEACCESS.admin === this.item.role) {
             return this.isAdmin();
-        } else if (ROLEACCESS.researcher == this.item.role) {
+        } else if (ROLEACCESS.researcher === this.item.role) {
             return this.isResearcher();
-        } else {
-            return false;
-        }
-    } 
-
-    public isAuth(): boolean {
-        if('' != this.credentialsService.getUser()) {
-            return true;
         } else {
             return false;
         }
     }
 
+    public isAuth(): boolean {
+        return '' !== this.credentialsService.getUser();
+    }
+
     public isAdmin(): boolean {
-        var user = this.credentialsService.getUser() || '';
-        if('' != user) {
-            return this.item.role == this.credentialsService.getUser().is_admin;
+        const user = this.credentialsService.getUser() || '';
+        if ('' !== user) {
+            return this.item.role === this.credentialsService.getUser().is_admin;
         } else {
             return false;
         }
     }
 
     public isResearcher(): boolean {
-        var user = this.credentialsService.getUser() || '';
-        if('' != user) {
-            return this.item.role == this.credentialsService.getUser().is_admin;
+        const user = this.credentialsService.getUser() || '';
+        if ('' !== user) {
+            return this.item.role === this.credentialsService.getUser().is_admin;
         } else {
             return false;
         }
     }
 
-    constructor(
-        private credentialsService: CredentialsService,
-        private router: Router
-    ) {
+    constructor(private credentialsService: CredentialsService,
+                private router: Router) {
     }
 
 }

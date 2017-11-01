@@ -1,33 +1,34 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 
-import { CoreRoutingModule } from './core-routing.module';
+import {CoreRoutingModule} from './core-routing.module';
 
-import { CookieService, CookieOptions } from 'angular2-cookie/core';
-import { CredentialsService } from './authenticate/credentials.service';
-import { AuthenticateService, BaseCanActivate, CanActivateAdmin, CanActivateResearcher } 
-    from './authenticate/authenticate.service';
+import {CookieService, CookieOptions} from 'angular2-cookie/core';
+import {CredentialsService} from './authenticate/credentials.service';
+import {
+    AuthenticateService, BaseCanActivate, CanActivateAdmin, CanActivateResearcher
+} from './authenticate/authenticate.service';
 
-import { PageNotFoundComponent, ForbiddenComponent, InternalServerErrorComponent } from './exception.component';
-import { LoginComponent } from './login.component';
-import { LogoutComponent } from './logout.component';
-import { RegisterComponent } from './register.component';
+import {PageNotFoundComponent, ForbiddenComponent, InternalServerErrorComponent} from './exception.component';
+import {LoginComponent} from './login.component';
+import {LogoutComponent} from './logout.component';
+import {RegisterComponent} from './register.component';
 
-import { LoginService } from './login.service';
-import { RegisterService } from './register.service';
+import {LoginService} from './login.service';
+import {RegisterService} from './register.service';
 
-import { ModalContentComponent } from '../core/modal.component';
+import {ModalContentComponent} from './modal.component';
 
-import { AlertModule } from 'ngx-bootstrap/alert'
+import {AlertModule} from 'ngx-bootstrap/alert'
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         HttpModule,
-    	CoreRoutingModule,
+        CoreRoutingModule,
         AlertModule.forRoot()
     ],
     entryComponents: [
@@ -44,7 +45,7 @@ import { AlertModule } from 'ngx-bootstrap/alert'
     ],
     providers: [
         CookieService,
-        { provide: CookieOptions, useValue: {} },
+        {provide: CookieOptions, useValue: {}},
         CredentialsService,
         AuthenticateService,
         BaseCanActivate,

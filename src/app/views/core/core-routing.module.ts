@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { PageNotFoundComponent, ForbiddenComponent, InternalServerErrorComponent } 
-    from './exception.component';
-import { LoginComponent } from './login.component';
-import { LogoutComponent } from './logout.component';
-import { RegisterComponent } from './register.component';
+import {
+    PageNotFoundComponent, ForbiddenComponent, InternalServerErrorComponent
+} from './exception.component';
+import {LoginComponent} from './login.component';
+import {LogoutComponent} from './logout.component';
+import {RegisterComponent} from './register.component';
 
 const routes: Routes = [
     {

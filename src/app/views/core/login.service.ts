@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core'
-import { Headers, Http } from '@angular/http';
+import {Injectable} from '@angular/core'
+import {Headers, Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { AgriHub } from './global/agrihub';
+import {AgriHub} from './global/agrihub';
 
 @Injectable()
 export class LoginService {
-    private loginUrl = AgriHub.BASE_API_URL+'/user-auth/';  // URL to web api
+    private loginUrl = AgriHub.BASE_API_URL + '/user-auth/';  // URL to web api
     private headers = new Headers({'Content-Type': 'application/json'});
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+    }
 
     login(username: string, password: string): Promise<any> {
         return this.http

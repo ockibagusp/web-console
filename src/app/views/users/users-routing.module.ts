@@ -4,10 +4,10 @@ import {
     RouterModule
 } from '@angular/router';
 
-import { UserComponent } from './user.component';
-import { UserDetailComponent } from './user-detail.component';
-import { UserNewComponent } from './user-new.component';
-import { UserEditComponent } from './user-edit.component';
+import {UserComponent} from './user.component';
+import {UserDetailComponent} from './user-detail.component';
+import {UserNewComponent} from './user-new.component';
+import {UserEditComponent} from './user-edit.component';
 
 const routes: Routes = [
     {

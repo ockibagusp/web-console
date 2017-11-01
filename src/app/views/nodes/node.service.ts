@@ -1,39 +1,38 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { Node } from './node.model';
-import { AgriHub } from '../core/global/agrihub';
+import {Node} from './node.model';
+import {AgriHub} from '../core/global/agrihub';
 
-import { CredentialsService } from '../core/authenticate/credentials.service';
+import {CredentialsService} from '../core/authenticate/credentials.service';
 
 @Injectable()
 export class NodeService {
-    private nodeUrl = AgriHub.BASE_API_URL+'/nodes';
+    private nodeUrl = AgriHub.BASE_API_URL + '/nodes';
     private headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + this.credentialsService.getToken()
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT ' + this.credentialsService.getToken()
     });
 
-    constructor(
-        private http: Http,
-        private credentialsService: CredentialsService
-    ) {}
+    constructor(private http: Http,
+                private credentialsService: CredentialsService) {
+    }
 
-    getNodes(role: string, page: number=1): Observable<any> {
-        let extraParam = "";
+    getNodes(role: string, page: number = 1): Observable<any> {
+        let extraParam = '';
 
-        if ("public" == role) {
-            extraParam += "?role=public";
-        } else if ("private" == role) {
-            extraParam += "?role=private";
-        } else if ("global" == role) {
-            extraParam += "?role=global";
+        if ('public' === role) {
+            extraParam += '?role=public';
+        } else if ('private' === role) {
+            extraParam += '?role=private';
+        } else if ('global' === role) {
+            extraParam += '?role=global';
         }
 
-        if ("" == extraParam) {
+        if ('' === extraParam) {
             extraParam += `?page=${page}`
         } else {
             extraParam += `&&page=${page}`
@@ -52,9 +51,9 @@ export class NodeService {
 
     save(node: Node): Observable<Node> {
         const url = node.id ? `${this.nodeUrl}/${node.id}/` : this.nodeUrl;
-        var promise: Observable<Response>;
+        let promise: Observable<Response>;
 
-        if (url == this.nodeUrl ) {
+        if (url === this.nodeUrl) {
             promise = this.http.post(`${url}/`, JSON.stringify(node), {headers: this.headers});
         } else {
             promise = this.http.put(url, JSON.stringify(node), {headers: this.headers});
@@ -76,10 +75,10 @@ export class NodeService {
     }
 
     private extractData(res: Response) {
-        let body = res.json();
-        return body || { };
+        const body = res.json();
+        return body || {};
     }
-    
+
     private handleError(error: any) {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

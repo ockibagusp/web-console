@@ -1,26 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Supernode } from './supernode.model';
-import { SupernodeService } from './supernode.service';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Supernode} from './supernode.model';
+import {SupernodeService} from './supernode.service';
 import 'rxjs/add/operator/switchMap';
 
-import { CredentialsService } from '../core/authenticate/credentials.service';
+import {CredentialsService} from '../core/authenticate/credentials.service';
 
 @Component({
     templateUrl: 'supernode-form.component.html'
 })
 export class SupernodeEditComponent implements OnInit {
     supernode: Supernode;
-    is_new:boolean = false;
+    is_new = false;
 
-    errors: Array<{ field: string, message: string}>;
+    errors: Array<{ field: string, message: string }>;
 
-    constructor(
-        private supernodeService: SupernodeService,
-        private route: ActivatedRoute,
-        private credentialsService: CredentialsService,
-        private router: Router
-    ) {}
+    constructor(private supernodeService: SupernodeService,
+                private route: ActivatedRoute,
+                private credentialsService: CredentialsService,
+                private router: Router) {
+    }
 
     ngOnInit() {
         this.route.params
@@ -36,7 +35,7 @@ export class SupernodeEditComponent implements OnInit {
     private setUpSupernode(supernode: Supernode): void {
         // raise 403 when node is not owned by this auth user
         if (supernode.user != this.credentialsService.getUser().username) {
-            this.router.navigateByUrl('/page/403', { skipLocationChange: true });
+            this.router.navigateByUrl('/page/403', {skipLocationChange: true});
         }
         this.supernode = supernode;
     }
@@ -50,14 +49,14 @@ export class SupernodeEditComponent implements OnInit {
     }
 
     private extractErrors(err: any): void {
-        let errorsParse = JSON.parse(err._body);
+        const errorsParse = JSON.parse(err._body);
         this.errors = [];
-        for(let index in errorsParse) {
-            if(errorsParse.hasOwnProperty(index)) {
+        for (const index in errorsParse) {
+            if (errorsParse.hasOwnProperty(index)) {
                 this.errors.push({
                     field: index,
-                    message: typeof errorsParse[index] === 'string' ? 
-                        errorsParse[index]: errorsParse[index][0]
+                    message: typeof errorsParse[index] === 'string' ?
+                        errorsParse[index] : errorsParse[index][0]
                 })
             }
         }

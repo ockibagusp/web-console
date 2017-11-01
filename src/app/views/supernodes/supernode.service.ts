@@ -1,28 +1,27 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { Supernode } from './supernode.model';
-import { AgriHub } from '../core/global/agrihub';
+import {Supernode} from './supernode.model';
+import {AgriHub} from '../core/global/agrihub';
 
-import { CredentialsService } from '../core/authenticate/credentials.service';
+import {CredentialsService} from '../core/authenticate/credentials.service';
 
 @Injectable()
 export class SupernodeService {
-    private supernodeUrl = AgriHub.BASE_API_URL+'/supernodes';
+    private supernodeUrl = AgriHub.BASE_API_URL + '/supernodes';
     private headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + this.credentialsService.getToken()
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT ' + this.credentialsService.getToken()
     });
 
-    constructor(
-        private http: Http,
-        private credentialsService: CredentialsService
-    ) {}
+    constructor(private http: Http,
+                private credentialsService: CredentialsService) {
+    }
 
-    getSupernodes(page: number=1): Observable<any> {
+    getSupernodes(page: number = 1): Observable<any> {
         return this.http.get(`${this.supernodeUrl}/?page=${page}`, {headers: this.headers})
             .map(this.extractData)
             .catch(this.handleError);
@@ -34,18 +33,18 @@ export class SupernodeService {
             .catch(this.handleError);
     }
 
-    getNodes(supernodeid: string, role: string, page: number=1): Observable<any> {
-        let extraParam = "";
+    getNodes(supernodeid: string, role: string, page: number = 1): Observable<any> {
+        let extraParam = '';
 
-        if ("public" == role) {
-            extraParam += "?role=public";
-        } else if ("private" == role) {
-            extraParam += "?role=private";
-        } else if ("global" == role) {
-            extraParam += "?role=global";
+        if ('public' === role) {
+            extraParam += '?role=public';
+        } else if ('private' === role) {
+            extraParam += '?role=private';
+        } else if ('global' === role) {
+            extraParam += '?role=global';
         }
 
-        if ("" == extraParam) {
+        if ('' === extraParam) {
             extraParam += `?page=${page}`
         } else {
             extraParam += `&&page=${page}`
@@ -58,9 +57,9 @@ export class SupernodeService {
 
     save(supernode: Supernode): Observable<Supernode> {
         const url = supernode.id ? `${this.supernodeUrl}/${supernode.id}/` : this.supernodeUrl;
-        var promise: Observable<Response>;
+        let promise: Observable<Response>;
 
-        if (url == this.supernodeUrl ) {
+        if (url === this.supernodeUrl) {
             promise = this.http.post(`${url}/`, JSON.stringify(supernode), {headers: this.headers});
         } else {
             promise = this.http.put(url, JSON.stringify(supernode), {headers: this.headers});
@@ -76,10 +75,10 @@ export class SupernodeService {
     }
 
     private extractData(res: Response) {
-        let body = res.json();
-        return body || { };
+        const body = res.json();
+        return body || {};
     }
-    
+
     private handleError(error: any) {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

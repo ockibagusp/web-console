@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router, Params} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
-import { UserService } from './user.service';
-import { User } from './user.model';
+import {UserService} from './user.service';
+import {User} from './user.model';
 
 @Component({
-	templateUrl: 'user-form.component.html'
+    templateUrl: 'user-form.component.html'
 })
 export class UserEditComponent implements OnInit {
     user: User;
-    is_new:boolean = false;
-    
+    is_new = false;
+
     errors: Array<{ field: string, message: string }>;
 
-    constructor(
-        private userService: UserService,
-        private route: ActivatedRoute,
-        private router: Router
-    ) {}
+    constructor(private userService: UserService,
+                private route: ActivatedRoute,
+                private router: Router) {
+    }
 
     ngOnInit() {
         this.user = new User;
@@ -31,23 +30,23 @@ export class UserEditComponent implements OnInit {
     }
 
     save(): void {
-        this.user.is_admin = this.user.is_admin ? 1: 0; 
+        this.user.is_admin = this.user.is_admin ? 1 : 0;
         this.userService.save(this.user)
             .subscribe(
                 user => this.router.navigate(['/users/view', user.id]),
                 error => this.extractErrors(error)
             );
     }
-    
+
     private extractErrors(err: any): void {
-        let errorsParse = JSON.parse(err._body);
+        const errorsParse = JSON.parse(err._body);
         this.errors = [];
-        for(let index in errorsParse) {
-            if(errorsParse.hasOwnProperty(index)) {
+        for (const index in errorsParse) {
+            if (errorsParse.hasOwnProperty(index)) {
                 this.errors.push({
                     field: index,
-                    message: typeof errorsParse[index] === 'string' ? 
-                        errorsParse[index]: errorsParse[index][0]
+                    message: typeof errorsParse[index] === 'string' ?
+                        errorsParse[index] : errorsParse[index][0]
                 })
             }
         }

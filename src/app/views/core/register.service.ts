@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core'
-import { Headers, Http } from '@angular/http';
+import {Injectable} from '@angular/core'
+import {Headers, Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { AgriHub } from './global/agrihub';
-import { User } from '../users/user.model';
+import {AgriHub} from './global/agrihub';
+import {User} from '../users/user.model';
 
 @Injectable()
 export class RegisterService {
-    private registerUrl = AgriHub.BASE_API_URL+'/register/';  // URL to web api
+    private registerUrl = AgriHub.BASE_API_URL + '/register/';  // URL to web api
     private headers = new Headers({'Content-Type': 'application/json'});
-    
-    constructor(private http: Http) {}
+
+    constructor(private http: Http) {
+    }
 
     register(user: User): Promise<any> {
         return this.http

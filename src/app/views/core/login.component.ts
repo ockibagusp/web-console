@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginService } from './login.service';
-import { CredentialsService } from './authenticate/credentials.service';
-import { AuthenticateService } from './authenticate/authenticate.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {LoginService} from './login.service';
+import {CredentialsService} from './authenticate/credentials.service';
+import {AuthenticateService} from './authenticate/authenticate.service';
 
 @Component({
     templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit {
-	username: string = "basukicahya";
-    password: string = "admin123";
+    username: string = 'basukicahya';
+    password: string = 'admin123';
 
     errors: string;
 
-    constructor(
-    	private router: Router, 
-        private loginService: LoginService,
-        private credentialsService: CredentialsService,
-        private authenticateService: AuthenticateService
-    ) {}
+    constructor(private router: Router,
+                private loginService: LoginService,
+                private credentialsService: CredentialsService,
+                private authenticateService: AuthenticateService) {
+    }
 
     ngOnInit(): void {
-    	if (this.authenticateService.isAuth()) {
+        if (this.authenticateService.isAuth()) {
             this.router.navigate(['/']);
         }
     }
