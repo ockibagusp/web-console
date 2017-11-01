@@ -52,7 +52,7 @@
 						</tbody>
 					</table>
 					<nav>
-						<pagination *ngIf="10>totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
+						<pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
 							[(ngModel)]="currentPage"
 							(pageChanged)="pageChanged($event)" [itemsPerPage]="itemsPerPage" 
 							class="pagination-md" [boundaryLinks]="true"></pagination>

@@ -23,7 +23,6 @@ export class SupernodeService {
     ) {}
 
     getSupernodes(page: number=1): Observable<any> {
-
         return this.http.get(`${this.supernodeUrl}/?page=${page}`, {headers: this.headers})
             .map(this.extractData)
             .catch(this.handleError);
@@ -35,7 +34,7 @@ export class SupernodeService {
             .catch(this.handleError);
     }
 
-    getNodes(id: string, role: string, page: number=1): Observable<any> {
+    getNodes(supernodeid: string, role: string, page: number=1): Observable<any> {
         let extraParam = "";
 
         if ("public" == role) {
@@ -52,7 +51,7 @@ export class SupernodeService {
             extraParam += `&&page=${page}`
         }
 
-        return this.http.get(`${this.supernodeUrl}/${id}/${extraParam}`, {headers: this.headers})
+        return this.http.get(`${this.supernodeUrl}/${supernodeid}/nodes/${extraParam}`, {headers: this.headers})
             .map(this.extractData)
             .catch(this.handleError);
     }

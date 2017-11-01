@@ -8,6 +8,7 @@ import { SupernodeComponent } from './supernode.component';
 import { SupernodeNewComponent } from './supernode-new.component'
 import { SupernodeEditComponent } from './supernode-edit.component';
 import { SupernodeDetailComponent } from './supernode-detail.component';
+import { SupernodeNodeComponent } from './supernode-node.component';
 
 const routes: Routes = [
     {
@@ -46,6 +47,13 @@ const routes: Routes = [
                 component: SupernodeEditComponent,
                 data: {
                     title: 'Edit'
+                }
+            },
+            {
+                path: 'view/:id/nodes',
+                component: SupernodeNodeComponent,
+                data: {
+                    title: 'Nodes List'
                 }
             }
         ]

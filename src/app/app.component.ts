@@ -18,7 +18,7 @@ export class MainAppComponent {
         } else if(this.authenticateService.isAdmin()) {
             this.router.navigate(['/users/list']);
         } else if(this.authenticateService.isResearcher()) {
-            this.router.navigate(['/nodes/list']);
+            this.router.navigate(['/supernodes/list']);
         }
     }
 }

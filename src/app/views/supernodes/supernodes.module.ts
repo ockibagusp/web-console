@@ -6,6 +6,7 @@ import { SupernodeComponent } from './supernode.component';
 import { SupernodeNewComponent } from './supernode-new.component';
 import { SupernodeEditComponent } from './supernode-edit.component';
 import { SupernodeDetailComponent } from './supernode-detail.component';
+import { SupernodeNodeComponent } from './supernode-node.component';
 
 import { SupernodeService } from './supernode.service';
 import { NodeService } from '../nodes/node.service';
@@ -19,6 +20,9 @@ import { SupernodeRoutingModule } from './supernodes-routing.module';
 // Modal Component
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+// Tabs Component
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
 // Pagination Component
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
@@ -30,6 +34,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 	    FormsModule,
     	SupernodeRoutingModule,
     	ModalModule.forRoot(),
+        TabsModule,
     	PaginationModule.forRoot(),
         AlertModule.forRoot()
     ],
@@ -40,7 +45,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
         SupernodeComponent,
         SupernodeNewComponent,
         SupernodeEditComponent,
-        SupernodeDetailComponent
+        SupernodeDetailComponent,
+        SupernodeNodeComponent
     ],
     providers: [ 
         SupernodeService,
