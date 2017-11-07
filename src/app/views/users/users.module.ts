@@ -8,6 +8,7 @@ import {UserNewComponent} from './user-new.component';
 import {UserEditComponent} from './user-edit.component';
 
 import {UserService} from './user.service';
+import {SupernodeService} from '../supernodes/supernode.service';
 import {NodeService} from '../nodes/node.service';
 import {SensorService} from '../nodes/sensor.service';
 
@@ -42,6 +43,7 @@ import {AlertModule} from 'ngx-bootstrap/alert';
     ],
     providers: [
         UserService,
+        SupernodeService,
         NodeService,
         SensorService
     ]

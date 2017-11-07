@@ -81,6 +81,10 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <pagination *ngIf="10<totalItems" [totalItems]="totalItems"
+                                        [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
+                                        [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
+                                        </pagination>
                                 </div>
                             </div>
                         </div>

@@ -22,8 +22,8 @@ export class SensorService {
                 private credentialsService: CredentialsService) {
     }
 
-    getSensors(nodeid: string): Observable<any> {
-        return this.http.get(`${this.nodeUrl}/${nodeid}/sensor/`, {headers: this.headers})
+    getSensors(nodeid: string, page: number = 1): Observable<any> {
+        return this.http.get(`${this.nodeUrl}/${nodeid}/sensor/?page=${page}`, {headers: this.headers})
             .map(this.extractData)
             .catch(this.handleError);
     }

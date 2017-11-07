@@ -8,6 +8,7 @@ import {NodeEditComponent} from './node-edit.component';
 import {NodeDetailComponent, ModalSensorFormComponent} from './node-detail.component';
 
 import {NodeService} from './node.service';
+import {SupernodeService} from '../supernodes/supernode.service';
 import {SensorService} from './sensor.service';
 import {UserService} from '../users/user.service';
 
@@ -46,6 +47,7 @@ import {AlertModule} from 'ngx-bootstrap/alert';
     ],
     providers: [
         NodeService,
+        SupernodeService,
         SensorService,
         UserService
     ]

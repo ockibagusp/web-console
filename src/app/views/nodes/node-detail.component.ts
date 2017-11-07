@@ -21,6 +21,10 @@ export class NodeDetailComponent implements OnInit {
     is_mine: boolean; // 'edit' button visibility
     // reset subsperdayremain flash info
     flash_message: string;
+    // sensor list pagination
+    public itemsPerPage = 10;
+    public currentPage = 1;
+    public totalItems: number;
     public bsModalRef: BsModalRef;
     public modalSubscriptions: Subscription;
 
@@ -46,11 +50,14 @@ export class NodeDetailComponent implements OnInit {
             );
     }
 
-    private getSensors() {
+    private getSensors(page: number = 1) {
         this.route.params
-            .switchMap((params: Params) => this.sensorService.getSensors(params['id']))
+            .switchMap((params: Params) => this.sensorService.getSensors(params['id'], page))
             .subscribe(
-                sensors => this.sensors = sensors.results as Sensor[],
+                res => {
+                    this.totalItems = res.count;
+                    this.sensors = res.results as Sensor[];
+                },
                 error => console.log(error)
             );
     }
@@ -89,6 +96,7 @@ export class NodeDetailComponent implements OnInit {
             // event fired when modal dismissed -> reload sensor data
             this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
                 if (!reason && 204 === this.bsModalRef.content.status) {
+                    this.router.navigateByUrl(`/nodes/view/${this.node.id}?sensor-page=1`);
                     this.getSensors();
                 }
                 this.modalSubscriptions.unsubscribe();
@@ -132,6 +140,11 @@ export class NodeDetailComponent implements OnInit {
             }
             this.modalSubscriptions.unsubscribe();
         });
+    }
+
+    public pageChanged(event: any): void {
+        this.router.navigateByUrl(`/nodes/view/${this.node.id}?sensor-page=${event.page}`);
+        this.getSensors(event.page);
     }
 }
 
