@@ -33,6 +33,12 @@
 					</div>
 				</div>
 			</form>
+			<div *ngIf="collectionSize">
+				<br>
+				<p>
+					<strong>Total Sensor Data</strong>: {{ collectionSize }}
+				</p>
+			</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>
