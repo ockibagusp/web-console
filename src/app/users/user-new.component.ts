@@ -29,12 +29,6 @@ export class UserNewComponent implements OnInit {
             { label: "New", is_active: true }
         ];
         this.user = new User;
-        // initial for example purpose
-        this.user.username = "milea";
-        this.user.email = "milea@example.com";
-        this.user.first_name = 'Milea Adnan';
-        this.user.last_name = 'Nasution';
-        this.user.is_admin = 0;
     }
 
     save() {

@@ -32,9 +32,6 @@ export class NodeNewComponent {
             { label: "New", is_active: true }
         ];
         this.node = new Node;
-        this.node.label = "FILKOM_1";
-        this.node.secretkey = "rahasia";
-        this.node.pubsperday = 20;
     }
 
     unlimitedStateChange(): void {

@@ -26,10 +26,6 @@ export class RegisterComponent implements OnInit {
         }
 
         this.user = new User;
-        this.user.username = 'milea';
-        this.user.email = 'milea@example.com';
-        this.user.first_name = 'Milea';
-        this.user.last_name = 'Adnan Nasution';
     }
 
     register(): void {

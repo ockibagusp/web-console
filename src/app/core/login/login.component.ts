@@ -10,8 +10,8 @@ import { AuthenticateService } from '../authenticate/authenticate.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    username: string = 'basukicahya';
-    password: string = 'admin123';
+    username: string;
+    password: string;
 
     errors: string;
 
