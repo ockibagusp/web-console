@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Agri Hub Client Using Angular2",
   "scripts": {
-    "start": "webpack-dev-server --inline --progress --port 8080",
+    "start": "webpack-dev-server --inline --progress --port 4200",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "keywords": [],
