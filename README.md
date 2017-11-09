@@ -1,27 +1,28 @@
-# Angular2DevelopmentCLI
+# web-console
+Agrihub Cloud Platform Web Console; code with Angular4, CoreUI and ❤
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
+## Features
+1. Full SPA (Single Page Application).
+2. Authenticated Using JWT (JSON Web Token).
+3. User credentials and token store on browser cookie (raw).
+4. Access control per page, thanks to Angular [CanActive](https://angular.io/api/router/CanActivate) guards and my own [AuthenticateService](https://github.com/OckiFals/web-console/blob/master/src/app/views/core/authenticate/authenticate.service.ts) class.
+5. Using Bootstrap Component UI, thanks to [ngx-bootstrap](https://valor-software.com/ngx-bootstrap/).
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Cons
+1. Storing raw data on browser cookie is very risk, inseccure, and bad-practice; i will fix this problem later...
 
-## Code scaffolding
+# Instruction
+1. Install NodeJS
+2. Install NPM
+3. Clone Repository
+`$ git clone https://github.com/OckiFals/web-console.git`
+4. Change directory
+`$ cd web-console`
+5. Install Dependencies (Angular4, TypeScript, RxJS, etc.)
+`$ npm install`
+6. Serve...
+`$ npm start`
+7. Or Build...
+`$ npm run build`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Output bundle in /dist directory
