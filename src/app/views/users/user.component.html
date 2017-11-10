@@ -46,7 +46,7 @@
                             <strong *ngIf="users?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
-                                            [(ngModel)]="adminCurrentPage" (pageChanged)="adminPageChanged($event)" 
+                                            [(ngModel)]="adminCurrentPage" (pageChanged)="pageChanged($event)" 
                                             [itemsPerPage]="itemsPerPage" class="pagination-md" 
                                             [boundaryLinks]="true"></pagination>
                             </nav>
@@ -87,7 +87,7 @@
                             <strong *ngIf="users?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
-                                            [(ngModel)]="researcherCurrentPage" (pageChanged)="researcherPageChanged($event)" 
+                                            [(ngModel)]="researcherCurrentPage" (pageChanged)="pageChanged($event)" 
                                             [itemsPerPage]="itemsPerPage" class="pagination-md" 
                                             [boundaryLinks]="true"></pagination>
                             </nav>

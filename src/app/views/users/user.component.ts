@@ -72,13 +72,8 @@ export class UserComponent implements OnInit {
         });
     }
 
-    public adminPageChanged(event: any): void {
-        this.router.navigateByUrl(`/users/list?role=admin&&page=${event.page}`);
-        this.getUsers(this.activeTab, event.page);
-    }
-
-    public researcherPageChanged(event: any): void {
-        this.router.navigateByUrl(`/users/list?role=researcher&&page=${event.page}`);
+    public pageChanged(event: any): void {
+        this.router.navigateByUrl(`/users/list?role=${this.activeTab}&&page=${event.page}`);
         this.getUsers(this.activeTab, event.page);
     }
 }
