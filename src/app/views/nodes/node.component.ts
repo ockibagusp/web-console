@@ -16,7 +16,7 @@ export class NodeComponent implements OnInit {
     public nodes: Node[];
     public maxSize = 5;
     public itemsPerPage = 10;
-    public totalItems = 75;
+    public totalItems: number;
     public currentPage = 1;
     public numPages = 0;
     public activeTab: string;
@@ -39,7 +39,10 @@ export class NodeComponent implements OnInit {
     private getNodes(role: string = '', page: number = 1): void {
         this.nodeService.getNodes(role, page)
             .subscribe(
-                res => this.nodes = res.results as Node[],
+                res => {
+                    this.totalItems = res.count;
+                    this.nodes = res.results as Node[];
+                },
                 error => console.log(error)
             );
     }

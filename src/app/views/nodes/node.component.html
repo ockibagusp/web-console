@@ -19,6 +19,7 @@
                                 <thead>
                                 <tr>
                                     <th>Node</th>
+                                    <th>Supernode</th>
                                     <th>Visibility</th>
                                     <th>Sensor</th>
                                     <th>Publish remaining</th>
@@ -29,6 +30,7 @@
                                 <tbody>
                                 <tr *ngFor="let node of nodes">
                                     <td>{{ node.label }}</td>
+                                    <td>{{ node.supernode }}</td>
                                     <td>
 										<span class="badge {{ node.is_public ? 'badge-success' : 'badge-primary' }}"
                                         >
@@ -72,9 +74,9 @@
                             <strong *ngIf="nodes?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
-                                            [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
-                                            [itemsPerPage]="itemsPerPage" class="pagination-md" 
-                                            [boundaryLinks]="true"></pagination>
+                                    [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
+                                    [itemsPerPage]="itemsPerPage" class="pagination-md" 
+                                    [boundaryLinks]="true"></pagination>
                             </nav>
                         </tab>
                         <tab (select)="selectTab('public')">
@@ -83,6 +85,7 @@
                                 <thead>
                                 <tr>
                                     <th>Node</th>
+                                    <th>Supernode</th>
                                     <th>Visibility</th>
                                     <th>Sensor</th>
                                     <th>Publish remaining</th>
@@ -93,6 +96,7 @@
                                 <tbody>
                                 <tr *ngFor="let node of nodes">
                                     <td>{{ node.label }}</td>
+                                    <td>{{ node.supernode }}</td>
                                     <td>
 										<span class="badge badge-success">
                                         	Public
@@ -135,9 +139,9 @@
                             <strong *ngIf="nodes?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
-                                            [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
-                                            [itemsPerPage]="itemsPerPage" class="pagination-md" 
-                                            [boundaryLinks]="true"></pagination>
+                                    [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
+                                    [itemsPerPage]="itemsPerPage" class="pagination-md" 
+                                    [boundaryLinks]="true"></pagination>
                             </nav>
                         </tab>
                         <tab (select)="selectTab('private')">
@@ -146,6 +150,7 @@
                                 <thead>
                                 <tr>
                                     <th>Node</th>
+                                    <th>Supernode</th>
                                     <th>Visibility</th>
                                     <th>Sensor</th>
                                     <th>Publish remaining</th>
@@ -156,6 +161,7 @@
                                 <tbody>
                                 <tr *ngFor="let node of nodes">
                                     <td>{{ node.label }}</td>
+                                    <td>{{ node.supernode }}</td>
                                     <td>
 										<span class="badge badge-primary">
                                         	Private
@@ -198,9 +204,9 @@
                             <strong *ngIf="nodes?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
-                                            [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
-                                            [itemsPerPage]="itemsPerPage" class="pagination-md" 
-                                            [boundaryLinks]="true"></pagination>
+                                    [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
+                                    [itemsPerPage]="itemsPerPage" class="pagination-md" 
+                                    [boundaryLinks]="true"></pagination>
                             </nav>
                         </tab>
                         <tab (select)="selectTab('global')">
@@ -210,6 +216,7 @@
                                 <tr>
                                     <th>User</th>
                                     <th>Node</th>
+                                    <th>Supernode</th>
                                     <th>Visibility</th>
                                     <th>Sensor</th>
                                     <th>Publish remaining</th>
@@ -221,6 +228,7 @@
                                 <tr *ngFor="let node of nodes">
                                     <td>{{ node.user }}</td>
                                     <td>{{ node.label }}</td>
+                                    <td>{{ node.supernode }}</td>
                                     <td>
 										<span class="badge {{ node.is_public ? 'badge-success' : 'badge-primary' }}"
                                         >
@@ -251,9 +259,9 @@
                             <strong *ngIf="nodes?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
-                                            [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
-                                            [itemsPerPage]="itemsPerPage" class="pagination-md" 
-                                            [boundaryLinks]="true"></pagination>
+                                    [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
+                                    [itemsPerPage]="itemsPerPage" class="pagination-md" 
+                                    [boundaryLinks]="true"></pagination>
                             </nav>
                         </tab>
                     </tabset>
