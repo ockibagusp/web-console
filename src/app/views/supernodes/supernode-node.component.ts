@@ -19,8 +19,13 @@ export class SupernodeNodeComponent {
     public maxSize = 5;
     public itemsPerPage = 10;
     public currentPage = 1;
+    public publicCurrentPage = 1;
+    public privateCurrentPage = 1;
+    public globalCurrentPage = 1;
     public totalItems: number;
     public activeTab: string;
+    // reset subsperdayremain flash info
+    public flash_message: string;
     public bsModalRef: BsModalRef;
     private modalSubscriptions: Subscription;
 
@@ -31,7 +36,7 @@ export class SupernodeNodeComponent {
     }
 
     ngOnInit(): void {
-        this.activeTab = '';
+        this.activeTab = 'all';
         this.getSupernode();
     }
 
@@ -40,6 +45,7 @@ export class SupernodeNodeComponent {
             .switchMap((params: Params) => this.supernodeService.getSupernode(params['id']))
             .subscribe(
                 supernode => {
+                    this.router.navigateByUrl(`/supernodes/view/${supernode.id}/nodes`);
                     this.supernode = supernode as Supernode;
                     this.getNodes();
                 },
@@ -60,8 +66,28 @@ export class SupernodeNodeComponent {
 
     public selectTab(tab_id: string) {
         this.router.navigateByUrl(`/supernodes/view/${this.supernode.id}/nodes?visibility=${tab_id}`);
+        this.totalItems = 0;
+        this.currentPage = 1;
+        this.publicCurrentPage = 1;
+        this.privateCurrentPage = 1;
+        this.globalCurrentPage = 1;
         this.activeTab = tab_id;
         this.getNodes(tab_id);
+    }
+
+    public openResetConfirmationModal(node: Node) {
+        this.bsModalRef = this.modalService.show(ModalContentComponent, {'class': 'modal-warning'});
+        this.bsModalRef.content.id = node.id;
+        this.bsModalRef.content.title = 'Reset Confirmation';
+        this.bsModalRef.content.message = 'Are you sure to reset publish per day remaining?';
+        // event fired when modal dismissed -> reload sensor data
+        this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
+            if (!reason && 200 === this.bsModalRef.content.status) {
+                this.getNodes(this.activeTab);
+                this.flash_message = node.label;
+            }
+            this.modalSubscriptions.unsubscribe();
+        });
     }
 
     public openDeleteConfirmationModal(supernode: Supernode) {
@@ -81,8 +107,31 @@ export class SupernodeNodeComponent {
         });
     }
 
-    public pageChanged(event: any): void {
-        this.router.navigateByUrl(`/supernodes/list?page=${event.page}`);
+    public allPageChanged(event: any): void {
+        this.router.navigateByUrl(
+            `/supernodes/view/${this.supernode.id}/nodes?visibility=${this.activeTab}&&page=${event.page}`
+        );
+        this.getNodes(this.activeTab, event.page);
+    }
+
+    public publicPageChanged(event: any): void {
+        this.router.navigateByUrl(
+            `/supernodes/view/${this.supernode.id}/nodes?visibility=${this.activeTab}&&page=${event.page}`
+        );
+        this.getNodes(this.activeTab, event.page);
+    }
+
+    public privatePageChanged(event: any): void {
+        this.router.navigateByUrl(
+            `/supernodes/view/${this.supernode.id}/nodes?visibility=${this.activeTab}&&page=${event.page}`
+        );
+        this.getNodes(this.activeTab, event.page);
+    }
+
+    public globalPageChanged(event: any): void {
+        this.router.navigateByUrl(
+            `/supernodes/view/${this.supernode.id}/nodes?visibility=${this.activeTab}&&page=${event.page}`
+        );
         this.getNodes(this.activeTab, event.page);
     }
 }
