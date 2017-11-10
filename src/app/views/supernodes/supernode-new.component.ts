@@ -23,9 +23,6 @@ export class SupernodeNewComponent implements OnInit {
 
     ngOnInit() {
         this.supernode = new Supernode;
-        this.supernode.label = 'UB';
-        this.supernode.secretkey = 'rahasia';
-        this.supernode.description = 'TEST';
     }
 
     save(): void {
