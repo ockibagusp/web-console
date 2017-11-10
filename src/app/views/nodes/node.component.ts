@@ -18,6 +18,9 @@ export class NodeComponent implements OnInit {
     public itemsPerPage = 10;
     public totalItems: number;
     public currentPage = 1;
+    public publicCurrentPage = 1;
+    public privateCurrentPage = 1;
+    public globalCurrentPage = 1;
     public numPages = 0;
     public activeTab: string;
     // reset subsperdayremain flash info
@@ -49,6 +52,11 @@ export class NodeComponent implements OnInit {
 
     public selectTab(tab_id: string) {
         this.router.navigateByUrl(`/nodes/list?visibility=${tab_id}`);
+        this.totalItems = 0;
+        this.currentPage = 1;
+        this.publicCurrentPage = 1;
+        this.privateCurrentPage = 1;
+        this.globalCurrentPage = 1;
         this.activeTab = tab_id;
         this.getNodes(tab_id);
     }
