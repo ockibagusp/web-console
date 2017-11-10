@@ -21,13 +21,19 @@ export class UserService {
                 private credentialsService: CredentialsService) {
     }
 
-    getUsers(type: string): Observable<any> {
+    getUsers(type: string, page: number = 1): Observable<any> {
         let extraParam = '';
 
         if ('admin' === type) {
             extraParam += '?type=admin';
         } else if ('researcher' === type) {
             extraParam += '?type=researcher';
+        }
+
+        if ('' === extraParam) {
+            extraParam += `?page=${page}`
+        } else {
+            extraParam += `&&page=${page}`
         }
 
         return this.http.get(`${this.userUrl}/${extraParam}`, {headers: this.headers})

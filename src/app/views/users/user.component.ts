@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
 import {UserService} from './user.service';
 import {User} from './user.model';
 
-
 import {ModalContentComponent} from '../core/modal.component';
 
 @Component({
@@ -17,8 +16,9 @@ export class UserComponent implements OnInit {
     public users: User[];
     public maxSize = 5;
     public itemsPerPage = 10;
-    public totalItems = 75;
-    public currentPage = 1;
+    public totalItems: number;
+    public adminCurrentPage = 1;
+    public researcherCurrentPage = 1;
     public numPages = 0;
     public activeTab: string;
     public bsModalRef: BsModalRef;
@@ -31,19 +31,26 @@ export class UserComponent implements OnInit {
 
     public ngOnInit() {
         this.activeTab = 'admin';
+        this.router.navigateByUrl('/users/list');
         this.getUsers(this.activeTab);
     }
 
-    private getUsers(type = '') {
-        this.userService.getUsers(type)
+    private getUsers(type = '', page: number = 1) {
+        this.userService.getUsers(type, page)
             .subscribe(
-                users => this.users = users.results as User[],
+                users => {
+                    this.totalItems = users.count;
+                    this.users = users.results as User[]
+                },
                 error => console.log(error)
             );
     }
 
     public selectTab(tab_type: string) {
         this.router.navigateByUrl(`/users/list?role=${tab_type}`);
+        this.totalItems = 0;
+        this.adminCurrentPage = 1;
+        this.researcherCurrentPage = 1;
         this.activeTab = tab_type;
         this.getUsers(tab_type);
     }
@@ -65,8 +72,13 @@ export class UserComponent implements OnInit {
         });
     }
 
-    public pageChanged(event: any): void {
-        console.log('Page changed to: ' + event.page);
-        console.log('Number items per page: ' + event.itemsPerPage);
+    public adminPageChanged(event: any): void {
+        this.router.navigateByUrl(`/users/list?role=admin&&page=${event.page}`);
+        this.getUsers(this.activeTab, event.page);
+    }
+
+    public researcherPageChanged(event: any): void {
+        this.router.navigateByUrl(`/users/list?role=researcher&&page=${event.page}`);
+        this.getUsers(this.activeTab, event.page);
     }
 }
