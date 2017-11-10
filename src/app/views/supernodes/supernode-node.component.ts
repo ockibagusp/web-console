@@ -107,28 +107,7 @@ export class SupernodeNodeComponent {
         });
     }
 
-    public allPageChanged(event: any): void {
-        this.router.navigateByUrl(
-            `/supernodes/view/${this.supernode.id}/nodes?visibility=${this.activeTab}&&page=${event.page}`
-        );
-        this.getNodes(this.activeTab, event.page);
-    }
-
-    public publicPageChanged(event: any): void {
-        this.router.navigateByUrl(
-            `/supernodes/view/${this.supernode.id}/nodes?visibility=${this.activeTab}&&page=${event.page}`
-        );
-        this.getNodes(this.activeTab, event.page);
-    }
-
-    public privatePageChanged(event: any): void {
-        this.router.navigateByUrl(
-            `/supernodes/view/${this.supernode.id}/nodes?visibility=${this.activeTab}&&page=${event.page}`
-        );
-        this.getNodes(this.activeTab, event.page);
-    }
-
-    public globalPageChanged(event: any): void {
+    public pageChanged(event: any): void {
         this.router.navigateByUrl(
             `/supernodes/view/${this.supernode.id}/nodes?visibility=${this.activeTab}&&page=${event.page}`
         );

@@ -72,7 +72,7 @@
                             <strong *ngIf="nodes?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize"
-                                    [(ngModel)]="currentPage" (pageChanged)="allPageChanged($event)"
+                                    [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
                                     [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
                                 </pagination>
                             </nav>
@@ -135,7 +135,7 @@
                             <strong *ngIf="nodes?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize"
-                                    [(ngModel)]="publicCurrentPage" (pageChanged)="publicPageChanged($event)"
+                                    [(ngModel)]="publicCurrentPage" (pageChanged)="pageChanged($event)"
                                     [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
                                 </pagination>
                             </nav>
@@ -198,7 +198,7 @@
                             <strong *ngIf="nodes?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize"
-                                    [(ngModel)]="privateCurrentPage" (pageChanged)="privatePageChanged($event)"
+                                    [(ngModel)]="privateCurrentPage" (pageChanged)="pageChanged($event)"
                                     [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
                                 </pagination>
                             </nav>
@@ -251,7 +251,7 @@
                             <strong *ngIf="nodes?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize"
-                                    [(ngModel)]="globalCurrentPage" (pageChanged)="globalPageChanged($event)"
+                                    [(ngModel)]="globalCurrentPage" (pageChanged)="pageChanged($event)"
                                     [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
                                 </pagination>
                             </nav>
