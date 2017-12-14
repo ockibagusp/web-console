@@ -43,6 +43,11 @@ export const routes: Routes = [
                 path: 'users',
                 canActivate: [BaseCanActivate, CanActivateAdmin],
                 loadChildren: './views/users/users.module#UsersModule',
+            },
+            {
+                path: 'sensordata',
+                canActivate: [BaseCanActivate],
+                loadChildren: './views/sensordatas/sensordatas.module#SensordatasModule',
             }
         ]
     },
