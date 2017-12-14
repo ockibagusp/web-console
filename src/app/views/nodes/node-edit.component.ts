@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {NodeService} from './node.service';
 import {Node} from './node.model';
+import { SupernodeService } from '../supernodes/supernode.service';
+import { Supernode } from '../supernodes/supernode.model';
 import 'rxjs/add/operator/switchMap';
 
 import {CredentialsService} from '../core/authenticate/credentials.service';
@@ -14,10 +16,13 @@ export class NodeEditComponent implements OnInit {
     is_new = false;
     unlimited: boolean;
     _initial_pubsperday: number;
+    supernodes: Supernode[];
 
     errors: Array<{ field: string, message: string }>;
 
+
     constructor(private nodeService: NodeService,
+                private supernodeService: SupernodeService,
                 private route: ActivatedRoute,
                 private credentialsService: CredentialsService,
                 private router: Router) {
@@ -30,6 +35,7 @@ export class NodeEditComponent implements OnInit {
                 node => this.setUpNode(node),
                 error => console.log(error)
             );
+        this.getSupernodes();
         // TODO why?
         this.node = new Node;
     }
@@ -42,6 +48,14 @@ export class NodeEditComponent implements OnInit {
         this.node = node;
         this.unlimited = (-1 === node.pubsperday);
         this._initial_pubsperday = node.pubsperday;
+    }
+
+    private getSupernodes(page: number = 1): void {
+        this.supernodeService.getSupernodes(page)
+            .subscribe(
+            res => this.supernodes = res.results as Supernode[],
+            error => console.log(error)
+            );
     }
 
     public unlimitedStateChange(): void {

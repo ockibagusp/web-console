@@ -16,6 +16,14 @@
                     </alert>
                     <form class="form-horizontal">
                         <div class="form-group">
+                            <label for="label">Supernode</label>
+                            <select name="supernode" class="form-control" [(ngModel)]="node.supernode">
+                                <option *ngFor="let supernode of supernodes" [ngValue]="supernode.label">
+                                    {{ supernode.label }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="label">Label</label>
                             <input type="text" name="label" class="form-control" [(ngModel)]="node.label"
                                    placeholder="Enter Node Label..">
