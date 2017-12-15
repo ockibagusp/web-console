@@ -20,13 +20,15 @@
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
+                                        <th>No.</th>
                                         <th>Sensor</th>
                                         <th>Data</th>
                                         <th>Timestamp</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let sensordata of sensordatas_array[i]">
+                                    <tr *ngFor="let sensordata of sensordatas_array[i]; let i = index">
+                                        <td>{{ i+1 }}</td>
                                         <td>{{ sensordata.sensorlabel }}</td>
                                         <td>
                                             {{ sensordata.data }}
