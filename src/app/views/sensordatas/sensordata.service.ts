@@ -26,7 +26,7 @@ export class SensordataService {
         var user = this.credentialsService.getUser().username;
         var filter = this.getFilterQuery(date_start, date_end);
 
-        return this.http.get(`${this.nodeUrl}/user/${user}/?page=${page}${filter}`, { headers: this.headers })
+        return this.http.get(`${this.nodeUrl}?page=${page}${filter}`, { headers: this.headers })
             .map(this.extractData)
             .catch(this.handleError);
     }

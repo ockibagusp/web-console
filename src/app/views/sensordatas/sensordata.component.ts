@@ -15,7 +15,7 @@ export class SensordataComponent implements OnInit {
     title: string;
     page = 1;
     maxSize = 10;
-    collectionSize: number;
+    totalItems: number;
 
     date_start: string;
     date_end: string;
@@ -31,33 +31,21 @@ export class SensordataComponent implements OnInit {
         this.getSensorData();
     }
 
-    getSensorData(): void {
+    getSensorData(page=1): void {
         this.sensorDataService.getSensorDataByUser(
-            this.page, this.date_start, this.date_end
+            page, this.date_start, this.date_end
         )
         .subscribe(
         sensordatas => {
-            this.collectionSize = sensordatas.count;
+            this.totalItems = sensordatas.count;
             this.sensordatas = sensordatas.results as Sensordata[];
         },
         error => console.log(error)
         );
     }
 
-    pageChange(): void {
-        this.router.navigateByUrl(`sensordata?page=${this.page}`);
-        this.getSensorData();
-    }
-
-    filter(): void {
-        this.page = 1;
-        this.pageChange();
-    }
-
-    clearFilter() {
-        this.page = 1;
-        this.date_start = "";
-        this.date_end = "";
-        this.pageChange();
+    pageChanged(event: any): void {
+        this.router.navigateByUrl(`/sensordata/list?page=${event.page}`);
+        this.getSensorData(event.page);
     }
 }

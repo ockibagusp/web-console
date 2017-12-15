@@ -18,7 +18,7 @@
                         <tbody>
                             <tr *ngFor="let sensordata of sensordatas">
                                 <td>
-                                    {{ sensordata.nodelabel }}
+                                    {{ sensordata.node }}
                                 </td>
                                 <td>
                                     {{ sensordata.sensorlabel }}
@@ -35,8 +35,8 @@
                     </table>
                     <strong *ngIf="sensordatas?.length == 0">No Data</strong>
                     <nav>
-                        <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
-                            [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>
+                    <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+                        [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>
                     </nav>
                 </div>
             </div>
