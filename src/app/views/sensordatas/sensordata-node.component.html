@@ -40,7 +40,7 @@
                             </table>
                             <strong *ngIf="sensordatas_array[i]?.length == 0">No Data</strong>
                             <nav>
-                                <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+                                <pagination *ngIf="10<totalItems[i]" [totalItems]="totalItems[i]" [maxSize]="maxSize" [(ngModel)]="currentPage[i]" (pageChanged)="pageChanged($event, i)"
                                     [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>
                             </nav>
                         </div>

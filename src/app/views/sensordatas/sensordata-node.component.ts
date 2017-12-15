@@ -24,7 +24,8 @@ export class SensordataNodeComponent implements OnInit {
     title: string;
     page = 1;
     maxSize = 10;
-    totalItems: number;
+    totalItems: Array<number> = [];
+    currentPage: Array<number> = [];
 
     date_start: string;
     date_end: string;
@@ -73,7 +74,7 @@ export class SensordataNodeComponent implements OnInit {
         )
         .subscribe(
             sensordatas => {
-                this.totalItems = sensordatas.count;
+                this.totalItems[index] = sensordatas.count;
                 this.sensordatas_array[index] = sensordatas.results as Sensordata[];
                 this.renderChart(index);
             },
@@ -92,15 +93,14 @@ export class SensordataNodeComponent implements OnInit {
         });
     }
 
-    pageChanged(event: any): void {
-        this.getSensorData(event.page);
+    pageChanged(event: any, index: number): void {
+        this.getSensorData(event.page, index);
     }
 
     // lineChart
     public lineChartData: Array<ChartData[]> = [];
     public lineChartLabels: Array<any> = [0];
     public lineChartOptions: any = {
-        // animation: false,
         responsive: true
     };
     public lineChartColours: Array<any> = [
