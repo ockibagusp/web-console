@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div *ngFor="let sensor of sensors; let i = index"class="row">
                         <div class="col-lg-7">
-                            <div *ngIf="lineChartData?.length" class="chart-wrapper">
+                            <div *ngIf="lineChartData[i]" class="chart-wrapper">
                                 <canvas baseChart class="chart" [datasets]="lineChartData[i]" 
                                 [labels]="lineChartLabels" [options]="lineChartOptions" 
                                 [colors]="lineChartColours" [legend]="true" 
@@ -26,7 +26,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let sensordata of sensordatas">
+                                    <tr *ngFor="let sensordata of sensordatas_array[i]">
                                         <td>{{ sensordata.sensorlabel }}</td>
                                         <td>
                                             {{ sensordata.data }}
@@ -38,7 +38,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <strong *ngIf="sensordatas?.length == 0">No Data</strong>
+                            <strong *ngIf="sensordatas_array[i]?.length == 0">No Data</strong>
                             <nav>
                                 <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
                                     [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>

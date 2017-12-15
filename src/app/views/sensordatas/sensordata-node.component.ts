@@ -20,7 +20,7 @@ interface ChartData {
 export class SensordataNodeComponent implements OnInit {
     node: Node;
     sensors: Sensor[];
-    sensordatas: Sensordata[];
+    sensordatas_array: Array<Sensordata[]> = [];
     title: string;
     page = 1;
     maxSize = 10;
@@ -59,42 +59,40 @@ export class SensordataNodeComponent implements OnInit {
         .subscribe(
             sensors => {
                 this.sensors = sensors.results as Sensor[];
-                this.getSensorData();
+                this.sensors.forEach((sensor, index) => {
+                    this.getSensorData(1, index);
+                });
             },
             error => console.log(error)
         );
     }
 
-    private getSensorData(page=1): void {
+    private getSensorData(page=1, index=0): void {
         this.sensorDataService.getSensorDataBySensor(
-            page, this.node.id, this.sensors[0].id, this.date_start, this.date_end
+            page, this.node.id, this.sensors[index].id, this.date_start, this.date_end
         )
         .subscribe(
             sensordatas => {
                 this.totalItems = sensordatas.count;
-                this.sensordatas = sensordatas.results as Sensordata[];
-                this.renderChart();
+                this.sensordatas_array[index] = sensordatas.results as Sensordata[];
+                this.renderChart(index);
             },
             error => console.log(error)
         );
     }
 
-    private renderChart(): void {
-        this.sensors.forEach((sensor, index) => {
-            let _chartdata = [];
-            this.sensordatas.forEach((sensordata, jindex) => {
-                _chartdata.push(sensordata.data);
-                this.lineChartLabels[jindex] = jindex+1;
-            });
-            this.lineChartData[index] = [{
-                data: _chartdata,
-                label: sensor.label
-            }];
+    private renderChart(index): void {
+        this.lineChartData[index] = [{
+            data: [],
+            label: this.sensors[index].label
+        }];
+        this.sensordatas_array[index].forEach((sensordata, jindex) => {
+            this.lineChartData[index][0].data.push(sensordata.data);
+            this.lineChartLabels[jindex] = jindex+1;
         });
     }
 
     pageChanged(event: any): void {
-        this.router.navigateByUrl(`/sensordata/node/${this.node.id}?page=${event.page}`);
         this.getSensorData(event.page);
     }
 
