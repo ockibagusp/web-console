@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {ChartsModule} from 'ng2-charts/ng2-charts';
 
 import {SensordataComponent} from './sensordata.component';
 import {SensordataNodeComponent} from './sensordata-node.component';
@@ -31,7 +32,8 @@ import {AlertModule} from 'ngx-bootstrap/alert';
         ModalModule.forRoot(),
         TabsModule,
         PaginationModule.forRoot(),
-        AlertModule.forRoot()
+        AlertModule.forRoot(),
+        ChartsModule
     ],
     entryComponents: [],
     declarations: [

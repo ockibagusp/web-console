@@ -6,40 +6,45 @@
                     <i class="fa fa-align-justify"></i> {{ node?.label }} Sensordatas
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>Super-Node</th>
-                                <th>Node</th>
-                                <th>Sensor</th>
-                                <th>Data</th>
-                                <th>Timestamp</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let sensordata of sensordatas">
-                                <td>{{ sensordata.supernode }}</td>
-                                <td>
-                                    {{ sensordata.node }}
-                                </td>
-                                <td>
-                                    {{ sensordata.sensorlabel }}
-                                </td>
-                                <td>
-                                    {{ sensordata.data }}
-                                </td>
-                                <td>
-                                    {{ sensordata.timestamp }}
-                                </td>
-                                
-                            </tr>
-                        </tbody>
-                    </table>
-                    <strong *ngIf="sensordatas?.length == 0">No Data</strong>
-                    <nav>
-                        <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
-                            [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>
-                    </nav>
+                    <div *ngFor="let sensor of sensors; let i = index"class="row">
+                        <div class="col-lg-7">
+                            <div *ngIf="lineChartData?.length" class="chart-wrapper">
+                                <canvas baseChart class="chart" [datasets]="lineChartData[i]" 
+                                [labels]="lineChartLabels" [options]="lineChartOptions" 
+                                [colors]="lineChartColours" [legend]="true" 
+                                [chartType]="'line'" (chartHover)="chartHovered($event)" 
+                                (chartClick)="chartClicked($event)"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Sensor</th>
+                                        <th>Data</th>
+                                        <th>Timestamp</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let sensordata of sensordatas">
+                                        <td>{{ sensordata.sensorlabel }}</td>
+                                        <td>
+                                            {{ sensordata.data }}
+                                        </td>
+                                        <td>
+                                            {{ sensordata.timestamp }}
+                                        </td>
+                            
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong *ngIf="sensordatas?.length == 0">No Data</strong>
+                            <nav>
+                                <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+                                    [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
