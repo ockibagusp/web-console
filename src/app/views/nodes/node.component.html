@@ -19,6 +19,7 @@
                                 <thead>
                                 <tr>
                                     <th>Node</th>
+                                    <th>Node Id</th>
                                     <th>Supernode</th>
                                     <th>Visibility</th>
                                     <th>Sensor</th>
@@ -30,6 +31,7 @@
                                 <tbody>
                                 <tr *ngFor="let node of nodes">
                                     <td>{{ node.label }}</td>
+                                    <td>{{ node.id }}</td>
                                     <td>{{ node.supernode }}</td>
                                     <td>
 										<span class="badge {{ node.is_public ? 'badge-success' : 'badge-primary' }}"
