@@ -36,7 +36,6 @@
                                         <td>
                                             {{ sensordata.timestamp }}
                                         </td>
-                            
                                     </tr>
                                 </tbody>
                             </table>
@@ -47,6 +46,7 @@
                             </nav>
                         </div>
                     </div>
+                    <strong *ngIf="sensors?.length == 0">No sensor device yet</strong>
                 </div>
             </div>
         </div>
