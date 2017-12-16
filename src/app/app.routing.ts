@@ -45,7 +45,7 @@ export const routes: Routes = [
                 loadChildren: './views/users/users.module#UsersModule',
             },
             {
-                path: 'sensordata',
+                path: 'sensordatas',
                 canActivate: [BaseCanActivate],
                 loadChildren: './views/sensordatas/sensordatas.module#SensordatasModule',
             }
