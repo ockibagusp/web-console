@@ -6,12 +6,6 @@ export const ROLEACCESS = {
 
 export const navigation = [
     {
-        name: 'Dashboard',
-        url: '/dashboard',
-        icon: 'icon-speedometer',
-        role: ROLEACCESS.auth
-    },
-    {
         name: 'Super-Nodes',
         url: '/supernodes',
         icon: 'fa fa-microchip',
