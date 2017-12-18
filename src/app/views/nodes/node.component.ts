@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Subscription } from 'rxjs/Subscription';
 
-import {NodeService} from './node.service';
-import {Node} from './node.model';
+import { NodeService } from './node.service';
+import { Node } from './node.model';
 
-import {ModalContentComponent} from '../core/modal.component';
+import { ModalContentComponent } from '../core/modal.component';
 
 @Component({
     templateUrl: 'node.component.html'
 })
 export class NodeComponent implements OnInit {
     public nodes: Node[];
+    public breadcrumbs: any[];
     public maxSize = 5;
     public itemsPerPage = 10;
     public totalItems: number;
@@ -36,6 +37,11 @@ export class NodeComponent implements OnInit {
 
     ngOnInit(): void {
         this.activeTab = '';
+        this.breadcrumbs = [
+            { label: "Home", url: "/" },
+            { label: "Nodes", url: "/nodes/list" },
+            { label: 'List', is_active: true }
+        ];
         this.getNodes();
     }
 

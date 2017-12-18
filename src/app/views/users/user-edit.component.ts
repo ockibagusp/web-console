@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, Params} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
-import {UserService} from './user.service';
-import {User} from './user.model';
+import { UserService } from './user.service';
+import { User } from './user.model';
 
 @Component({
     templateUrl: 'user-form.component.html'
 })
 export class UserEditComponent implements OnInit {
-    user: User;
-    is_new = false;
+    public user: User;
+    public is_new = false;
+    public breadcrumbs: any[];
 
     errors: Array<{ field: string, message: string }>;
 
@@ -24,7 +25,15 @@ export class UserEditComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.userService.getUser(params['id']))
             .subscribe(
-                user => this.user = user as User,
+                user => {
+                    this.breadcrumbs = [
+                        { label: "Home", url: "/" },
+                        { label: "Users", url: "/users/list" },
+                        { label: user.username, url: `/users/view/${user.id}` },
+                        { label: "Edit", is_active: true }
+                    ];
+                    this.user = user as User;
+                },
                 error => console.log(error)
             )
     }

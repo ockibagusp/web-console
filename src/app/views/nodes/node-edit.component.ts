@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {NodeService} from './node.service';
-import {Node} from './node.model';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NodeService } from './node.service';
+import { Node } from './node.model';
 import { SupernodeService } from '../supernodes/supernode.service';
 import { Supernode } from '../supernodes/supernode.model';
 import 'rxjs/add/operator/switchMap';
@@ -12,14 +12,14 @@ import {CredentialsService} from '../core/authenticate/credentials.service';
     templateUrl: 'node-form.component.html'
 })
 export class NodeEditComponent implements OnInit {
-    node: Node;
-    is_new = false;
-    unlimited: boolean;
-    _initial_pubsperday: number;
-    supernodes: Supernode[];
+    public node: Node;
+    public is_new = false;
+    public unlimited: boolean;
+    public _initial_pubsperday: number;
+    public supernodes: Supernode[];
+    public breadcrumbs: any[];
 
     errors: Array<{ field: string, message: string }>;
-
 
     constructor(private nodeService: NodeService,
                 private supernodeService: SupernodeService,
@@ -45,6 +45,12 @@ export class NodeEditComponent implements OnInit {
         if (node.user !== this.credentialsService.getUser().username) {
             this.router.navigateByUrl('/page/403', {skipLocationChange: true});
         }
+        this.breadcrumbs = [
+            { label: "Home", url: "/" },
+            { label: "Nodes", url: "/nodes/list" },
+            { label: node.label, url: `/nodes/view/${node.id}` },
+            { label: 'Edit', is_active: true }
+        ];
         this.node = node;
         this.unlimited = (-1 === node.pubsperday);
         this._initial_pubsperday = node.pubsperday;
@@ -53,8 +59,8 @@ export class NodeEditComponent implements OnInit {
     private getSupernodes(page: number = 1): void {
         this.supernodeService.getSupernodes(page)
             .subscribe(
-            res => this.supernodes = res.results as Supernode[],
-            error => console.log(error)
+                res => this.supernodes = res.results as Supernode[],
+                error => console.log(error)
             );
     }
 

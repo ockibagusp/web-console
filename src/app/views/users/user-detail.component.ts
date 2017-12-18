@@ -12,7 +12,8 @@ import {User} from './user.model';
     templateUrl: 'user-detail.component.html'
 })
 export class UserDetailComponent implements OnInit {
-    user: User;
+    public user: User;
+    public breadcrumbs: any[];
 
     public bsModalRef: BsModalRef;
     public modalSubscriptions: Subscription;
@@ -27,7 +28,14 @@ export class UserDetailComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.userService.getUser(params['id']))
             .subscribe(
-                user => this.user = user as User,
+                user => {
+                    this.breadcrumbs = [
+                        { label: "Home", url: "/" },
+                        { label: "Users", url: "/users/list" },
+                        { label: user.username, is_active: true }
+                    ];
+                    this.user = user as User;
+                },
                 error => console.log(error)
             )
     }

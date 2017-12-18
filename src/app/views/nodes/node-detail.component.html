@@ -1,114 +1,120 @@
-<div class="animated fadeIn">
-    <div class="row">
-        <div class="col-lg-12">
-            <div *ngIf="node" class="card">
-                <div class="card-header">
-                    <i class="fa fa-align-justify"></i> {{ node.label }}
-                </div>
-                <div class="card-body">
-                    <alert *ngIf="flash_message" [type]="'info'" dismissOnTimeout="5000" dismissible="true">
-                        <strong>{{ flash_message }}:</strong> Reset Subsperdayremain Successfully
-                    </alert>
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="card">
-                                <div class="card-header">
-                                    Detail Info
-                                </div>
-                                <div class="card-body">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr>
-                                            <th>ID</th>
-                                            <td>{{ node.id }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Public node?</th>
-                                            <td>{{ 1 == node.is_public ? "yes" : "no" }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Publish per day</th>
-                                            <td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperday }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Publish per day remaining</th>
-                                            <td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Sensor count</th>
-                                            <td>{{ node.sensor_count }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Sensor data list</th>
-                                            <td>
-                                                <a [routerLink]="['/sensordata/node', node.id]" class="btn btn-link">
-                                                    <i class="fa fa-link"></i>&nbsp; Link
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <breadcrumbs [links]="breadcrumbs"></breadcrumbs>
+</ol>
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div *ngIf="node" class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> {{ node.label }}
+                    </div>
+                    <div class="card-body">
+                        <alert *ngIf="flash_message" [type]="'info'" dismissOnTimeout="5000" dismissible="true">
+                            <strong>{{ flash_message }}:</strong> Reset Subsperdayremain Successfully
+                        </alert>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Detail Info
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table">
+                                            <tbody>
+                                            <tr>
+                                                <th>ID</th>
+                                                <td>{{ node.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Public node?</th>
+                                                <td>{{ 1 == node.is_public ? "yes" : "no" }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Publish per day</th>
+                                                <td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperday }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Publish per day remaining</th>
+                                                <td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sensor count</th>
+                                                <td>{{ node.sensor_count }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sensor data list</th>
+                                                <td>
+                                                    <a [routerLink]="['/sensordata/node', node.id]" class="btn btn-link">
+                                                        <i class="fa fa-link"></i>&nbsp; Link
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    Sensor List
-                                    <button *ngIf="is_mine" class="btn btn-sm btn-flat btn-primary float-right"
-                                            (click)="openSensorFormModal()">
-                                        <i class="fa fa-plus"></i> Add
-                                    </button>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-sm">
-                                        <thead>
-                                        <tr>
-                                            <th>Label</th>
-                                            <th *ngIf="is_mine">ID</th>
-                                            <th *ngIf="is_mine" width="80px">Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr *ngFor="let sensor of sensors">
-                                            <td>{{ sensor.label }}</td>
-                                            <td *ngIf="is_mine">{{ sensor.id }}</td>
-                                            <td *ngIf="is_mine">
-                                                <button type="button" class="btn btn-sm btn-flat btn-primary"
-                                                        data-toggle="modal" (click)="openSensorFormModal(sensor)">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-flat btn-danger"
-                                                        data-toggle="modal"
-                                                        (click)="openDeleteConfirmationModal(sensor)">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <pagination *ngIf="10<totalItems" [totalItems]="totalItems"
-                                        [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
-                                        [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
-                                        </pagination>
+                            <div class="col-md-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Sensor List
+                                        <button *ngIf="is_mine" class="btn btn-sm btn-flat btn-primary float-right"
+                                                (click)="openSensorFormModal()">
+                                            <i class="fa fa-plus"></i> Add
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-sm">
+                                            <thead>
+                                            <tr>
+                                                <th>Label</th>
+                                                <th *ngIf="is_mine">ID</th>
+                                                <th *ngIf="is_mine" width="80px">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let sensor of sensors">
+                                                <td>{{ sensor.label }}</td>
+                                                <td *ngIf="is_mine">{{ sensor.id }}</td>
+                                                <td *ngIf="is_mine">
+                                                    <button type="button" class="btn btn-sm btn-flat btn-primary"
+                                                            data-toggle="modal" (click)="openSensorFormModal(sensor)">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-danger"
+                                                            data-toggle="modal"
+                                                            (click)="openDeleteConfirmationModal(sensor)">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <pagination *ngIf="10<totalItems" [totalItems]="totalItems"
+                                            [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" 
+                                            [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
+                                            </pagination>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div *ngIf="is_mine" class="card-footer">
-                    <a [routerLink]="['/nodes/edit', node.id]" class="btn btn-sm btn-flat btn-primary">
-                        <i class="fa fa-edit"></i> Edit
-                    </a>
-                    <button type="button" class="btn btn-sm btn-flat btn-warning"
-                            [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain"
-                            data-toggle="modal" (click)="openResetConfirmationModal()">
-                        <i class="fa fa-history"></i> Reset
-                    </button>
-                    <button type="button" class="btn btn-sm btn-flat btn-danger"
-                            data-toggle="modal" (click)="openDeleteConfirmationModal()">
-                        <i class="fa fa-trash-o"></i> Delete
-                    </button>
+                    <div *ngIf="is_mine" class="card-footer">
+                        <a [routerLink]="['/nodes/edit', node.id]" class="btn btn-sm btn-flat btn-primary">
+                            <i class="fa fa-edit"></i> Edit
+                        </a>
+                        <button type="button" class="btn btn-sm btn-flat btn-warning"
+                                [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain"
+                                data-toggle="modal" (click)="openResetConfirmationModal()">
+                            <i class="fa fa-history"></i> Reset
+                        </button>
+                        <button type="button" class="btn btn-sm btn-flat btn-danger"
+                                data-toggle="modal" (click)="openDeleteConfirmationModal()">
+                            <i class="fa fa-trash-o"></i> Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

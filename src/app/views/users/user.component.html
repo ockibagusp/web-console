@@ -1,102 +1,108 @@
-<div class="animated fadeIn">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Users
-                    <a [routerLink]="['/users/new']" class="btn btn-sm btn-flat btn-primary float-right">
-                        <i class="fa fa-plus"></i> Add
-                    </a>
-                </div>
-                <div class="card-body">
-                    <tabset>
-                        <tab (select)="selectTab('admin')">
-                            <ng-template tabHeading>Admin</ng-template>
-                            <table class="table table-bordered table-striped table-sm">
-                                <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Acount Role</th>
-                                    <th width="120px">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let user of users">
-                                    <td>{{ user.username }}</td>
-                                    <td>{{ user.email}}</td>
-                                    <td>{{ 1 == user.is_admin ? 'Admin' : 'Researcher' }}</td>
-                                    <td>
-                                        <a [routerLink]="['/users/view', user.id]"
-                                           class="btn btn-sm btn-flat btn-success">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                        <a [routerLink]="['/users/edit', user.id]"
-                                           class="btn btn-sm btn-flat btn-primary">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-flat btn-danger"
-                                                data-toggle="modal" (click)="openDeleteConfirmationModal(user)">
-                                            <i class="fa fa-trash-o"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <strong *ngIf="users?.length == 0">No Data</strong>
-                            <nav>
-                                <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
-                                            [(ngModel)]="adminCurrentPage" (pageChanged)="pageChanged($event)" 
-                                            [itemsPerPage]="itemsPerPage" class="pagination-md" 
-                                            [boundaryLinks]="true"></pagination>
-                            </nav>
-                        </tab>
-                        <tab (select)="selectTab('researcher')">
-                            <ng-template tabHeading>Researcher</ng-template>
-                            <table class="table table-bordered table-striped table-sm">
-                                <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Acount Role</th>
-                                    <th width="120px">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let user of users">
-                                    <td>{{ user.username }}</td>
-                                    <td>{{ user.email}}</td>
-                                    <td>{{ 1 == user.is_admin ? 'Admin' : 'Researcher' }}</td>
-                                    <td>
-                                        <a [routerLink]="['/users/view', user.id]"
-                                           class="btn btn-sm btn-flat btn-success">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                        <a [routerLink]="['/users/edit', user.id]"
-                                           class="btn btn-sm btn-flat btn-primary">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-flat btn-danger"
-                                                data-toggle="modal" (click)="openDeleteConfirmationModal(user)">
-                                            <i class="fa fa-trash-o"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <strong *ngIf="users?.length == 0">No Data</strong>
-                            <nav>
-                                <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
-                                            [(ngModel)]="researcherCurrentPage" (pageChanged)="pageChanged($event)" 
-                                            [itemsPerPage]="itemsPerPage" class="pagination-md" 
-                                            [boundaryLinks]="true"></pagination>
-                            </nav>
-                        </tab>
-                    </tabset>
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <breadcrumbs [links]="breadcrumbs"></breadcrumbs>
+</ol>
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Users
+                        <a [routerLink]="['/users/new']" class="btn btn-sm btn-flat btn-primary float-right">
+                            <i class="fa fa-plus"></i> Add
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <tabset>
+                            <tab (select)="selectTab('admin')">
+                                <ng-template tabHeading>Admin</ng-template>
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Acount Role</th>
+                                        <th width="120px">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let user of users">
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.email}}</td>
+                                        <td>{{ 1 == user.is_admin ? 'Admin' : 'Researcher' }}</td>
+                                        <td>
+                                            <a [routerLink]="['/users/view', user.id]"
+                                               class="btn btn-sm btn-flat btn-success">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a [routerLink]="['/users/edit', user.id]"
+                                               class="btn btn-sm btn-flat btn-primary">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-sm btn-flat btn-danger"
+                                                    data-toggle="modal" (click)="openDeleteConfirmationModal(user)">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <strong *ngIf="users?.length == 0">No Data</strong>
+                                <nav>
+                                    <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
+                                                [(ngModel)]="adminCurrentPage" (pageChanged)="pageChanged($event)" 
+                                                [itemsPerPage]="itemsPerPage" class="pagination-md" 
+                                                [boundaryLinks]="true"></pagination>
+                                </nav>
+                            </tab>
+                            <tab (select)="selectTab('researcher')">
+                                <ng-template tabHeading>Researcher</ng-template>
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Acount Role</th>
+                                        <th width="120px">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let user of users">
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.email}}</td>
+                                        <td>{{ 1 == user.is_admin ? 'Admin' : 'Researcher' }}</td>
+                                        <td>
+                                            <a [routerLink]="['/users/view', user.id]"
+                                               class="btn btn-sm btn-flat btn-success">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a [routerLink]="['/users/edit', user.id]"
+                                               class="btn btn-sm btn-flat btn-primary">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-sm btn-flat btn-danger"
+                                                    data-toggle="modal" (click)="openDeleteConfirmationModal(user)">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <strong *ngIf="users?.length == 0">No Data</strong>
+                                <nav>
+                                    <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" 
+                                                [(ngModel)]="researcherCurrentPage" (pageChanged)="pageChanged($event)" 
+                                                [itemsPerPage]="itemsPerPage" class="pagination-md" 
+                                                [boundaryLinks]="true"></pagination>
+                                </nav>
+                            </tab>
+                        </tabset>
+                    </div>
                 </div>
             </div>
+            <!--/.col-->
         </div>
-        <!--/.col-->
+        <!--/.row-->
     </div>
-    <!--/.row-->
 </div>

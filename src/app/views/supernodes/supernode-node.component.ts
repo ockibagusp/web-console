@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
-import {Subscription} from 'rxjs/Subscription';
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Subscription } from 'rxjs/Subscription';
 
-import {SupernodeService} from './supernode.service';
-import {Supernode} from './supernode.model';
-import {Node} from '../nodes/node.model';
+import { SupernodeService } from './supernode.service';
+import { Supernode } from './supernode.model';
+import { Node } from '../nodes/node.model';
 
-import {ModalContentComponent} from '../core/modal.component';
+import { ModalContentComponent } from '../core/modal.component';
 
 @Component({
     templateUrl: 'node-list.component.html'
@@ -16,6 +16,7 @@ import {ModalContentComponent} from '../core/modal.component';
 export class SupernodeNodeComponent {
     public supernode: Supernode;
     public nodes: Node[];
+    public breadcrumbs: any[];
     public maxSize = 5;
     public itemsPerPage = 10;
     public currentPage = 1;
@@ -47,6 +48,12 @@ export class SupernodeNodeComponent {
                 supernode => {
                     this.router.navigateByUrl(`/supernodes/view/${supernode.id}/nodes`);
                     this.supernode = supernode as Supernode;
+                    this.breadcrumbs = [
+                        { label: "Home", url: "/" },
+                        { label: "Supernodes", url: "/supernodes/list" },
+                        { label: `${supernode.label}'s`, url: `/supernodes/view/${supernode.id}` },
+                        { label: 'Nodes', is_active: true }
+                    ];
                     this.getNodes();
                 },
                 error => console.log(error)

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {Node} from './node.model';
-import {NodeService} from './node.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Node } from './node.model';
+import { NodeService } from './node.service';
 import { SupernodeService } from '../supernodes/supernode.service';
 import { Supernode } from '../supernodes/supernode.model';
 
@@ -14,11 +14,12 @@ interface Errors {
     templateUrl: 'node-form.component.html'
 })
 export class NodeNewComponent implements OnInit {
-    is_new = true;
-    node: Node;
-    unlimited: boolean;
-
-    supernodes: Supernode[];
+    public is_new = true;
+    public node: Node;
+    public unlimited: boolean;
+    public breadcrumbs: any[];
+    
+    public supernodes: Supernode[];
 
     errors: Errors[];
 
@@ -29,6 +30,11 @@ export class NodeNewComponent implements OnInit {
 
     ngOnInit() {
         this.node = new Node;
+        this.breadcrumbs = [
+            { label: "Home", url: "/" },
+            { label: "Nodes", url: "/nodes/list" },
+            { label: 'New', is_active: true }
+        ];
         this.getSupernodes();
     }
 

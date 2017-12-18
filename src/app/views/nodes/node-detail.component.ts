@@ -1,28 +1,29 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
-import {ModalContentComponent} from '../core/modal.component';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { ModalContentComponent } from '../core/modal.component';
 import 'rxjs/add/operator/switchMap';
-import {Subscription} from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
-import {NodeService} from './node.service';
-import {SensorService} from './sensor.service';
-import {Node} from './node.model';
-import {Sensor} from './sensor.model';
-import {CredentialsService} from '../core/authenticate/credentials.service';
+import { NodeService } from './node.service';
+import { SensorService } from './sensor.service';
+import { Node } from './node.model';
+import { Sensor } from './sensor.model';
+import { CredentialsService } from '../core/authenticate/credentials.service';
 
-import {ModalSensorFormComponent} from '../shared/modalsensorform.component';
+import { ModalSensorFormComponent } from '../shared/modalsensorform.component';
 
 @Component({
     templateUrl: 'node-detail.component.html'
 })
 export class NodeDetailComponent implements OnInit {
-    node: Node;
-    sensors: Sensor[];
-    is_mine: boolean; // 'edit' button visibility
+    public node: Node;
+    public sensors: Sensor[];
+    public is_mine: boolean; // 'edit' button visibility
+    public breadcrumbs: any[];
     // reset subsperdayremain flash info
-    flash_message: string;
+    public flash_message: string;
     // sensor list pagination
     public itemsPerPage = 10;
     public currentPage = 1;
@@ -65,6 +66,11 @@ export class NodeDetailComponent implements OnInit {
     }
 
     private setUpNode(node: Node): void {
+        this.breadcrumbs = [
+            { label: "Home", url: "/" },
+            { label: "Nodes", url: "/nodes/list" },
+            { label: node.label, is_active: true }
+        ];
         this.node = node;
         // show 'edit' button only when node is owned by this auth user
         this.is_mine = (node.user === this.credentialsService.getUser().username);

@@ -1,63 +1,69 @@
-<div class="animated fadeIn">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-align-justify"></i> {{ is_new ? 'New Node' : 'Edit Node' }}
-                </div>
-                <div class="card-body">
-                    <p *ngFor="let error of errors">
-                        <alert [type]="'danger'" dismissible="true">
-                            <strong>{{ error.field }}:</strong> {{ error.message }}
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <breadcrumbs [links]="breadcrumbs"></breadcrumbs>
+</ol>
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> {{ is_new ? 'New Node' : 'Edit Node' }}
+                    </div>
+                    <div class="card-body">
+                        <p *ngFor="let error of errors">
+                            <alert [type]="'danger'" dismissible="true">
+                                <strong>{{ error.field }}:</strong> {{ error.message }}
+                            </alert>
+                        </p>
+                        <alert *ngIf="node.is_public" [dismissible]="false">
+                            <strong>Important!</strong> Your sensor datas would be visible by another.
                         </alert>
-                    </p>
-                    <alert *ngIf="node.is_public" [dismissible]="false">
-                        <strong>Important!</strong> Your sensor datas would be visible by another.
-                    </alert>
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="label">Supernode</label>
-                            <select name="supernode" class="form-control" [(ngModel)]="node.supernode">
-                                <option *ngFor="let supernode of supernodes" [ngValue]="supernode.label">
-                                    {{ supernode.label }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="label">Label</label>
-                            <input type="text" name="label" class="form-control" [(ngModel)]="node.label"
-                                   placeholder="Enter Node Label..">
-                        </div>
-                        <div class="form-group">
-                            <label for="label">Secretkey</label>
-                            <input type="text" name="secretkey" class="form-control" [(ngModel)]="node.secretkey"
-                                   placeholder="Enter Node Secretkey..">
-                        </div>
-                        <div class="form-group">
-                            <label for="is_public">Public Node?</label>
-                            <div class="checkbox">
-                                <input type="checkbox" [(ngModel)]="node.is_public" [(ngModel)]="node.is_public"
-                                       name="is_public">
-                                {{ node.is_public ? "Yes" : "No" }}
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="label">Supernode</label>
+                                <select name="supernode" class="form-control" [(ngModel)]="node.supernode">
+                                    <option *ngFor="let supernode of supernodes" [ngValue]="supernode.label">
+                                        {{ supernode.label }}
+                                    </option>
+                                </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="pubsperday">Publish per day</label>
-                            <div class="checkbox">
-                                <input type="checkbox" [(ngModel)]="unlimited" name="_unlimited"
-                                       (ngModelChange)="unlimitedStateChange()"> Unlimited
+                            <div class="form-group">
+                                <label for="label">Label</label>
+                                <input type="text" name="label" class="form-control" [(ngModel)]="node.label"
+                                       placeholder="Enter Node Label..">
                             </div>
-                            <input type="number" min="-1" [(ngModel)]="node.pubsperday" class="form-control"
-                                   name="pubsperday" *ngIf="!unlimited" required>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label for="label">Secretkey</label>
+                                <input type="text" name="secretkey" class="form-control" [(ngModel)]="node.secretkey"
+                                       placeholder="Enter Node Secretkey..">
+                            </div>
+                            <div class="form-group">
+                                <label for="is_public">Public Node?</label>
+                                <div class="checkbox">
+                                    <input type="checkbox" [(ngModel)]="node.is_public" [(ngModel)]="node.is_public"
+                                           name="is_public">
+                                    {{ node.is_public ? "Yes" : "No" }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pubsperday">Publish per day</label>
+                                <div class="checkbox">
+                                    <input type="checkbox" [(ngModel)]="unlimited" name="_unlimited"
+                                           (ngModelChange)="unlimitedStateChange()"> Unlimited
+                                </div>
+                                <input type="number" min="-1" [(ngModel)]="node.pubsperday" class="form-control"
+                                       name="pubsperday" *ngIf="!unlimited" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" (click)="save()" class="btn btn-sm btn-primary">
+                            <i class="fa fa-save"></i> Save
+                        </button>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button type="button" (click)="save()" class="btn btn-sm btn-primary">
-                        <i class="fa fa-save"></i> Save
-                    </button>
-                </div>
-            </div>
-        </div> <!--/.col-->
-    </div><!--/.row-->
+            </div> <!--/.col-->
+        </div><!--/.row-->
+    </div>
 </div>

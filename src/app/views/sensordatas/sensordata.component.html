@@ -1,47 +1,53 @@
-<div class="animated fadeIn">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-align-justify"></i> All Sensordatas
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>Node</th>
-                                <th>Sensor</th>
-                                <th>Data</th>
-                                <th>Timestamp</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let sensordata of sensordatas">
-                                <td>
-                                    {{ sensordata.node }}
-                                </td>
-                                <td>
-                                    {{ sensordata.sensorlabel }}
-                                </td>
-                                <td>
-                                    {{ sensordata.data }}
-                                </td>
-                                <td>
-                                    {{ sensordata.timestamp | localdate }}
-                                </td>
-                                
-                            </tr>
-                        </tbody>
-                    </table>
-                    <strong *ngIf="sensordatas?.length == 0">No Data</strong>
-                    <nav>
-                    <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
-                        [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>
-                    </nav>
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <breadcrumbs [links]="breadcrumbs"></breadcrumbs>
+</ol>
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> All Sensordatas
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Node</th>
+                                    <th>Sensor</th>
+                                    <th>Data</th>
+                                    <th>Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let sensordata of sensordatas">
+                                    <td>
+                                        {{ sensordata.node }}
+                                    </td>
+                                    <td>
+                                        {{ sensordata.sensorlabel }}
+                                    </td>
+                                    <td>
+                                        {{ sensordata.data }}
+                                    </td>
+                                    <td>
+                                        {{ sensordata.timestamp | localdate }}
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                        <strong *ngIf="sensordatas?.length == 0">No Data</strong>
+                        <nav>
+                        <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [maxSize]="maxSize" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+                            [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>
+                        </nav>
+                    </div>
                 </div>
             </div>
+            <!--/.col-->
         </div>
-        <!--/.col-->
+        <!--/.row-->
     </div>
-    <!--/.row-->
 </div>

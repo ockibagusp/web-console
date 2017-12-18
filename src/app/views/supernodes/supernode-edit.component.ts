@@ -10,8 +10,9 @@ import {CredentialsService} from '../core/authenticate/credentials.service';
     templateUrl: 'supernode-form.component.html'
 })
 export class SupernodeEditComponent implements OnInit {
-    supernode: Supernode;
-    is_new = false;
+    public is_new = false;
+    public supernode: Supernode;
+    public breadcrumbs: any[];
 
     errors: Array<{ field: string, message: string }>;
 
@@ -28,7 +29,6 @@ export class SupernodeEditComponent implements OnInit {
                 supernode => this.setUpSupernode(supernode),
                 error => console.log(error)
             );
-        // TODO why?
         this.supernode = new Supernode;
     }
 
@@ -37,6 +37,12 @@ export class SupernodeEditComponent implements OnInit {
         if (supernode.user != this.credentialsService.getUser().username) {
             this.router.navigateByUrl('/page/403', {skipLocationChange: true});
         }
+        this.breadcrumbs = [
+            { label: "Home", url: "/" },
+            { label: "Supernodes", url: "/supernodes/list" },
+            { label: supernode.label, url: `/supernodes/view/${supernode.id}` },
+            { label: 'Edit', is_active: true }
+        ];
         this.supernode = supernode;
     }
 

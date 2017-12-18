@@ -11,11 +11,12 @@ import { Sensordata } from './sensordata.model';
     templateUrl: 'sensordata.component.html'
 })
 export class SensordataComponent implements OnInit {
-    sensordatas: Sensordata[];
-    title: string;
-    page = 1;
-    maxSize = 10;
-    totalItems: number;
+    public sensordatas: Sensordata[];
+    public breadcrumbs: any[];
+    public title: string;
+    public page = 1;
+    public maxSize = 10;
+    public totalItems: number;
 
     date_start: string;
     date_end: string;
@@ -28,6 +29,10 @@ export class SensordataComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.breadcrumbs = [
+            { label: "Home", url: "/" },
+            { label: "Sensordatas", is_active: true }
+        ];
         this.getSensorData();
     }
 

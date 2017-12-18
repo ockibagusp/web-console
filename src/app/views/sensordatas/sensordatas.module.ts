@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 
+import { SharedModule } from '../shared/shared.module';
+
 import {SensordataComponent} from './sensordata.component';
 import {SensordataNodeComponent} from './sensordata-node.component';
 
@@ -35,7 +37,8 @@ import {LocalDatePipe} from '../core/pipes/local-date.pipe';
         TabsModule,
         PaginationModule.forRoot(),
         AlertModule.forRoot(),
-        ChartsModule
+        ChartsModule,
+        SharedModule
     ],
     entryComponents: [],
     declarations: [

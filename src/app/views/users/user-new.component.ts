@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import {UserService} from './user.service';
-import {User} from './user.model';
+import { UserService } from './user.service';
+import { User } from './user.model';
 
 @Component({
     templateUrl: 'user-form.component.html'
 })
 export class UserNewComponent implements OnInit {
-    is_new = true;
-    user: User;
-    links: any[];
+    public is_new = true;
+    public user: User;
+    public breadcrumbs: any[];
 
     errors: Array<{ field: string, message: string }>;
 
@@ -19,6 +19,11 @@ export class UserNewComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.breadcrumbs = [
+            { label: "Home", url: "/" },
+            { label: "Users", url: "/users/list" },
+            { label: "New", is_active: true }
+        ];
         this.user = new User;
     }
 

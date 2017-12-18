@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Subscription } from 'rxjs/Subscription';
 
-import {SupernodeService} from './supernode.service';
-import {Supernode} from './supernode.model';
+import { SupernodeService } from './supernode.service';
+import { Supernode } from './supernode.model';
 
-import {ModalContentComponent} from '../core/modal.component';
+import { ModalContentComponent } from '../core/modal.component';
 
 @Component({
     templateUrl: 'supernode.component.html'
 })
 export class SupernodeComponent implements OnInit {
     public supernodes: Supernode[];
+    public breadcrumbs: any[];
     public maxSize = 5;
     public itemsPerPage = 10;
     public currentPage = 1;
@@ -27,6 +28,11 @@ export class SupernodeComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.breadcrumbs = [
+            { label: "Home", url: "/" },
+            { label: "Supernodes", url: "/supernodes/list"},
+            { label: "List", is_active: true }
+        ];
         this.getSupernodes();
     }
 

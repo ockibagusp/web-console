@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
-import {ModalContentComponent} from '../core/modal.component';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { ModalContentComponent } from '../core/modal.component';
 import 'rxjs/add/operator/switchMap';
-import {Subscription} from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
-import {SupernodeService} from './supernode.service';
-import {SensorService} from './sensor.service';
-import {Supernode} from './supernode.model';
-import {Sensor} from './sensor.model';
-import {CredentialsService} from '../core/authenticate/credentials.service';
+import { SupernodeService } from './supernode.service';
+import { SensorService } from './sensor.service';
+import { Supernode } from './supernode.model';
+import { Sensor } from './sensor.model';
+import { CredentialsService } from '../core/authenticate/credentials.service';
 
 import { ModalSensorFormComponent } from '../shared/modalsensorform.component';
 
@@ -20,6 +20,8 @@ import { ModalSensorFormComponent } from '../shared/modalsensorform.component';
 export class SupernodeDetailComponent implements OnInit {
     supernode: Supernode;
     sensors: Sensor[];
+
+    public breadcrumbs: any[];
     public bsModalRef: BsModalRef;
     public modalSubscriptions: Subscription;
 
@@ -41,6 +43,11 @@ export class SupernodeDetailComponent implements OnInit {
             .subscribe(
                 supernode => {
                     this.supernode = supernode as Supernode;
+                    this.breadcrumbs = [
+                        { label: "Home", url: "/" },
+                        { label: "Supernodes", url: "/supernodes/list" },
+                        { label: supernode.label, is_active: true }
+                    ];
                     this.getSupernodeSensor();
                 },
                 error => console.log(error)

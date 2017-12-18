@@ -18,10 +18,11 @@ interface ChartData {
     templateUrl: 'sensordata-node.component.html'
 })
 export class SensordataNodeComponent implements OnInit {
-    node: Node;
-    sensors: Sensor[];
-    sensordatas_array: Array<Sensordata[]> = [];
-    title: string;
+    public node: Node;
+    public sensors: Sensor[];
+    public sensordatas_array: Array<Sensordata[]> = [];
+    public title: string;
+    public breadcrumbs: any[];
     page = 1;
     maxSize = 10;
     totalItems: Array<number> = [];
@@ -47,6 +48,11 @@ export class SensordataNodeComponent implements OnInit {
             .switchMap((params: Params) => this.nodeService.getNode(params['nodeid']))
             .subscribe(
             node => {
+                this.breadcrumbs = [
+                    { label: "Home", url: "/" },
+                    { label: "Sensordatas", url: "/sensordatas/list" },
+                    { label: node.label, is_active: true }
+                ];
                 this.node = node;
                 this.title = node.label;
                 this.getSensors();
