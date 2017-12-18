@@ -19,7 +19,7 @@
                                     <table class="table">
                                         <tbody>
                                         <tr>
-                                            <th>Node Id</th>
+                                            <th>ID</th>
                                             <td>{{ node.id }}</td>
                                         </tr>
                                         <tr>
@@ -65,12 +65,14 @@
                                         <thead>
                                         <tr>
                                             <th>Label</th>
+                                            <th *ngIf="is_mine">ID</th>
                                             <th *ngIf="is_mine" width="80px">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr *ngFor="let sensor of sensors">
                                             <td>{{ sensor.label }}</td>
+                                            <td *ngIf="is_mine">{{ sensor.id }}</td>
                                             <td *ngIf="is_mine">
                                                 <button type="button" class="btn btn-sm btn-flat btn-primary"
                                                         data-toggle="modal" (click)="openSensorFormModal(sensor)">

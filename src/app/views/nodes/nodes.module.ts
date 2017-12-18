@@ -1,14 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {SharedModule} from '../shared/shared.module';
 
 import {NodeComponent} from './node.component';
 import {NodeNewComponent} from './node-new.component';
 import {NodeEditComponent} from './node-edit.component';
-import {NodeDetailComponent, ModalSensorFormComponent} from './node-detail.component';
+import {NodeDetailComponent} from './node-detail.component';
+import {ModalSensorFormComponent} from '../shared/modalsensorform.component';
 
 import {NodeService} from './node.service';
 import {SupernodeService} from '../supernodes/supernode.service';
+import { SensorService as SupernodeSensorService } from '../supernodes/sensor.service';
 import {SensorService} from './sensor.service';
 import {UserService} from '../users/user.service';
 
@@ -33,7 +36,8 @@ import {AlertModule} from 'ngx-bootstrap/alert';
         ModalModule.forRoot(),
         TabsModule,
         PaginationModule.forRoot(),
-        AlertModule.forRoot()
+        AlertModule.forRoot(),
+        SharedModule
     ],
     entryComponents: [
         ModalSensorFormComponent
@@ -42,12 +46,12 @@ import {AlertModule} from 'ngx-bootstrap/alert';
         NodeComponent,
         NodeNewComponent,
         NodeEditComponent,
-        NodeDetailComponent,
-        ModalSensorFormComponent
+        NodeDetailComponent
     ],
     providers: [
         NodeService,
         SupernodeService,
+        SupernodeSensorService,
         SensorService,
         UserService
     ]

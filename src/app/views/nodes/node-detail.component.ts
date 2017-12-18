@@ -12,6 +12,8 @@ import {Node} from './node.model';
 import {Sensor} from './sensor.model';
 import {CredentialsService} from '../core/authenticate/credentials.service';
 
+import {ModalSensorFormComponent} from '../shared/modalsensorform.component';
+
 @Component({
     templateUrl: 'node-detail.component.html'
 })
@@ -119,6 +121,7 @@ export class NodeDetailComponent implements OnInit {
         this.bsModalRef = this.modalService.show(ModalSensorFormComponent, {'class': 'modal-primary'});
         this.bsModalRef.content.title = (sensor ? 'Edit' : 'New') + ' Sensor Form';
         this.bsModalRef.content.node = this.node;
+        this.bsModalRef.content.is_node = true;
         const _sensor = new Sensor();
         // is modal form action is update
         if (sensor) {
@@ -145,77 +148,5 @@ export class NodeDetailComponent implements OnInit {
     public pageChanged(event: any): void {
         this.router.navigateByUrl(`/nodes/view/${this.node.id}?sensor-page=${event.page}`);
         this.getSensors(event.page);
-    }
-}
-
-interface Errors {
-    field: string,
-    message: string
-}
-
-@Component({
-    selector: 'modal-content',
-    template: `
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">{{ title }}</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <p *ngFor="let error of errors">
-                <alert [type]="'danger'" dismissible="true">
-                    <strong>{{ error.field }}:</strong> {{ error.message }}
-                </alert>
-            </p>
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="label">Label</label>
-                    <input type="text" name="label" class="form-control" [(ngModel)]="sensor.label"
-                           placeholder="Enter Node Label..">
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
-            <button [disabled]="!sensor.label" type="button" class="btn btn-primary" (click)="save()">Save</button>
-        </div>
-    `
-})
-export class ModalSensorFormComponent {
-    public title: string;
-    public node: Node;
-    public sensor: Sensor = new Sensor;
-    public status: number;
-    public errors: Errors[];
-
-    constructor(private router: Router,
-                public bsModalRef: BsModalRef,
-                public sensorService: SensorService) {
-    }
-
-    save(): void {
-        this.sensorService.save(this.node, this.sensor)
-            .subscribe(
-                () => {
-                    this.status = 201;
-                    this.bsModalRef.hide();
-                },
-                error => this.extractErrors(error)
-            );
-    }
-
-    private extractErrors(err: any): void {
-        const errorsParse = JSON.parse(err._body);
-        this.errors = [];
-        for (const index in errorsParse) {
-            if (errorsParse.hasOwnProperty(index)) {
-                this.errors.push({
-                    field: index,
-                    message: typeof errorsParse[index] === 'string' ?
-                        errorsParse[index] : errorsParse[index][0]
-                })
-            }
-        }
     }
 }

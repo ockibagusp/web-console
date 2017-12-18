@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-7">
                             <div class="card">
                                 <div class="card-header">
                                     Detail Info
@@ -15,6 +15,10 @@
                                 <div class="card-body">
                                     <table class="table">
                                         <tbody>
+                                        <tr>
+                                            <th>ID</th>
+                                            <td>{{ supernode.id }}</td>
+                                        </tr>
                                         <tr>
                                             <th>Secretkey</th>
                                             <td>{{ supernode.secretkey }}</td>
@@ -38,6 +42,45 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    Sensor List
+                                    <button class="btn btn-sm btn-flat btn-primary float-right" (click)="openSensorFormModal()">
+                                        <i class="fa fa-plus"></i> Add
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Label</th>
+                                                <th>ID</th>
+                                                <th width="80px">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let sensor of sensors">
+                                                <td>{{ sensor.label }}</td>
+                                                <td>{{ sensor.id }}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-primary" data-toggle="modal" (click)="openSensorFormModal(sensor)">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-toggle="modal" (click)="openDeleteConfirmationModal(sensor)">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <strong *ngIf="sensors?.length == 0">No Data</strong>
+                                    <pagination *ngIf="10<totalItems" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+                                        [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true">
+                                    </pagination>
                                 </div>
                             </div>
                         </div>
