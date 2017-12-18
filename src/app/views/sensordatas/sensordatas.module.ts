@@ -24,6 +24,8 @@ import {PaginationModule} from 'ngx-bootstrap/pagination';
 
 import {AlertModule} from 'ngx-bootstrap/alert';
 
+import {LocalDatePipe} from '../core/pipes/local-date.pipe';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -38,7 +40,8 @@ import {AlertModule} from 'ngx-bootstrap/alert';
     entryComponents: [],
     declarations: [
         SensordataComponent,
-        SensordataNodeComponent
+        SensordataNodeComponent,
+        LocalDatePipe
     ],
     providers: [
         SensordataService,
