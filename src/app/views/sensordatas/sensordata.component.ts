@@ -50,7 +50,7 @@ export class SensordataComponent implements OnInit {
     }
 
     pageChanged(event: any): void {
-        this.router.navigateByUrl(`/sensordata/list?page=${event.page}`);
+        this.router.navigateByUrl(`/sensordatas/list?page=${event.page}`);
         this.getSensorData(event.page);
     }
 }
