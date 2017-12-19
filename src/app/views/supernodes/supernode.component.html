@@ -19,6 +19,7 @@
                             <tr>
                                 <th>Super-Node</th>
                                 <th>ID</th>
+                                <th>Has Sensor?</th>
                                 <th>Node</th>
                                 <th>Nodes List</th>
                                 <th>Sensordatas List</th>
@@ -30,6 +31,9 @@
                             <tr *ngFor="let supernode of supernodes">
                                 <td>{{ supernode.label }}</td>
                                 <td>{{ supernode.id }}</td>
+                                <td>{{ 0 != supernode.sensor_count ? 
+                                    'Yes (' + supernode.sensor_count + ')' : 'No' }}
+                                </td>
                                 <td>
                                     {{ supernode.node_count }}
                                 </td>
