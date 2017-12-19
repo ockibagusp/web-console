@@ -50,8 +50,9 @@ export class SensordataNodeComponent implements OnInit {
             node => {
                 this.breadcrumbs = [
                     { label: "Home", url: "/" },
-                    { label: "Sensordatas", url: "/sensordatas/list" },
-                    { label: node.label, is_active: true }
+                    { label: "Nodes", url: "/nodes/list" },
+                    { label: node.label, url: `/nodes/view/${node.id}` },
+                    { label: "Sensordatas", is_active: true }
                 ];
                 this.node = node;
                 this.title = node.label;

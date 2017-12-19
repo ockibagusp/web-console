@@ -50,8 +50,9 @@ export class SensordataSupernodeComponent implements OnInit {
             supernode => {
                 this.breadcrumbs = [
                     { label: "Home", url: "/" },
-                    { label: "Sensordatas", url: "/sensordatas/list" },
-                    { label: supernode.label, is_active: true }
+                    { label: "Supernodes", url: "/supernodes/list" },
+                    { label: supernode.label, url: `/supernodes/view/${supernode.id}` },
+                    { label: "Sensordatas", is_active: true }
                 ];
                 this.supernode = supernode;
                 this.title = supernode.label;
