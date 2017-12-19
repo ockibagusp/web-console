@@ -21,6 +21,7 @@
                                 <th>ID</th>
                                 <th>Node</th>
                                 <th>Nodes List</th>
+                                <th>Sensordatas List</th>
                                 <th>Description</th>
                                 <th width="120px">Action</th>
                             </tr>
@@ -35,6 +36,11 @@
                                 <td>
                                     <a [routerLink]="['/supernodes/view', supernode.id, 'nodes']"
                                        class="btn btn-link">
+                                        <i class="fa fa-link"></i>&nbsp; Link
+                                    </a>
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/sensordatas/supernode', supernode.id]" class="btn btn-link">
                                         <i class="fa fa-link"></i>&nbsp; Link
                                     </a>
                                 </td>

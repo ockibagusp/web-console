@@ -1,0 +1,62 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <breadcrumbs [links]="breadcrumbs"></breadcrumbs>
+</ol>
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> {{ supernode?.label }} Sensordatas
+                    </div>
+                    <div class="card-body">
+                        <div *ngFor="let sensor of sensors; let i = index"class="row">
+                            <div class="col-lg-7">
+                                <div *ngIf="lineChartData[i]" class="chart-wrapper">
+                                    <canvas baseChart class="chart" [datasets]="lineChartData[i]" 
+                                    [labels]="lineChartLabels" [options]="lineChartOptions" 
+                                    [colors]="lineChartColours" [legend]="true" 
+                                    [chartType]="'line'" (chartHover)="chartHovered($event)" 
+                                    (chartClick)="chartClicked($event)"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Sensor</th>
+                                            <th>Data</th>
+                                            <th>Timestamp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let sensordata of sensordatas_array[i]; let i = index">
+                                            <td>{{ i+1 }}</td>
+                                            <td>{{ sensordata.sensorlabel }}</td>
+                                            <td>
+                                                {{ sensordata.data }}
+                                            </td>
+                                            <td>
+                                                {{ sensordata.timestamp | localdate }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <strong *ngIf="sensordatas_array[i]?.length == 0">No Data</strong>
+                                <nav>
+                                    <pagination *ngIf="10<totalItems[i]" [totalItems]="totalItems[i]" [maxSize]="maxSize" [(ngModel)]="currentPage[i]" (pageChanged)="pageChanged($event, i)"
+                                        [itemsPerPage]="itemsPerPage" class="pagination-md" [boundaryLinks]="true"></pagination>
+                                </nav>
+                            </div>
+                        </div>
+                        <strong *ngIf="sensors?.length == 0">No sensor device yet</strong>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </div>
+</div>

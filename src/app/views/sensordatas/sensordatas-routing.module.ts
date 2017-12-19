@@ -1,11 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
     Routes,
     RouterModule
 } from '@angular/router';
 
-import {SensordataComponent} from './sensordata.component';
-import {SensordataNodeComponent} from './sensordata-node.component';
+import { SensordataComponent } from './sensordata.component';
+import { SensordataSupernodeComponent } from './sensordata-supernode.component';
+import { SensordataNodeComponent } from './sensordata-node.component';
 
 const routes: Routes = [
     {
@@ -23,6 +24,13 @@ const routes: Routes = [
                 component: SensordataComponent,
                 data: {
                     title: 'List'
+                }
+            },
+            {
+                path: 'supernode/:supernodeid',
+                component: SensordataSupernodeComponent,
+                data: {
+                    title: 'Nodes List'
                 }
             },
             {

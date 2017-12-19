@@ -11,7 +11,7 @@ import { CredentialsService } from '../core/authenticate/credentials.service';
 
 @Injectable()
 export class SensordataService {
-    private nodeUrl = AgriHub.BASE_API_URL + '/sensordatas';
+    private url = AgriHub.BASE_API_URL + '/sensordatas';
     private headers = new Headers({
         'Content-Type': 'application/json',
         'Authorization': 'JWT ' + this.credentialsService.getToken()
@@ -26,25 +26,49 @@ export class SensordataService {
         var user = this.credentialsService.getUser().username;
         var filter = this.getFilterQuery(date_start, date_end);
 
-        return this.http.get(`${this.nodeUrl}?page=${page}${filter}`, { headers: this.headers })
+        return this.http.get(`${this.url}?page=${page}${filter}`, { headers: this.headers })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    getSensorDataByNode(page: number = 1, nodeid: string, date_start = "", date_end = ""): Observable<any> {
+    getSensorDataBySupernode(page: number = 1, supernodeid: string,
+        date_start = "", date_end = ""): Observable<any> {
         var filter = this.getFilterQuery(date_start, date_end);
-        return this.http.get(`${this.nodeUrl}/node/${nodeid}/?page=${page}${filter}`, { headers: this.headers })
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.http.get(
+            `${this.url}/supernode/${supernodeid}/?page=${page}${filter}`,
+            { headers: this.headers }
+        ).map(this.extractData)
+        .catch(this.handleError);
+    }
+
+    getSensorDataBySupernodeSensor(page: number = 1, supernodeid: string, sensorid: string,
+        date_start = "", date_end = ""): Observable<any> {
+        var filter = this.getFilterQuery(date_start, date_end);
+        return this.http.get(
+            `${this.url}/supernode/${supernodeid}/sensor/${sensorid}/?page=${page}${filter}`,
+            { headers: this.headers }
+        ).map(this.extractData)
+        .catch(this.handleError);
+    }
+
+    getSensorDataByNode(page: number = 1, nodeid: string, 
+        date_start = "", date_end = ""): Observable<any> {
+        var filter = this.getFilterQuery(date_start, date_end);
+        return this.http.get(
+            `${this.url}/node/${nodeid}/?page=${page}${filter}`, 
+            { headers: this.headers }
+        ).map(this.extractData)
+        .catch(this.handleError);
     }
 
     getSensorDataBySensor(page: number = 1, nodeid: string, sensorid: string,
         date_start = "", date_end = ""): Observable<any> {
         var filter = this.getFilterQuery(date_start, date_end);
-        return this.http.get(`${this.nodeUrl}/node/${nodeid}/sensor/${sensorid}/?page=${page}${filter}`,
-            { headers: this.headers })
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.http.get(
+            `${this.url}/node/${nodeid}/sensor/${sensorid}/?page=${page}${filter}`,
+            { headers: this.headers }
+        ).map(this.extractData)
+        .catch(this.handleError);
     }
 
     private getFilterQuery(date_start = "", date_end = ""): string {
