@@ -30,7 +30,7 @@
                                         <th>Sensor</th>
                                         <th>Publish remaining</th>
                                         <th>Sensordatas List</th>
-                                        <th width="150px">Action</th>
+                                        <th width="180px">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -65,6 +65,10 @@
                                                class="btn btn-sm btn-flat btn-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            <button type="button" class="btn btn-sm btn-flat btn-secondary" title="duplicate node" 
+                                                data-toggle="modal" (click)="openResetConfirmationModal(node)">
+                                                <i class="fa fa-copy"></i>
+                                            </button>
                                             <button type="button" class="btn btn-sm btn-flat btn-warning" title="reset publish per day limit"
                                                     data-toggle="modal" (click)="openResetConfirmationModal(node)"
                                                     [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
@@ -97,7 +101,7 @@
                                         <th>Sensor</th>
                                         <th>Publish remaining</th>
                                         <th>Sensordatas List</th>
-                                        <th width="150px">Action</th>
+                                        <th width="180px">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -162,7 +166,7 @@
                                         <th>Sensor</th>
                                         <th>Publish remaining</th>
                                         <th>Sensordatas List</th>
-                                        <th width="150px">Action</th>
+                                        <th width="180px">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>

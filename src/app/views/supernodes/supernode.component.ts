@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { SupernodeService } from './supernode.service';
 import { Supernode } from './supernode.model';
 
-import { ModalContentComponent } from '../core/modal.component';
+import { ModalContentComponent, MODAL } from '../core/modal.component';
 
 @Component({
     templateUrl: 'supernode.component.html'
@@ -53,8 +53,8 @@ export class SupernodeComponent implements OnInit {
         this.bsModalRef.content.url = supernode.url;
         this.bsModalRef.content.title = 'Delete Confirmation';
         this.bsModalRef.content.message = 'Are you sure to perform this action?';
-        this.bsModalRef.content.is_delete = true;
-        this.bsModalRef.content.is_supernode = true;
+        this.bsModalRef.content.action = MODAL.ACTION.DELETE;
+        this.bsModalRef.content.delete_target = MODAL.DELETE_TARGET.SUPERNODE;
         // event fired when modal dismissed -> reload sensor data
         this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
             if (!reason && 204 === this.bsModalRef.content.status) {

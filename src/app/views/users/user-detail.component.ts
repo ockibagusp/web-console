@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, Params} from '@angular/router';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
-import {ModalContentComponent} from '../core/modal.component';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { ModalContentComponent, MODAL } from '../core/modal.component';
+import { Subscription } from 'rxjs/Subscription';
 
-import {UserService} from './user.service';
-import {User} from './user.model';
+import { UserService } from './user.service';
+import { User } from './user.model';
 
 @Component({
     templateUrl: 'user-detail.component.html'
@@ -46,8 +46,8 @@ export class UserDetailComponent implements OnInit {
         this.bsModalRef.content.url = this.user.url;
         this.bsModalRef.content.title = 'User Delete Confirmation';
         this.bsModalRef.content.message = 'Are you sure to perform this action?';
-        this.bsModalRef.content.is_delete = true;
-        this.bsModalRef.content.is_user = true;
+        this.bsModalRef.content.action = MODAL.ACTION.DELETE;
+        this.bsModalRef.content.delete_target = MODAL.DELETE_TARGET.USER;
         // event fired when modal dismissed -> reload sensor data
         this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
             if (!reason && 204 === this.bsModalRef.content.status) {

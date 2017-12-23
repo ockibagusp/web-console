@@ -68,6 +68,13 @@ export class NodeService {
             .catch(this.handleError);
     }
 
+    duplicate(id: string, count: number): Observable<Node> {
+        return this.http.post(
+            `${this.nodeUrl}/duplicate/`, { 'id': id, 'count': count }, { headers: this.headers }
+        ).map(this.extractData)
+        .catch(this.handleError);
+    }
+
     reset(id: string): Observable<Node> {
         return this.http.post(`${this.nodeUrl}/reset/`, {'id': id}, {headers: this.headers})
             .map(this.extractData)

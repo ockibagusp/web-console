@@ -5,6 +5,21 @@ import {SupernodeService} from '../supernodes/supernode.service';
 import {NodeService} from '../nodes/node.service';
 import {SensorService} from '../nodes/sensor.service';
 
+
+export const MODAL = {
+    ACTION: {
+        DUPLICATE: 1,
+        RESET: 2,
+        DELETE: 3
+    },
+    DELETE_TARGET: {
+        USER: 1,
+        SUPERNODE: 2,
+        NODE: 3,
+        SENSOR: 4
+    }
+};
+
 @Component({
     selector: 'modal-content',
     template: `
@@ -19,8 +34,10 @@ import {SensorService} from '../nodes/sensor.service';
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">No</button>
-            <button type="button" class="btn btn-warning" *ngIf="!is_delete" (click)="reset()">Reset</button>
-            <button type="button" class="btn btn-danger" *ngIf="is_delete" (click)="delete()">Delete</button>
+            <button type="button" class="btn btn-warning" *ngIf="action==MODAL.ACTION.RESET" 
+                (click)="reset()">Reset</button>
+            <button type="button" class="btn btn-danger" *ngIf="action==MODAL.ACTION.DELETE" 
+                (click)="delete()">Delete</button>
         </div>
     `
 })
@@ -30,13 +47,15 @@ export class ModalContentComponent {
     public url: string;
     public message: string;
     public status: number;
-    // in case of reset pubs per day remain, is_delete should be false
-    public is_delete = false;
-    // perform diferent delete action
-    public is_supernode = false;
-    public is_node = false;
-    public is_sensor = false;
-    public is_user = false;
+
+    public duplicate_count = 0;
+
+    // perform different action
+    public action: number;
+    // perform diferent delete target
+    public delete_target: number;
+    // redeclare MODAL so in this component template we can access it
+    private MODAL = MODAL;
 
     constructor(public bsModalRef: BsModalRef,
                 private userService: UserService,
@@ -57,7 +76,7 @@ export class ModalContentComponent {
     }
 
     delete(): void {
-        if (this.is_supernode) {
+        if (this.delete_target = MODAL.DELETE_TARGET.SUPERNODE) {
             this.supernodeService.delete(this.url)
                 .subscribe(
                     () => {
@@ -66,7 +85,7 @@ export class ModalContentComponent {
                     },
                     error => null
                 );
-        } else if (this.is_node) {
+        } else if (this.delete_target = MODAL.DELETE_TARGET.NODE) {
             this.nodeService.delete(this.url)
                 .subscribe(
                     () => {
@@ -75,7 +94,7 @@ export class ModalContentComponent {
                     },
                     error => null
                 );
-        } else if (this.is_sensor) {
+        } else if (this.delete_target = MODAL.DELETE_TARGET.SENSOR) {
             this.sensorService.delete(this.url)
                 .subscribe(
                     () => {
@@ -84,7 +103,7 @@ export class ModalContentComponent {
                     },
                     error => null
                 );
-        } else if (this.is_user) {
+        } else if (this.delete_target = MODAL.DELETE_TARGET.USER) {
             this.userService.delete(this.url)
                 .subscribe(
                     () => {

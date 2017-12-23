@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { ModalContentComponent } from '../core/modal.component';
+import { ModalContentComponent, MODAL } from '../core/modal.component';
 import 'rxjs/add/operator/switchMap';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -69,11 +69,11 @@ export class SupernodeDetailComponent implements OnInit {
         this.bsModalRef.content.is_supernode = true;
         this.bsModalRef.content.id = this.supernode.id;
         this.bsModalRef.content.url = this.supernode.url;
-        this.bsModalRef.content.is_node = true;
+        this.bsModalRef.content.action = MODAL.ACTION.DELETE;
         if (null != sensor) {
             this.bsModalRef.content.id = sensor.id;
             this.bsModalRef.content.url = sensor.url;
-            this.bsModalRef.content.is_sensor = true;
+            this.bsModalRef.content.delete_target = MODAL.DELETE_TARGET.SENSOR;
             // event fired when modal dismissed -> reload sensor data
             this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
                 if (!reason && 204 === this.bsModalRef.content.status) {
@@ -83,6 +83,7 @@ export class SupernodeDetailComponent implements OnInit {
                 this.modalSubscriptions.unsubscribe();
             });
         } else {
+            this.bsModalRef.content.delete_target = MODAL.DELETE_TARGET.SUPERNODE;
             // event fired when modal dismissed -> navigate to nodes/list
             this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
                 if (!reason && 204 === this.bsModalRef.content.status) {

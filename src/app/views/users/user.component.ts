@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import { User } from './user.model';
 
-import { ModalContentComponent } from '../core/modal.component';
+import { ModalContentComponent, MODAL } from '../core/modal.component';
 
 @Component({
     templateUrl: 'user.component.html'
@@ -66,8 +66,8 @@ export class UserComponent implements OnInit {
         this.bsModalRef.content.url = user.url;
         this.bsModalRef.content.title = 'User Delete Confirmation';
         this.bsModalRef.content.message = 'Are you sure to perform this action?';
-        this.bsModalRef.content.is_delete = true;
-        this.bsModalRef.content.is_user = true;
+        this.bsModalRef.content.action = MODAL.ACTION.DELETE;
+        this.bsModalRef.content.delete_target = MODAL.DELETE_TARGET.USER;
         // event fired when modal dismissed -> reload sensor data
         this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
             if (!reason && 204 === this.bsModalRef.content.status) {

@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { NodeService } from './node.service';
 import { Node } from './node.model';
 
-import { ModalContentComponent } from '../core/modal.component';
+import { ModalContentComponent, MODAL } from '../core/modal.component';
 
 @Component({
     templateUrl: 'node.component.html'
@@ -72,6 +72,7 @@ export class NodeComponent implements OnInit {
         this.bsModalRef.content.id = node.id;
         this.bsModalRef.content.title = 'Reset Confirmation';
         this.bsModalRef.content.message = 'Are you sure to reset publish per day remaining?';
+        this.bsModalRef.content.action = MODAL.ACTION.RESET;
         // event fired when modal dismissed -> reload sensor data
         this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
             if (!reason && 200 === this.bsModalRef.content.status) {
@@ -88,8 +89,8 @@ export class NodeComponent implements OnInit {
         this.bsModalRef.content.url = node.url;
         this.bsModalRef.content.title = 'Delete Confirmation';
         this.bsModalRef.content.message = 'Are you sure to perform this action?';
-        this.bsModalRef.content.is_delete = true;
-        this.bsModalRef.content.is_node = true;
+        this.bsModalRef.content.action = MODAL.ACTION.DELETE;
+        this.bsModalRef.content.delete_target = MODAL.DELETE_TARGET.NODE;
         // event fired when modal dismissed -> reload sensor data
         this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
             if (!reason && 204 === this.bsModalRef.content.status) {
