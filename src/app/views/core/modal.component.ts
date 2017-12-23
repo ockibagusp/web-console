@@ -74,7 +74,7 @@ export class ModalContentComponent {
     // perform diferent delete target
     public delete_target: number;
     // redeclare MODAL so in this component template we can access it
-    private MODAL = MODAL;
+    public MODAL = MODAL;
 
     constructor(public bsModalRef: BsModalRef,
                 private userService: UserService,

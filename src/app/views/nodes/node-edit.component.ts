@@ -6,6 +6,8 @@ import { SupernodeService } from '../supernodes/supernode.service';
 import { Supernode } from '../supernodes/supernode.model';
 import 'rxjs/add/operator/switchMap';
 
+import { Coordinates } from '../shared/coordinates.model';
+
 import {CredentialsService} from '../core/authenticate/credentials.service';
 
 @Component({
@@ -18,6 +20,8 @@ export class NodeEditComponent implements OnInit {
     public _initial_pubsperday: number;
     public supernodes: Supernode[];
     public breadcrumbs: any[];
+
+    public coordinates: Coordinates;
 
     errors: Array<{ field: string, message: string }>;
 
@@ -35,8 +39,11 @@ export class NodeEditComponent implements OnInit {
                 node => this.setUpNode(node),
                 error => console.log(error)
             );
+        this.coordinates = {
+            lat: null,
+            long: null
+        };
         this.getSupernodes();
-        // TODO why?
         this.node = new Node;
     }
 
@@ -54,6 +61,9 @@ export class NodeEditComponent implements OnInit {
         this.node = node;
         this.unlimited = (-1 === node.pubsperday);
         this._initial_pubsperday = node.pubsperday;
+        if (node.coordinates) {
+            this.coordinates = node.coordinates;
+        }
     }
 
     private getSupernodes(page: number = 1): void {
@@ -75,6 +85,11 @@ export class NodeEditComponent implements OnInit {
 
     public save(): void {
         this.node.is_public = this.node.is_public ? 1 : 0;
+        if (this.coordinates.lat || this.coordinates.long) {
+            this.node.coordinates = this.coordinates;
+        } else {
+            this.node.coordinates = null;
+        }
         this.nodeService.save(this.node)
             .subscribe(
                 node => this.router.navigate(['/nodes/view', node.id]),
@@ -85,13 +100,25 @@ export class NodeEditComponent implements OnInit {
     private extractErrors(err: any): void {
         const errorsParse = JSON.parse(err._body);
         this.errors = [];
+
         for (const index in errorsParse) {
             if (errorsParse.hasOwnProperty(index)) {
-                this.errors.push({
-                    field: index,
-                    message: typeof errorsParse[index] === 'string' ?
-                        errorsParse[index] : errorsParse[index][0]
-                })
+                if (errorsParse[index] instanceof Array || typeof errorsParse[index] === 'string') {
+                    this.errors.push({
+                        field: index,
+                        message: typeof errorsParse[index] === 'string' ?
+                            errorsParse[index] : errorsParse[index][0]
+                    })
+                } else { // dictionary
+                    for (const jindex in errorsParse[index]) {
+                        if (errorsParse[index].hasOwnProperty(jindex)) {
+                            this.errors.push({
+                                field: `${index} (${jindex})`,
+                                message: errorsParse[index][jindex]
+                            })
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,3 +1,5 @@
+import { Coordinates } from '../shared/coordinates.model';
+
 export class Supernode {
     id: string;
     user: string;
@@ -8,4 +10,5 @@ export class Supernode {
     sensor_count: number;
     node_count: number;
     nodes_list: string;
+    coordinates: Coordinates;
 }

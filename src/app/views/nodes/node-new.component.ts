@@ -4,6 +4,7 @@ import { Node } from './node.model';
 import { NodeService } from './node.service';
 import { SupernodeService } from '../supernodes/supernode.service';
 import { Supernode } from '../supernodes/supernode.model';
+import { Coordinates } from '../shared/coordinates.model';
 
 interface Errors {
     field: string,
@@ -21,6 +22,8 @@ export class NodeNewComponent implements OnInit {
     
     public supernodes: Supernode[];
 
+    public coordinates: Coordinates;
+
     errors: Errors[];
 
     constructor(private nodeService: NodeService,
@@ -35,6 +38,10 @@ export class NodeNewComponent implements OnInit {
             { label: "Nodes", url: "/nodes/list" },
             { label: 'New', is_active: true }
         ];
+        this.coordinates = {
+            lat: null,
+            long: null
+        };
         this.getSupernodes();
     }
 
@@ -56,7 +63,9 @@ export class NodeNewComponent implements OnInit {
 
     save(): void {
         this.node.is_public = this.node.is_public ? 1 : 0;
-        console.log(this.node)
+        if (this.coordinates.lat || this.coordinates.long) {
+            this.node.coordinates = this.coordinates;
+        }
         this.nodeService.save(this.node)
             .subscribe(
                 node => this.router.navigate(['/nodes/list']),
@@ -67,13 +76,25 @@ export class NodeNewComponent implements OnInit {
     private extractErrors(err: any): void {
         const errorsParse = JSON.parse(err._body);
         this.errors = [];
+
         for (const index in errorsParse) {
             if (errorsParse.hasOwnProperty(index)) {
-                this.errors.push({
-                    field: index,
-                    message: typeof errorsParse[index] === 'string' ?
-                        errorsParse[index] : errorsParse[index][0]
-                })
+                if (errorsParse[index] instanceof Array || typeof errorsParse[index] === 'string') {
+                    this.errors.push({
+                        field: index,
+                        message: typeof errorsParse[index] === 'string' ?
+                            errorsParse[index] : errorsParse[index][0]
+                    })
+                } else { // dictionary
+                    for (const jindex in errorsParse[index]) {
+                        if (errorsParse[index].hasOwnProperty(jindex)) {
+                            this.errors.push({
+                                field: `${index} (${jindex})`,
+                                message: errorsParse[index][jindex]
+                            })
+                        }
+                    }
+                }
             }
         }
     }

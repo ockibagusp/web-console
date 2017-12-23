@@ -55,6 +55,23 @@
                                 <input type="number" min="-1" [(ngModel)]="node.pubsperday" class="form-control"
                                        name="pubsperday" *ngIf="!unlimited" required>
                             </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    Coordinates
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="lat">Latitude</label>
+                                            <input type="number" name="lat" [(ngModel)]="coordinates.lat" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="long">Longitude</label>
+                                            <input type="number" name="long" [(ngModel)]="coordinates.long" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="card-footer">

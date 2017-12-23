@@ -1,3 +1,5 @@
+import { Coordinates } from '../shared/coordinates.model';
+
 export class Node {
     id: string;
     url: string;
@@ -11,4 +13,5 @@ export class Node {
     sensor_count: number;
     sensors_list: string;
     subscriptions_list: string;
+    coordinates: Coordinates;
 }
