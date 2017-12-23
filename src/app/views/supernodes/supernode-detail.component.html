@@ -33,6 +33,18 @@
                                                 <td>{{ !supernode.description ? "-" : supernode.description }}</td>
                                             </tr>
                                             <tr>
+                                                <th>Coordinates</th>
+                                                <td>
+                                                    Lat: {{ !supernode.coordinates ? "-" : supernode.coordinates.lat }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <td>
+                                                    Long: {{ !supernode.coordinates ? "-" : supernode.coordinates.long }}
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <th>Sensors Count</th>
                                                 <td>{{ supernode.sensor_count }}</td>
                                             </tr>

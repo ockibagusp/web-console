@@ -40,6 +40,18 @@
                                                 <td>{{ -1 == node.pubsperday ? "unlimited" : node.pubsperdayremain }}</td>
                                             </tr>
                                             <tr>
+                                                <th>Coordinates</th>
+                                                <td>
+                                                    Lat: {{ !node.coordinates ? "-" : node.coordinates.lat }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <td>
+                                                    Long: {{ !node.coordinates ? "-" : node.coordinates.long }}
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <th>Sensor count</th>
                                                 <td>{{ node.sensor_count }}</td>
                                             </tr>
