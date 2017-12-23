@@ -102,15 +102,15 @@
                         </div>
                     </div>
                     <div *ngIf="is_mine" class="card-footer">
-                        <a [routerLink]="['/nodes/edit', node.id]" class="btn btn-sm btn-flat btn-primary">
+                        <a [routerLink]="['/nodes/edit', node.id]" class="btn btn-sm btn-flat btn-primary" title="edit node">
                             <i class="fa fa-edit"></i> Edit
                         </a>
-                        <button type="button" class="btn btn-sm btn-flat btn-warning"
+                        <button type="button" class="btn btn-sm btn-flat btn-warning" title="reset publish per day limit"
                                 [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain"
                                 data-toggle="modal" (click)="openResetConfirmationModal()">
                             <i class="fa fa-history"></i> Reset
                         </button>
-                        <button type="button" class="btn btn-sm btn-flat btn-danger"
+                        <button type="button" class="btn btn-sm btn-flat btn-danger" title="delete node"
                                 data-toggle="modal" (click)="openDeleteConfirmationModal()">
                             <i class="fa fa-trash-o"></i> Delete
                         </button>

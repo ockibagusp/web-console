@@ -55,20 +55,20 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a [routerLink]="['/nodes/view', node.id]"
+                                            <a [routerLink]="['/nodes/view', node.id]" title="node detail"
                                                class="btn btn-sm btn-flat btn-success">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a [routerLink]="['/nodes/edit/', node.id]"
+                                            <a [routerLink]="['/nodes/edit/', node.id]" title="edit node"
                                                class="btn btn-sm btn-flat btn-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-flat btn-warning"
+                                            <button type="button" class="btn btn-sm btn-flat btn-warning" title="reset publish per day limit"
                                                     data-toggle="modal" (click)="openResetConfirmationModal(node)"
                                                     [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
                                                 <i class="fa fa-history"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-flat btn-danger"
+                                            <button type="button" class="btn btn-sm btn-flat btn-danger" title="delete node"
                                                     data-toggle="modal" (click)="openDeleteConfirmationModal(node)">
                                                 <i class="fa fa-trash-o"></i>
                                             </button>
@@ -118,20 +118,20 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a [routerLink]="['/nodes/view', node.id]"
+                                            <a [routerLink]="['/nodes/view', node.id]" title="node detail"
                                                class="btn btn-sm btn-flat btn-success">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a [routerLink]="['/nodes/edit/', node.id]"
+                                            <a [routerLink]="['/nodes/edit/', node.id]" title="edit node"
                                                class="btn btn-sm btn-flat btn-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-flat btn-warning"
+                                            <button type="button" class="btn btn-sm btn-flat btn-warning" title="reset publish per day limit"
                                                     data-toggle="modal" (click)="openResetConfirmationModal(node)"
                                                     [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
                                                 <i class="fa fa-history"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-flat btn-danger"
+                                            <button type="button" class="btn btn-sm btn-flat btn-danger" title="delete node"
                                                     data-toggle="modal" (click)="openDeleteConfirmationModal(node)">
                                                 <i class="fa fa-trash-o"></i>
                                             </button>
@@ -181,20 +181,20 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a [routerLink]="['/nodes/view', node.id]"
+                                            <a [routerLink]="['/nodes/view', node.id]" title="node detail"
                                                class="btn btn-sm btn-flat btn-success">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a [routerLink]="['/nodes/edit/', node.id]"
+                                            <a [routerLink]="['/nodes/edit/', node.id]" title="edit node"
                                                class="btn btn-sm btn-flat btn-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-flat btn-warning"
+                                            <button type="button" class="btn btn-sm btn-flat btn-warning" title="reset publish per day limit"
                                                     data-toggle="modal" (click)="openResetConfirmationModal(node)"
                                                     [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
                                                 <i class="fa fa-history"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-flat btn-danger"
+                                            <button type="button" class="btn btn-sm btn-flat btn-danger" title="delete node"
                                                     data-toggle="modal" (click)="openDeleteConfirmationModal(node)">
                                                 <i class="fa fa-trash-o"></i>
                                             </button>
@@ -247,7 +247,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a [routerLink]="['/nodes/view', node.id]"
+                                            <a [routerLink]="['/nodes/view', node.id]" title="node detail"
                                                class="btn btn-sm btn-flat btn-success">
                                                 <i class="fa fa-eye"></i>
                                             </a>

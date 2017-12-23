@@ -52,15 +52,15 @@
                                     {{ !supernode.description ? "-" : supernode.description }}
                                 </td>
                                 <td>
-                                    <a [routerLink]="['/supernodes/view', supernode.id]"
+                                    <a [routerLink]="['/supernodes/view', supernode.id]" title="supernode detail"
                                        class="btn btn-sm btn-flat btn-success">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a [routerLink]="['/supernodes/edit/', supernode.id]"
+                                    <a [routerLink]="['/supernodes/edit/', supernode.id]" title="edit supernode"
                                        class="btn btn-sm btn-flat btn-primary">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <button type="button" class="btn btn-sm btn-flat btn-danger"
+                                    <button type="button" class="btn btn-sm btn-flat btn-danger" title="delete supernode"
                                             data-toggle="modal" (click)="openDeleteConfirmationModal(supernode)">
                                         <i class="fa fa-trash-o"></i>
                                     </button>

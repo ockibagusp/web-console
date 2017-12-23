@@ -104,10 +104,10 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a [routerLink]="['/supernodes/edit', supernode.id]" class="btn btn-sm btn-flat btn-primary">
+                        <a [routerLink]="['/supernodes/edit', supernode.id]" class="btn btn-sm btn-flat btn-primary" title="edit supernode">
                             <i class="fa fa-edit"></i> Edit
                         </a>
-                        <button type="button" class="btn btn-sm btn-flat btn-danger"
+                        <button type="button" class="btn btn-sm btn-flat btn-danger" title="delete supernode"
                                 data-toggle="modal" (click)="openDeleteConfirmationModal()">
                             <i class="fa fa-trash-o"></i> Delete
                         </button>
