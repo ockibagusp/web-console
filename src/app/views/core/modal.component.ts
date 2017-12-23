@@ -20,6 +20,11 @@ export const MODAL = {
     }
 };
 
+interface Errors {
+    field: string,
+    message: string
+}
+
 @Component({
     selector: 'modal-content',
     template: `
@@ -30,10 +35,24 @@ export const MODAL = {
             </button>
         </div>
         <div class="modal-body">
+            <p *ngFor="let error of errors">
+                <alert [type]="'danger'" dismissible="true">
+                    <strong>{{ error.field }}:</strong> {{ error.message }}
+                </alert>
+            </p>
             {{ message }}
+            <form *ngIf="action==MODAL.ACTION.DUPLICATE" class="form-horizontal">
+                <div class="form-group">
+                    <label for="label">Duplicate count</label>
+                    <input type="number" name="duplicate_count" class="form-control" min="1"
+                        [(ngModel)]="duplicate_count">
+                </div>
+            </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">No</button>
+            <button type="button" class="btn btn-primary" *ngIf="action==MODAL.ACTION.DUPLICATE" 
+                (click)="duplicate()">Duplicate</button>
             <button type="button" class="btn btn-warning" *ngIf="action==MODAL.ACTION.RESET" 
                 (click)="reset()">Reset</button>
             <button type="button" class="btn btn-danger" *ngIf="action==MODAL.ACTION.DELETE" 
@@ -47,8 +66,8 @@ export class ModalContentComponent {
     public url: string;
     public message: string;
     public status: number;
-
-    public duplicate_count = 0;
+    public errors: Errors[];
+    public duplicate_count: number = 1;
 
     // perform different action
     public action: number;
@@ -64,6 +83,17 @@ export class ModalContentComponent {
                 private sensorService: SensorService) {
     }
 
+    duplicate(): void {
+        this.nodeService.duplicate(this.id, this.duplicate_count)
+            .subscribe(
+            () => {
+                this.status = 200;
+                this.bsModalRef.hide();
+            },
+            error => this.extractErrors(error)
+            );
+    }
+
     reset(): void {
         this.nodeService.reset(this.id)
             .subscribe(
@@ -71,7 +101,7 @@ export class ModalContentComponent {
                     this.status = 200;
                     this.bsModalRef.hide();
                 },
-                error => null
+                error => this.extractErrors(error)
             );
     }
 
@@ -83,7 +113,7 @@ export class ModalContentComponent {
                         this.status = 204;
                         this.bsModalRef.hide();
                     },
-                    error => null
+                    error => this.extractErrors(error)
                 );
         } else if (this.delete_target = MODAL.DELETE_TARGET.NODE) {
             this.nodeService.delete(this.url)
@@ -92,7 +122,7 @@ export class ModalContentComponent {
                         this.status = 204;
                         this.bsModalRef.hide();
                     },
-                    error => null
+                    error => this.extractErrors(error)
                 );
         } else if (this.delete_target = MODAL.DELETE_TARGET.SENSOR) {
             this.sensorService.delete(this.url)
@@ -101,7 +131,7 @@ export class ModalContentComponent {
                         this.status = 204;
                         this.bsModalRef.hide();
                     },
-                    error => null
+                    error => this.extractErrors(error)
                 );
         } else if (this.delete_target = MODAL.DELETE_TARGET.USER) {
             this.userService.delete(this.url)
@@ -110,8 +140,22 @@ export class ModalContentComponent {
                         this.status = 204;
                         this.bsModalRef.hide();
                     },
-                    error => null
+                    error => this.extractErrors(error)
                 );
+        }
+    }
+
+    private extractErrors(err: any): void {
+        const errorsParse = JSON.parse(err._body);
+        this.errors = [];
+        for (const index in errorsParse) {
+            if (errorsParse.hasOwnProperty(index)) {
+                this.errors.push({
+                    field: index,
+                    message: typeof errorsParse[index] === 'string' ?
+                        errorsParse[index] : errorsParse[index][0]
+                })
+            }
         }
     }
 }

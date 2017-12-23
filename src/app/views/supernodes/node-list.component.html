@@ -14,8 +14,11 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <alert *ngIf="flash_message" [type]="'info'" dismissOnTimeout="5000" dismissible="true">
-                            <strong>{{ flash_message }}:</strong> Reset Subsperdayremain Successfully
+                        <alert *ngIf="flash_message&&'duplicate'==flash_action" [type]="'info'" dismissOnTimeout="5000" dismissible="true">
+                            <strong>{{ flash_message }}:</strong> Has Been Successfully Duplicated
+                        </alert>
+                        <alert *ngIf="flash_message&&'reset'==flash_action" [type]="'info'" dismissOnTimeout="5000" dismissible="true">
+                            <strong>{{ flash_message }}:</strong> Subsperdayremain Has Been Reset Successfully
                         </alert>
                         <tabset>
                             <tab (select)="selectTab('all')">
@@ -29,7 +32,7 @@
                                         <th>Sensor</th>
                                         <th>Publish remaining</th>
                                         <th>Sensordatas List</th>
-                                        <th width="150px">Action</th>
+                                        <th width="180px">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -63,6 +66,10 @@
                                                class="btn btn-sm btn-flat btn-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            <button type="button" class="btn btn-sm btn-flat btn-secondary" title="duplicate node" 
+                                                data-toggle="modal" (click)="openDuplicateFormModal(node)">
+                                                <i class="fa fa-copy"></i>
+                                            </button>
                                             <button type="button" class="btn btn-sm btn-flat btn-warning" title="reset publish per day limit"
                                                     data-toggle="modal" (click)="openResetConfirmationModal(node)"
                                                     [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
@@ -94,7 +101,7 @@
                                         <th>Sensor</th>
                                         <th>Publish remaining</th>
                                         <th>Sensordatas List</th>
-                                        <th width="150px">Action</th>
+                                        <th width="180px">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -126,6 +133,10 @@
                                                class="btn btn-sm btn-flat btn-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            <button type="button" class="btn btn-sm btn-flat btn-secondary" title="duplicate node" 
+                                                data-toggle="modal" (click)="openDuplicateFormModal(node)">
+                                                <i class="fa fa-copy"></i>
+                                            </button>
                                             <button type="button" class="btn btn-sm btn-flat btn-warning" title="reset publish per day limit"
                                                     data-toggle="modal" (click)="openResetConfirmationModal(node)"
                                                     [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">
@@ -157,7 +168,7 @@
                                         <th>Sensor</th>
                                         <th>Publish remaining</th>
                                         <th>Sensordatas List</th>
-                                        <th width="150px">Action</th>
+                                        <th width="180px">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -189,6 +200,10 @@
                                                class="btn btn-sm btn-flat btn-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            <button type="button" class="btn btn-sm btn-flat btn-secondary" title="duplicate node" 
+                                                data-toggle="modal" (click)="openDuplicateFormModal(node)">
+                                                <i class="fa fa-copy"></i>
+                                            </button>
                                             <button type="button" class="btn btn-sm btn-flat btn-warning" title="reset publish per day limit"
                                                     data-toggle="modal" (click)="openResetConfirmationModal(node)"
                                                     [disabled]="-1 == node.pubsperday || node.pubsperday == node.pubsperdayremain">

@@ -25,6 +25,7 @@ export class NodeComponent implements OnInit {
     public numPages = 0;
     public activeTab: string;
     // reset subsperdayremain flash info
+    public flash_action: string;
     public flash_message: string;
     public bsModalRef: BsModalRef;
     private modalSubscriptions: Subscription;
@@ -67,6 +68,22 @@ export class NodeComponent implements OnInit {
         this.getNodes(tab_id);
     }
 
+    public openDuplicateFormModal(node: Node) {
+        this.bsModalRef = this.modalService.show(ModalContentComponent, { 'class': 'modal-secondary' });
+        this.bsModalRef.content.id = node.id;
+        this.bsModalRef.content.title = 'Duplicate Form';
+        this.bsModalRef.content.action = MODAL.ACTION.DUPLICATE;
+        // event fired when modal dismissed -> reload sensor data
+        this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
+            if (!reason && 200 === this.bsModalRef.content.status) {
+                this.getNodes(this.activeTab);
+                this.flash_action = "duplicate";
+                this.flash_message = node.label;
+            }
+            this.modalSubscriptions.unsubscribe();
+        });
+    }
+
     public openResetConfirmationModal(node: Node) {
         this.bsModalRef = this.modalService.show(ModalContentComponent, {'class': 'modal-warning'});
         this.bsModalRef.content.id = node.id;
@@ -77,6 +94,7 @@ export class NodeComponent implements OnInit {
         this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
             if (!reason && 200 === this.bsModalRef.content.status) {
                 this.getNodes(this.activeTab);
+                this.flash_action = "reset";
                 this.flash_message = node.label;
             }
             this.modalSubscriptions.unsubscribe();

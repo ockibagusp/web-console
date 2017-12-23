@@ -8,7 +8,7 @@ import { SupernodeService } from './supernode.service';
 import { Supernode } from './supernode.model';
 import { Node } from '../nodes/node.model';
 
-import { ModalContentComponent } from '../core/modal.component';
+import { ModalContentComponent, MODAL } from '../core/modal.component';
 
 @Component({
     templateUrl: 'node-list.component.html'
@@ -26,6 +26,7 @@ export class SupernodeNodeComponent {
     public totalItems: number;
     public activeTab: string;
     // reset subsperdayremain flash info
+    public flash_action: string;
     public flash_message: string;
     public bsModalRef: BsModalRef;
     private modalSubscriptions: Subscription;
@@ -82,15 +83,33 @@ export class SupernodeNodeComponent {
         this.getNodes(tab_id);
     }
 
+    public openDuplicateFormModal(node: Node) {
+        this.bsModalRef = this.modalService.show(ModalContentComponent, { 'class': 'modal-secondary' });
+        this.bsModalRef.content.id = node.id;
+        this.bsModalRef.content.title = 'Duplicate Form';
+        this.bsModalRef.content.action = MODAL.ACTION.DUPLICATE;
+        // event fired when modal dismissed -> reload sensor data
+        this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
+            if (!reason && 200 === this.bsModalRef.content.status) {
+                this.getNodes(this.activeTab);
+                this.flash_action = "duplicate";
+                this.flash_message = node.label;
+            }
+            this.modalSubscriptions.unsubscribe();
+        });
+    }
+
     public openResetConfirmationModal(node: Node) {
         this.bsModalRef = this.modalService.show(ModalContentComponent, {'class': 'modal-warning'});
         this.bsModalRef.content.id = node.id;
         this.bsModalRef.content.title = 'Reset Confirmation';
         this.bsModalRef.content.message = 'Are you sure to reset publish per day remaining?';
+        this.bsModalRef.content.action = MODAL.ACTION.RESET;
         // event fired when modal dismissed -> reload sensor data
         this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
             if (!reason && 200 === this.bsModalRef.content.status) {
                 this.getNodes(this.activeTab);
+                this.flash_action = "reset";
                 this.flash_message = node.label;
             }
             this.modalSubscriptions.unsubscribe();
@@ -103,8 +122,8 @@ export class SupernodeNodeComponent {
         this.bsModalRef.content.url = supernode.url;
         this.bsModalRef.content.title = 'Delete Confirmation';
         this.bsModalRef.content.message = 'Are you sure to perform this action?';
-        this.bsModalRef.content.is_delete = true;
-        this.bsModalRef.content.is_node = true;
+        this.bsModalRef.content.action = MODAL.ACTION.DELETE;
+        this.bsModalRef.content.delete_target = MODAL.DELETE_TARGET.NODE;
         // event fired when modal dismissed -> reload sensor data
         this.modalSubscriptions = this.modalService.onHidden.subscribe((reason: string) => {
             if (!reason && 204 === this.bsModalRef.content.status) {
