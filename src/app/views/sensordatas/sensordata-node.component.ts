@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+import { ISubscription } from "rxjs/Subscription";
 
 import { NodeService } from '../nodes/node.service';
 import { SensorService } from '../nodes/sensor.service';
@@ -17,7 +20,7 @@ interface ChartData {
 @Component({
     templateUrl: 'sensordata-node.component.html'
 })
-export class SensordataNodeComponent implements OnInit {
+export class SensordataNodeComponent implements OnInit, OnDestroy {
     public node: Node;
     public sensors: Sensor[];
     public sensordatas_array: Array<Sensordata[]> = [];
@@ -30,6 +33,9 @@ export class SensordataNodeComponent implements OnInit {
 
     date_start: string;
     date_end: string;
+
+    // sensordatas polling observables
+    private subscriptions: Array<ISubscription> = [];
 
     constructor(
         private nodeService: NodeService,
@@ -67,6 +73,7 @@ export class SensordataNodeComponent implements OnInit {
         .subscribe(
             sensors => {
                 this.sensors = sensors.results as Sensor[];
+                this.getSensorDataPolling();
                 this.sensors.forEach((sensor, index) => {
                     this.getSensorData(1, index);
                 });
@@ -87,6 +94,23 @@ export class SensordataNodeComponent implements OnInit {
             },
             error => console.log(error)
         );
+    }
+
+    private getSensorDataPolling() {
+        this.sensors.forEach((sensor, index) => {
+            // push observable to subscriptions
+            this.subscriptions.push(
+                Observable.interval(5000)
+                    .switchMap(() => this.sensorDataService.getSensorDataBySensor(
+                        1, this.node.id, this.sensors[index].id, this.date_start, this.date_end
+                    ))
+                    .map((sensordatas) => sensordatas.results)
+                    .subscribe((sensordatas) => {
+                        this.sensordatas_array[index] = sensordatas;
+                        this.renderChart(index);
+                    })
+            );
+        });
     }
 
     private renderChart(index): void {
@@ -120,6 +144,10 @@ export class SensordataNodeComponent implements OnInit {
             pointHoverBorderColor: 'rgba(148,159,177,0.8)'
         }
     ];
+
+    ngOnDestroy() {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe())
+    }
 
     // events
     public chartClicked(e: any): void {
