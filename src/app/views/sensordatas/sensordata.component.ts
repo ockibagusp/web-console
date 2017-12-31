@@ -17,7 +17,7 @@ export class SensordataComponent implements OnInit, OnDestroy {
     public sensordatas: Sensordata[];
     public breadcrumbs: any[];
     public title: string;
-    public page = 1;
+    public currentPage = 1;
     public maxSize = 10;
     public totalItems: number;
 
@@ -59,7 +59,7 @@ export class SensordataComponent implements OnInit, OnDestroy {
     private getSensorDataPolling() {
         this.subscription = Observable.interval(5000)
             .switchMap(() => this.sensorDataService.getSensorDataByUser(
-                1, this.date_start, this.date_end
+                this.currentPage, this.date_start, this.date_end
             ))
             .map((sensordatas) => sensordatas.results)
             .subscribe((sensordatas) => {

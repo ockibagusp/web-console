@@ -102,7 +102,7 @@ export class SensordataNodeComponent implements OnInit, OnDestroy {
             this.subscriptions.push(
                 Observable.interval(5000)
                     .switchMap(() => this.sensorDataService.getSensorDataBySensor(
-                        1, this.node.id, this.sensors[index].id, this.date_start, this.date_end
+                        this.currentPage[index], this.node.id, this.sensors[index].id, this.date_start, this.date_end
                     ))
                     .map((sensordatas) => sensordatas.results)
                     .subscribe((sensordatas) => {

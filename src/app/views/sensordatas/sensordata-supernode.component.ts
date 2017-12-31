@@ -101,7 +101,7 @@ export class SensordataSupernodeComponent implements OnInit, OnDestroy {
             this.subscriptions.push(
                 Observable.interval(5000)
                     .switchMap(() => this.sensorDataService.getSensorDataBySupernodeSensor(
-                        1, this.supernode.id, this.sensors[index].id, this.date_start, this.date_end
+                        this.currentPage[index], this.supernode.id, this.sensors[index].id, this.date_start, this.date_end
                     ))
                     .map((sensordatas) => sensordatas.results)
                     .subscribe((sensordatas) => {
