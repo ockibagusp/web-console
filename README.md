@@ -1,5 +1,5 @@
 # web-console
-Agrihub Cloud Platform Web Console; code with Angular4, CoreUI and ❤
+Agrihub Cloud Platform Web Console; code with Angular4, CoreUI and ❤ (Undergraduate Thesis).
 
 ## Features
 1. Full SPA (Single Page Application).
