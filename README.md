@@ -9,7 +9,7 @@ Agrihub Cloud Platform Web Console; code with Angular4, CoreUI and ❤ (Undergra
 5. Using Bootstrap Component UI, thanks to [ngx-bootstrap](https://valor-software.com/ngx-bootstrap/).
 
 # Cons
-1. Storing raw data on browser cookie is very risk, inseccure, and bad-practice; i will fix this problem later...
+1. Storing raw data on browser cookie is very risk, inseccure, and bad-practice...
 
 # Instruction
 1. Install NodeJS
